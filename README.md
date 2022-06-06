@@ -1,5 +1,4 @@
 # MemHouse
 MemHouse is a platform to easy surf mems 
 
-![MemHouse architecture](https://user-images.githubusercontent.com/93443107/172125444-609b169b-b60c-40b0-b63f-32fe31d2b5cd.png)
-
+![MemHouse architecture](https://user-images.githubusercontent.com/93443107/172220719-07c544d6-b26d-4af5-9d64-6581233a15d7.png)
