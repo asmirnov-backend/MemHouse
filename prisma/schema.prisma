@@ -1,69 +1,8 @@
 generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["filterJson"]
+  provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgres"
   url      = env("DATABASE_URL")
-}
-
-model Advertiser {
-  id        Int        @id @default(autoincrement())
-  originId  String     @unique @db.VarChar(255)
-  name      String     @db.VarChar(255)
-  campaigns Campaign[]
-}
-
-model Campaign {
-  id            Int           @id @default(autoincrement())
-  originId      Int           @unique
-  name          String        @db.VarChar(255)
-  friendlyName  String        @db.VarChar(255)
-  contractStart String?       @db.VarChar(255)
-  contractEnd   String?       @db.VarChar(255)
-  spendRate     Float         @default(0)
-  spendType     SpendType     @default(Hide)
-  type          AnalyticsType
-  advertiserId  Int
-  advertiser    Advertiser    @relation(fields: [advertiserId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_campaign_advertiser")
-
-  @@index([advertiserId], map: "FK_campaign_advertiser")
-}
-
-enum SpendType {
-  Hide
-  CPM
-}
-
-enum AnalyticsType {
-  AUDIO
-  BROADSTREET
-  DISPLAY
-  OTT
-  PREROLL
-  SOCIAL
-  VIDEO
-}
-
-model broadstreet_performance_campaign {
-  campaign_id Int
-  date        DateTime @db.Date()
-  views       Int?
-  hovers      Int?
-  clicks      Int?
-
-  @@id([campaign_id, date])
-}
-
-model broadstreet_performance_creatives {
-  date          DateTime @db.Date()
-  campaign_id   Int
-  creative_name String   @db.VarChar(255)
-  creative_id   Int
-  views         Int?
-  hovers        Int?
-  clicks        Int?
-
-  @@id([campaign_id, date, creative_id])
 }
