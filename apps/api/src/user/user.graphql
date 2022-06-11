@@ -1,20 +1,20 @@
 type User {
-  uniqueId: ID!
+  id: ID!
   email: String!
   password: String!
   nickname: String!
-  # createdMems: [Mem]
 }
 
 type Query {
   user(uniqueId: ID!): User!
 }
 
-# type Mutation {
-#   createMem(createMemInput: CreateMemInput): Mem
-# }
+type Mutation {
+  createUser(createUserInput: CreateUserInput): User
+}
 
-# input CreateMemInput {
-#   imgUrls: [String!]!
-#   text: String
-# }
+input CreateUserInput {
+  email: String!
+  password: String!
+  nickname: String!
+}

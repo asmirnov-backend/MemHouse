@@ -1,4 +1,5 @@
 type Mem {
+  id: ID!
   imgUrls: [String!]!
   text: String
   likes: Int!
