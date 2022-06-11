@@ -3,6 +3,7 @@ type User {
   email: String!
   password: String!
   nickname: String!
+  createdMems: [Mem]
 }
 
 type Query {
