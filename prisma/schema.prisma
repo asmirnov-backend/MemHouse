@@ -6,3 +6,20 @@ datasource db {
   provider = "postgres"
   url      = env("DATABASE_URL")
 }
+
+model Mem {
+  id       String   @id @db.Uuid
+  imgUrls  String[]
+  text     String   @db.VarChar(1024)
+  tags     String[]
+  likes    Int
+  dislikes Int
+  rating   Float
+}
+
+model User {
+  id       String @id @db.Uuid
+  email    String @db.VarChar(128)
+  password String
+  nickname String @db.VarChar(64)
+}
