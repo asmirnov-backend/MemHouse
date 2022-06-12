@@ -2,17 +2,23 @@ type Mem {
   id: ID!
   imgUrls: [String!]!
   text: String
+  tags: [String!]!
   likes: Int!
   dislikes: Int!
   rating: Float!
 }
 
 type Query {
-  mems(offset: Int!, limit: Int!): [Mem!]!
+  mems(pagination: PaginationInput!): [Mem!]!
+}
+
+input PaginationInput {
+  offset: Int!
+  limit: Int!
 }
 
 type Mutation {
-  createMem(createMemInput: CreateMemInput): Mem
+  createMem(createMemInput: CreateMemInput!): Mem!
 }
 
 input CreateMemInput {

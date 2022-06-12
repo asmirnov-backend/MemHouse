@@ -13,3 +13,11 @@ MemHouse is a platform to easy surf mems
 ![MemHouse constructor diagram](https://user-images.githubusercontent.com/93443107/173183086-825c3bc3-995a-42ef-8760-93d04e4f5856.png)
 
 <https://app.diagrams.net/?libs=general;uml#G12t0Kjo5OfwtcxeGzsxaQjMOXes3jg-RM>
+
+## Setup
+
+### POSTGRES
+
+```bash
+docker run --name postgres-local -p 5432:5432 -e POSTGRES_DB=mem-storage -e POSTGRES_HOST_AUTH_METHOD=trust -e POSTGRES_USER=root -d postgres
+```
