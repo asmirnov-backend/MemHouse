@@ -1,5 +1,7 @@
-generator client {
-  provider = "prisma-client-js"
+generator nestgraphql {
+  provider          = "node node_modules/prisma-nestjs-graphql"
+  output            = "../apps/api/src/"
+  outputFilePattern = "{model}/@genereted/{plural.type}/{name}.{type}.ts"
 }
 
 datasource db {
