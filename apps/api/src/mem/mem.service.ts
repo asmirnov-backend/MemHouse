@@ -1,4 +1,8 @@
-import { CreateMemInput, Mem, UpdateMemInput } from '@api/graphql.schema';
+import { CreateOneMemArgs } from './@genereted/args/create-one-mem.args';
+import { FindManyMemArgs } from './@genereted/args/find-many-mem.args';
+import { UpdateOneMemArgs } from './@genereted/args/update-one-mem.args';
+import { Mem } from './@genereted/models/mem.model';
+
 import { PrismaService } from '@api/prisma/prisma.service';
 
 import { Injectable } from '@nestjs/common';
@@ -7,32 +11,17 @@ import { Injectable } from '@nestjs/common';
 export class MemService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async getBestMems(pagination: {
-    offset: number;
-    limit: number;
-  }): Promise<Mem[]> {
-    return this.prisma.mem.findMany({
-      take: pagination.limit,
-      skip: pagination.offset,
-    });
+  async getBestMems(findManyMemArgs: FindManyMemArgs): Promise<Mem[]> {
+    return this.prisma.mem.findMany(findManyMemArgs);
   }
 
-  async createMem(data: CreateMemInput): Promise<Mem> {
-    return this.prisma.mem.create({
-      data: { imgUrls: data.imgUrls, text: data.text, rating: 1.0 },
-    });
+  async createMem(createOneMemArgs: CreateOneMemArgs): Promise<Mem> {
+    createOneMemArgs.data.rating = 1.0;
+
+    return this.prisma.mem.create(createOneMemArgs);
   }
 
-  async updateMem(updateMemInput: UpdateMemInput): Promise<Mem> {
-    return this.prisma.mem.update({
-      where: { id: updateMemInput.id },
-      data: {
-        imgUrls: updateMemInput.imgUrls ?? undefined,
-        text: updateMemInput.text,
-        tags: updateMemInput.tags ?? undefined,
-        likes: { increment: updateMemInput.increaseLikes ?? 0 },
-        dislikes: { increment: updateMemInput.increaseDislikes ?? 0 },
-      },
-    });
+  async updateMem(updateOneMemArgs: UpdateOneMemArgs): Promise<Mem> {
+    return this.prisma.mem.update(updateOneMemArgs);
   }
 }

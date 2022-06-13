@@ -7,12 +7,15 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 
+import { join } from 'path';
+
 @Module({
   imports: [
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      typePaths: ['./apps/api/src/**/*.graphql'],
-      definitions: { path: 'apps/api/src/graphql.schema.ts' },
+      autoTransformHttpErrors: true,
+      autoSchemaFile: join(process.cwd(), '/apps/api/src/schema.gql'),
+      sortSchema: false,
     }),
     ConfigModule.forRoot({ isGlobal: true }),
     MemModule,

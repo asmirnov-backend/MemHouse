@@ -1,24 +1,21 @@
+import { CreateOneUserArgs } from './@genereted/args/create-one-user.args';
+import { FindUniqueUserArgs } from './@genereted/args/find-unique-user.args';
+import { User } from './@genereted/models/user.model';
 import { UserService } from './user.service';
-
-import { CreateUserInput, IMutation, IQuery, User } from '@api/graphql.schema';
 
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 
 @Resolver()
-export class UserResolver
-  implements Pick<IQuery, 'user'>, Pick<IMutation, 'createUser'>
-{
+export class UserResolver {
   constructor(private readonly userService: UserService) {}
 
-  @Query()
-  user(@Args('id') id: string): (User | null) | Promise<User | null> {
-    return this.userService.getUser(id);
+  @Query(() => User)
+  user(@Args() findUniqueUserArgs: FindUniqueUserArgs): Promise<User | null> {
+    return this.userService.getUser(findUniqueUserArgs);
   }
 
-  @Mutation()
-  createUser(
-    @Args('createUserInput') createUserInput: CreateUserInput,
-  ): User | Promise<User> {
-    return this.userService.createUser(createUserInput);
+  @Mutation(() => User)
+  createUser(@Args() createOneUserArgs: CreateOneUserArgs): Promise<User> {
+    return this.userService.createUser(createOneUserArgs);
   }
 }
