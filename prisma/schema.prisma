@@ -1,8 +1,37 @@
-generator client {
-  provider = "prisma-client-js"
+generator nestgraphql {
+  provider               = "node node_modules/prisma-nestjs-graphql"
+  output                 = "../apps/api/src/"
+  outputFilePattern      = "{model}/@genereted/{plural.type}/{name}.{type}.ts"
+  fields_Validator_from  = "class-validator"
+  fields_Validator_input = true
 }
 
 datasource db {
   provider = "postgres"
   url      = env("DATABASE_URL")
+}
+
+model Mem {
+  /// @HideField({ match: 'Create*UserArgs'})
+  id       String   @id @default(uuid()) @db.Uuid
+  imgUrls  String[]
+  text     String?  @db.VarChar(1024)
+  tags     String[]
+  likes    Int      @default(0)
+  dislikes Int      @default(0)
+  /// @HideField({ input: true})
+  rating   Float
+}
+
+model User {
+  /// @HideField({ input: true})
+  id       String @id @default(uuid()) @db.Uuid
+  /// @Validator.IsEmail()
+  email    String @unique @db.VarChar(128)
+  /// @HideField()
+  /// @Validator.MinLength(6)
+  password String
+  nickname String @unique @db.VarChar(64)
+  /// @HideField({ input: true})
+  money    Float  @default(0)
 }
