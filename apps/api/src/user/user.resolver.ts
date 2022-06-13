@@ -1,6 +1,7 @@
-import { IQuery, User } from '@api/graphql.interface';
+import { IQuery } from '@api/graphql.schema';
 
 import { Resolver } from '@nestjs/graphql';
+import { User } from '@prisma/client';
 
 @Resolver()
 export class UserResolver implements Pick<IQuery, 'user'> {

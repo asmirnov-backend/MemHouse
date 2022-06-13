@@ -19,9 +19,20 @@ input PaginationInput {
 
 type Mutation {
   createMem(createMemInput: CreateMemInput!): Mem!
+  updateMem(updateMemInput: UpdateMemInput!): Mem!
 }
 
 input CreateMemInput {
   imgUrls: [String!]!
   text: String
+  tags: [String!]
+}
+
+input UpdateMemInput {
+  id: ID!
+  imgUrls: [String!]
+  text: String
+  tags: [String!]
+  increaseLikes: Int
+  increaseDislikes: Int
 }

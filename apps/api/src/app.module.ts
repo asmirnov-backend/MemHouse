@@ -12,7 +12,7 @@ import { GraphQLModule } from '@nestjs/graphql';
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       typePaths: ['./apps/api/src/**/*.graphql'],
-      definitions: { path: 'apps/api/src/graphql.interface.ts' },
+      definitions: { path: 'apps/api/src/graphql.schema.ts' },
     }),
     ConfigModule.forRoot({ isGlobal: true }),
     MemModule,
