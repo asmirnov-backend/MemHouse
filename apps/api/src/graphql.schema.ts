@@ -45,13 +45,13 @@ export interface Mem {
 
 export interface IQuery {
     mems(pagination: PaginationInput): Mem[] | Promise<Mem[]>;
-    user(uniqueId: string): User | Promise<User>;
+    user(id: string): Nullable<User> | Promise<Nullable<User>>;
 }
 
 export interface IMutation {
     createMem(createMemInput: CreateMemInput): Mem | Promise<Mem>;
     updateMem(updateMemInput: UpdateMemInput): Mem | Promise<Mem>;
-    createUser(createUserInput?: Nullable<CreateUserInput>): Nullable<User> | Promise<Nullable<User>>;
+    createUser(createUserInput: CreateUserInput): User | Promise<User>;
 }
 
 export interface User {
@@ -59,7 +59,8 @@ export interface User {
     email: string;
     password: string;
     nickname: string;
-    createdMems?: Nullable<Nullable<Mem>[]>;
+    money: number;
+    createdMems?: Nullable<Mem[]>;
 }
 
 type Nullable<T> = T | null;

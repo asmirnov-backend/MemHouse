@@ -3,15 +3,16 @@ type User {
   email: String!
   password: String!
   nickname: String!
-  createdMems: [Mem]
+  money: Float!
+  createdMems: [Mem!]
 }
 
 type Query {
-  user(uniqueId: ID!): User!
+  user(id: ID!): User
 }
 
 type Mutation {
-  createUser(createUserInput: CreateUserInput): User
+  createUser(createUserInput: CreateUserInput!): User!
 }
 
 input CreateUserInput {

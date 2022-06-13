@@ -1,11 +1,24 @@
-import { IQuery } from '@api/graphql.schema';
+import { UserService } from './user.service';
 
-import { Resolver } from '@nestjs/graphql';
-import { User } from '@prisma/client';
+import { CreateUserInput, IMutation, IQuery, User } from '@api/graphql.schema';
+
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 
 @Resolver()
-export class UserResolver implements Pick<IQuery, 'user'> {
-  user(uniqueId: string): User | Promise<User> {
-    throw new Error('Method not implemented.');
+export class UserResolver
+  implements Pick<IQuery, 'user'>, Pick<IMutation, 'createUser'>
+{
+  constructor(private readonly userService: UserService) {}
+
+  @Query()
+  user(@Args('id') id: string): (User | null) | Promise<User | null> {
+    return this.userService.getUser(id);
+  }
+
+  @Mutation()
+  createUser(
+    @Args('createUserInput') createUserInput: CreateUserInput,
+  ): User | Promise<User> {
+    return this.userService.createUser(createUserInput);
   }
 }

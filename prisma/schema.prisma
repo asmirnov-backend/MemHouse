@@ -18,8 +18,9 @@ model Mem {
 }
 
 model User {
-  id       String @id @db.Uuid
-  email    String @db.VarChar(128)
+  id       String @id @default(uuid()) @db.Uuid
+  email    String @unique @db.VarChar(128)
   password String
-  nickname String @db.VarChar(64)
+  nickname String @unique @db.VarChar(64)
+  money    Float  @default(0)
 }
