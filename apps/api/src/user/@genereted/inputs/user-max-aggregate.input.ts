@@ -1,8 +1,8 @@
-import { Field, InputType } from '@nestjs/graphql';
+import { Field, InputType, HideField } from '@nestjs/graphql';
 
 @InputType()
 export class UserMaxAggregateInput {
-  @Field(() => Boolean, { nullable: true })
+  @HideField()
   id?: true;
 
   @Field(() => Boolean, { nullable: true })
@@ -14,6 +14,6 @@ export class UserMaxAggregateInput {
   @Field(() => Boolean, { nullable: true })
   nickname?: true;
 
-  @Field(() => Boolean, { nullable: true })
+  @HideField()
   money?: true;
 }

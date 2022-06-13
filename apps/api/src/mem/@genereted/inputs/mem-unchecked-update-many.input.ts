@@ -6,7 +6,7 @@ import { IntFieldUpdateOperationsInput } from '../../../prisma/@genereted/inputs
 import { NullableStringFieldUpdateOperationsInput } from '../../../prisma/@genereted/inputs/nullable-string-field-update-operations.input';
 import { StringFieldUpdateOperationsInput } from '../../../prisma/@genereted/inputs/string-field-update-operations.input';
 
-import { InputType, Field } from '@nestjs/graphql';
+import { InputType, Field, HideField } from '@nestjs/graphql';
 
 @InputType()
 export class MemUncheckedUpdateManyInput {
@@ -28,6 +28,6 @@ export class MemUncheckedUpdateManyInput {
   @Field(() => IntFieldUpdateOperationsInput, { nullable: true })
   dislikes?: IntFieldUpdateOperationsInput;
 
-  @Field(() => FloatFieldUpdateOperationsInput, { nullable: true })
+  @HideField()
   rating?: FloatFieldUpdateOperationsInput;
 }

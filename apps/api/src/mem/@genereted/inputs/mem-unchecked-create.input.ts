@@ -1,7 +1,7 @@
 import { MemCreateimgUrlsInput } from './mem-createimg-urls.input';
 import { MemCreatetagsInput } from './mem-createtags.input';
 
-import { Field, InputType, Int, Float } from '@nestjs/graphql';
+import { Field, InputType, Int, Float, HideField } from '@nestjs/graphql';
 
 @InputType()
 export class MemUncheckedCreateInput {
@@ -23,6 +23,6 @@ export class MemUncheckedCreateInput {
   @Field(() => Int, { nullable: true })
   dislikes?: number;
 
-  @Field(() => Float, { nullable: false })
+  @HideField()
   rating!: number;
 }

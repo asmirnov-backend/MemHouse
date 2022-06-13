@@ -6,7 +6,7 @@ import { MemSumOrderByAggregateInput } from './mem-sum-order-by-aggregate.input'
 
 import { SortOrder } from '../../../prisma/@genereted/enums/sort-order.enum';
 
-import { InputType, Field } from '@nestjs/graphql';
+import { HideField, InputType, Field } from '@nestjs/graphql';
 
 @InputType()
 export class MemOrderByWithAggregationInput {
@@ -28,7 +28,7 @@ export class MemOrderByWithAggregationInput {
   @Field(() => SortOrder, { nullable: true })
   dislikes?: keyof typeof SortOrder;
 
-  @Field(() => SortOrder, { nullable: true })
+  @HideField()
   rating?: keyof typeof SortOrder;
 
   @Field(() => MemCountOrderByAggregateInput, { nullable: true })

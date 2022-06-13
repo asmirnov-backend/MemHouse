@@ -6,11 +6,11 @@ import { UserSumOrderByAggregateInput } from './user-sum-order-by-aggregate.inpu
 
 import { SortOrder } from '../../../prisma/@genereted/enums/sort-order.enum';
 
-import { InputType, Field } from '@nestjs/graphql';
+import { HideField, InputType, Field } from '@nestjs/graphql';
 
 @InputType()
 export class UserOrderByWithAggregationInput {
-  @Field(() => SortOrder, { nullable: true })
+  @HideField()
   id?: keyof typeof SortOrder;
 
   @Field(() => SortOrder, { nullable: true })
@@ -22,7 +22,7 @@ export class UserOrderByWithAggregationInput {
   @Field(() => SortOrder, { nullable: true })
   nickname?: keyof typeof SortOrder;
 
-  @Field(() => SortOrder, { nullable: true })
+  @HideField()
   money?: keyof typeof SortOrder;
 
   @Field(() => UserCountOrderByAggregateInput, { nullable: true })

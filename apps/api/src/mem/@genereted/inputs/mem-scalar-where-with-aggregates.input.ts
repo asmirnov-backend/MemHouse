@@ -4,7 +4,7 @@ import { StringNullableListFilter } from '../../../prisma/@genereted/inputs/stri
 import { StringNullableWithAggregatesFilter } from '../../../prisma/@genereted/inputs/string-nullable-with-aggregates-filter.input';
 import { StringWithAggregatesFilter } from '../../../prisma/@genereted/inputs/string-with-aggregates-filter.input';
 
-import { Field, InputType } from '@nestjs/graphql';
+import { Field, InputType, HideField } from '@nestjs/graphql';
 
 @InputType()
 export class MemScalarWhereWithAggregatesInput {
@@ -35,6 +35,6 @@ export class MemScalarWhereWithAggregatesInput {
   @Field(() => IntWithAggregatesFilter, { nullable: true })
   dislikes?: IntWithAggregatesFilter;
 
-  @Field(() => FloatWithAggregatesFilter, { nullable: true })
+  @HideField()
   rating?: FloatWithAggregatesFilter;
 }

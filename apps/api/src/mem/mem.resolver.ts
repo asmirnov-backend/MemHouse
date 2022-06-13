@@ -1,41 +1,27 @@
+import { CreateOneMemArgs } from './@genereted/args/create-one-mem.args';
+import { FindManyMemArgs } from './@genereted/args/find-many-mem.args';
+import { UpdateOneMemArgs } from './@genereted/args/update-one-mem.args';
+import { Mem } from './@genereted/models/mem.model';
 import { MemService } from './mem.service';
-
-import {
-  IQuery,
-  IMutation,
-  UpdateMemInput,
-  CreateMemInput,
-  PaginationInput,
-  Mem,
-} from '@api/graphql.schema';
 
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 
 @Resolver()
-export class MemResolver
-  implements
-    Pick<IQuery, 'mems'>,
-    Pick<IMutation, 'createMem'>,
-    Pick<IMutation, 'updateMem'>
-{
+export class MemResolver {
   constructor(private readonly memService: MemService) {}
 
-  @Mutation()
-  updateMem(
-    @Args('updateMemInput') updateMemInput: UpdateMemInput,
-  ): Mem | Promise<Mem> {
-    return this.memService.updateMem(updateMemInput);
+  @Mutation(() => Mem)
+  updateMem(@Args() updateOneMemArgs: UpdateOneMemArgs): Promise<Mem> {
+    return this.memService.updateMem(updateOneMemArgs);
   }
 
-  @Mutation()
-  createMem(
-    @Args('createMemInput') createMemInput: CreateMemInput,
-  ): Mem | Promise<Mem> {
-    return this.memService.createMem(createMemInput);
+  @Mutation(() => Mem)
+  createMem(@Args() createOneMemArgs: CreateOneMemArgs): Promise<Mem> {
+    return this.memService.createMem(createOneMemArgs);
   }
 
-  @Query()
-  mems(@Args('pagination') pagination: PaginationInput): Promise<Mem[]> {
-    return this.memService.getBestMems(pagination);
+  @Query(() => [Mem])
+  mems(@Args() findManyMemArgs: FindManyMemArgs): Promise<Mem[]> {
+    return this.memService.getBestMems(findManyMemArgs);
   }
 }

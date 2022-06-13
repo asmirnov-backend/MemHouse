@@ -1,4 +1,4 @@
-import { Field, InputType } from '@nestjs/graphql';
+import { Field, InputType, HideField } from '@nestjs/graphql';
 
 @InputType()
 export class MemAvgAggregateInput {
@@ -8,6 +8,6 @@ export class MemAvgAggregateInput {
   @Field(() => Boolean, { nullable: true })
   dislikes?: true;
 
-  @Field(() => Boolean, { nullable: true })
+  @HideField()
   rating?: true;
 }

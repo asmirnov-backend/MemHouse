@@ -1,7 +1,7 @@
 import { FloatWithAggregatesFilter } from '../../../prisma/@genereted/inputs/float-with-aggregates-filter.input';
 import { StringWithAggregatesFilter } from '../../../prisma/@genereted/inputs/string-with-aggregates-filter.input';
 
-import { Field, InputType } from '@nestjs/graphql';
+import { Field, InputType, HideField } from '@nestjs/graphql';
 
 @InputType()
 export class UserScalarWhereWithAggregatesInput {
@@ -14,7 +14,7 @@ export class UserScalarWhereWithAggregatesInput {
   @Field(() => [UserScalarWhereWithAggregatesInput], { nullable: true })
   NOT?: Array<UserScalarWhereWithAggregatesInput>;
 
-  @Field(() => StringWithAggregatesFilter, { nullable: true })
+  @HideField()
   id?: StringWithAggregatesFilter;
 
   @Field(() => StringWithAggregatesFilter, { nullable: true })
@@ -26,6 +26,6 @@ export class UserScalarWhereWithAggregatesInput {
   @Field(() => StringWithAggregatesFilter, { nullable: true })
   nickname?: StringWithAggregatesFilter;
 
-  @Field(() => FloatWithAggregatesFilter, { nullable: true })
+  @HideField()
   money?: FloatWithAggregatesFilter;
 }

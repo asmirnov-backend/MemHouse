@@ -4,7 +4,7 @@ import { StringFilter } from '../../../prisma/@genereted/inputs/string-filter.in
 import { StringNullableFilter } from '../../../prisma/@genereted/inputs/string-nullable-filter.input';
 import { StringNullableListFilter } from '../../../prisma/@genereted/inputs/string-nullable-list-filter.input';
 
-import { Field, InputType } from '@nestjs/graphql';
+import { Field, InputType, HideField } from '@nestjs/graphql';
 
 @InputType()
 export class MemWhereInput {
@@ -35,6 +35,6 @@ export class MemWhereInput {
   @Field(() => IntFilter, { nullable: true })
   dislikes?: IntFilter;
 
-  @Field(() => FloatFilter, { nullable: true })
+  @HideField()
   rating?: FloatFilter;
 }

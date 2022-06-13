@@ -1,4 +1,4 @@
-import { Field, ObjectType, Float } from '@nestjs/graphql';
+import { Field, ObjectType, HideField, Float } from '@nestjs/graphql';
 
 @ObjectType()
 export class UserMinAggregate {
@@ -8,7 +8,7 @@ export class UserMinAggregate {
   @Field(() => String, { nullable: true })
   email?: string;
 
-  @Field(() => String, { nullable: true })
+  @HideField()
   password?: string;
 
   @Field(() => String, { nullable: true })

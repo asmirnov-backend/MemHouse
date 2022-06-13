@@ -1,10 +1,10 @@
 import { SortOrder } from '../../../prisma/@genereted/enums/sort-order.enum';
 
-import { Field, InputType } from '@nestjs/graphql';
+import { Field, InputType, HideField } from '@nestjs/graphql';
 
 @InputType()
 export class UserOrderByWithRelationInput {
-  @Field(() => SortOrder, { nullable: true })
+  @HideField()
   id?: keyof typeof SortOrder;
 
   @Field(() => SortOrder, { nullable: true })
@@ -16,6 +16,6 @@ export class UserOrderByWithRelationInput {
   @Field(() => SortOrder, { nullable: true })
   nickname?: keyof typeof SortOrder;
 
-  @Field(() => SortOrder, { nullable: true })
+  @HideField()
   money?: keyof typeof SortOrder;
 }

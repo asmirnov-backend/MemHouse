@@ -1,7 +1,7 @@
 import { FloatFilter } from '../../../prisma/@genereted/inputs/float-filter.input';
 import { StringFilter } from '../../../prisma/@genereted/inputs/string-filter.input';
 
-import { Field, InputType } from '@nestjs/graphql';
+import { Field, InputType, HideField } from '@nestjs/graphql';
 
 @InputType()
 export class UserWhereInput {
@@ -14,7 +14,7 @@ export class UserWhereInput {
   @Field(() => [UserWhereInput], { nullable: true })
   NOT?: Array<UserWhereInput>;
 
-  @Field(() => StringFilter, { nullable: true })
+  @HideField()
   id?: StringFilter;
 
   @Field(() => StringFilter, { nullable: true })
@@ -26,6 +26,6 @@ export class UserWhereInput {
   @Field(() => StringFilter, { nullable: true })
   nickname?: StringFilter;
 
-  @Field(() => FloatFilter, { nullable: true })
+  @HideField()
   money?: FloatFilter;
 }

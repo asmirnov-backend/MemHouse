@@ -1,9 +1,9 @@
 import { SortOrder } from '../../../prisma/@genereted/enums/sort-order.enum';
 
-import { Field, InputType } from '@nestjs/graphql';
+import { Field, InputType, HideField } from '@nestjs/graphql';
 
 @InputType()
 export class UserSumOrderByAggregateInput {
-  @Field(() => SortOrder, { nullable: true })
+  @HideField()
   money?: keyof typeof SortOrder;
 }
