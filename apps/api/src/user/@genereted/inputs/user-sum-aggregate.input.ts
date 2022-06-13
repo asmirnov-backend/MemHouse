@@ -1,9 +1,7 @@
-import { Field } from '@nestjs/graphql';
-import { InputType } from '@nestjs/graphql';
+import { Field, InputType } from '@nestjs/graphql';
 
 @InputType()
 export class UserSumAggregateInput {
-
-    @Field(() => Boolean, {nullable:true})
-    money?: true;
+  @Field(() => Boolean, { nullable: true })
+  money?: true;
 }

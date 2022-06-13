@@ -16,7 +16,7 @@
     "test:integration": "jest --config ./test/config/jest.integration.config.json",
     "test:e2e": "jest --config ./test/config/jest.e2e.config.json",
     "test:all": "jest --config ./test/config/jest.unit.config.json && jest --config ./test/config/jest.integration.config.json && jest --config ./test/config/jest.e2e.config.json",
-    "db:generate": "prisma generate",
+    "db:generate": "prisma generate && eslint \"./apps/api/src/**/@genereted/**/*.ts\" --fix",
     "db:deploy": "prisma migrate deploy",
     "db:seed": "prisma db seed"
   },

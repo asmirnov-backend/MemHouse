@@ -1,17 +1,16 @@
-import { Field } from '@nestjs/graphql';
-import { ArgsType } from '@nestjs/graphql';
 import { MemUpdateManyMutationInput } from '../inputs/mem-update-many-mutation.input';
-import { Type } from 'class-transformer';
 import { MemWhereInput } from '../inputs/mem-where.input';
+
+import { Field, ArgsType } from '@nestjs/graphql';
+import { Type } from 'class-transformer';
 
 @ArgsType()
 export class UpdateManyMemArgs {
+  @Field(() => MemUpdateManyMutationInput, { nullable: false })
+  @Type(() => MemUpdateManyMutationInput)
+  data!: MemUpdateManyMutationInput;
 
-    @Field(() => MemUpdateManyMutationInput, {nullable:false})
-    @Type(() => MemUpdateManyMutationInput)
-    data!: MemUpdateManyMutationInput;
-
-    @Field(() => MemWhereInput, {nullable:true})
-    @Type(() => MemWhereInput)
-    where?: MemWhereInput;
+  @Field(() => MemWhereInput, { nullable: true })
+  @Type(() => MemWhereInput)
+  where?: MemWhereInput;
 }

@@ -1,22 +1,21 @@
-import { Field } from '@nestjs/graphql';
-import { ArgsType } from '@nestjs/graphql';
-import { MemWhereUniqueInput } from '../inputs/mem-where-unique.input';
-import { Type } from 'class-transformer';
 import { MemCreateInput } from '../inputs/mem-create.input';
 import { MemUpdateInput } from '../inputs/mem-update.input';
+import { MemWhereUniqueInput } from '../inputs/mem-where-unique.input';
+
+import { Field, ArgsType } from '@nestjs/graphql';
+import { Type } from 'class-transformer';
 
 @ArgsType()
 export class UpsertOneMemArgs {
+  @Field(() => MemWhereUniqueInput, { nullable: false })
+  @Type(() => MemWhereUniqueInput)
+  where!: MemWhereUniqueInput;
 
-    @Field(() => MemWhereUniqueInput, {nullable:false})
-    @Type(() => MemWhereUniqueInput)
-    where!: MemWhereUniqueInput;
+  @Field(() => MemCreateInput, { nullable: false })
+  @Type(() => MemCreateInput)
+  create!: MemCreateInput;
 
-    @Field(() => MemCreateInput, {nullable:false})
-    @Type(() => MemCreateInput)
-    create!: MemCreateInput;
-
-    @Field(() => MemUpdateInput, {nullable:false})
-    @Type(() => MemUpdateInput)
-    update!: MemUpdateInput;
+  @Field(() => MemUpdateInput, { nullable: false })
+  @Type(() => MemUpdateInput)
+  update!: MemUpdateInput;
 }

@@ -1,10 +1,7 @@
-import { Field } from '@nestjs/graphql';
-import { ObjectType } from '@nestjs/graphql';
-import { Float } from '@nestjs/graphql';
+import { Field, ObjectType, Float } from '@nestjs/graphql';
 
 @ObjectType()
 export class UserAvgAggregate {
-
-    @Field(() => Float, {nullable:true})
-    money?: number;
+  @Field(() => Float, { nullable: true })
+  money?: number;
 }
