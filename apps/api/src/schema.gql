@@ -13,8 +13,8 @@ type Mem {
 }
 
 type User {
-  id: ID!
   money: Float!
+  id: String!
   email: String!
   nickname: String!
 }
@@ -26,11 +26,11 @@ type Query {
 
 input MemsGetBestInput {
   take: Int = 10
-  skip: Int
+  skip: Int = 0
 }
 
 input UserUniqueInput {
-  id: ID
+  id: String
   email: String
   nickname: String
 }
@@ -42,7 +42,7 @@ type Mutation {
 }
 
 input MemUpdateInput {
-  id: ID!
+  id: String!
   imgUrls: [String!]
   text: String
   tags: [String!]

@@ -1,13 +1,16 @@
-import { InputType, Field, ID } from '@nestjs/graphql';
-import { IsEmail } from 'class-validator';
+import { InputType } from '@nestjs/graphql';
+import { IsEmail, IsOptional, IsUUID } from 'class-validator';
 
 @InputType()
 export class UserUniqueInput {
-  @Field(() => ID)
+  @IsOptional()
+  @IsUUID()
   id?: string;
 
+  @IsOptional()
   @IsEmail()
   email?: string;
 
+  @IsOptional()
   nickname?: string;
 }

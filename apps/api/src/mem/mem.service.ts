@@ -11,12 +11,10 @@ import { Injectable } from '@nestjs/common';
 export class MemService {
   constructor(private readonly prisma: PrismaService) {}
 
-  private readonly DEFAULT_TAKE_MEMS = 10;
-
   async getBestMems(params: MemsGetBestInput): Promise<Mem[]> {
     return this.prisma.mem.findMany({
       orderBy: { rating: 'desc' },
-      take: params.take || this.DEFAULT_TAKE_MEMS,
+      take: params.take,
       skip: params.skip,
     });
   }

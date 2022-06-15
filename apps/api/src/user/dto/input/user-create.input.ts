@@ -1,16 +1,15 @@
-import { InputType, HideField } from '@nestjs/graphql';
-import { IsEmail, MinLength } from 'class-validator';
+import { InputType } from '@nestjs/graphql';
+import { IsEmail, IsString, Matches } from 'class-validator';
 
 @InputType()
 export class UserCreateInput {
-  @HideField()
-  id?: string;
-
   @IsEmail()
-  email!: string;
+  email: string;
 
-  @MinLength(6)
-  password!: string;
+  @IsString()
+  @Matches(new RegExp('(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}'))
+  password: string;
 
-  nickname!: string;
+  @IsString()
+  nickname: string;
 }

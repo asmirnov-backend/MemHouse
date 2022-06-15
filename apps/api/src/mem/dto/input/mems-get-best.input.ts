@@ -1,10 +1,15 @@
 import { Field, Int, InputType } from '@nestjs/graphql';
+import { IsInt, IsOptional } from 'class-validator';
 
 @InputType()
 export class MemsGetBestInput {
-  @Field(() => Int, { defaultValue: 10 })
-  take?: number;
+  @Field(() => Int)
+  @IsOptional()
+  @IsInt()
+  take = 10;
 
   @Field(() => Int)
-  skip?: number;
+  @IsOptional()
+  @IsInt()
+  skip = 0;
 }
