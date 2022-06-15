@@ -20,7 +20,7 @@ type User {
 }
 
 type Query {
-  mems(GetBestMemsInput: MemsGetBestInput!): [Mem!]!
+  bestMems(GetBestMemsInput: MemsGetBestInput!): [Mem!]!
   user(UserUniqueInput: UserUniqueInput!): User!
 }
 

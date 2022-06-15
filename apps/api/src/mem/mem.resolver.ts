@@ -21,9 +21,7 @@ export class MemResolver {
   }
 
   @Query(() => [Mem])
-  mems(@Args('GetBestMemsInput') params: MemsGetBestInput): Promise<Mem[]> {
-    console.log(params);
-
+  bestMems(@Args('GetBestMemsInput') params: MemsGetBestInput): Promise<Mem[]> {
     return this.memService.getBestMems(params);
   }
 }
