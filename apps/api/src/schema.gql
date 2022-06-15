@@ -4,220 +4,56 @@
 
 type Mem {
   id: ID!
-  imgUrls: [String!]
-  text: String
-  tags: [String!]
   likes: Int!
   dislikes: Int!
+  imgUrls: [String!]!
+  text: String
+  tags: [String!]
   rating: Float!
 }
 
 type User {
-  id: ID!
+  id: String!
   email: String!
   nickname: String!
   money: Float!
 }
 
 type Query {
-  mems(where: MemWhereInput, orderBy: [MemOrderByWithRelationInput!], cursor: MemWhereUniqueInput, take: Int, skip: Int, distinct: [MemScalarFieldEnum!]): [Mem!]!
-  user(where: UserWhereUniqueInput!): User!
+  bestMems(GetBestMemsInput: MemsGetBestInput!): [Mem!]!
+  user(UserUniqueInput: UserUniqueInput!): User!
 }
 
-input MemWhereInput {
-  AND: [MemWhereInput!]
-  OR: [MemWhereInput!]
-  NOT: [MemWhereInput!]
-  id: StringFilter
-  imgUrls: StringNullableListFilter
-  text: StringNullableFilter
-  tags: StringNullableListFilter
-  likes: IntFilter
-  dislikes: IntFilter
+input MemsGetBestInput {
+  take: Int = 10
+  skip: Int = 0
 }
 
-input StringFilter {
-  equals: String
-  in: [String!]
-  notIn: [String!]
-  lt: String
-  lte: String
-  gt: String
-  gte: String
-  contains: String
-  startsWith: String
-  endsWith: String
-  mode: QueryMode
-  not: NestedStringFilter
-}
-
-enum QueryMode {
-  default
-  insensitive
-}
-
-input NestedStringFilter {
-  equals: String
-  in: [String!]
-  notIn: [String!]
-  lt: String
-  lte: String
-  gt: String
-  gte: String
-  contains: String
-  startsWith: String
-  endsWith: String
-  not: NestedStringFilter
-}
-
-input StringNullableListFilter {
-  equals: [String!]
-  has: String
-  hasEvery: [String!]
-  hasSome: [String!]
-  isEmpty: Boolean
-}
-
-input StringNullableFilter {
-  equals: String
-  in: [String!]
-  notIn: [String!]
-  lt: String
-  lte: String
-  gt: String
-  gte: String
-  contains: String
-  startsWith: String
-  endsWith: String
-  mode: QueryMode
-  not: NestedStringNullableFilter
-}
-
-input NestedStringNullableFilter {
-  equals: String
-  in: [String!]
-  notIn: [String!]
-  lt: String
-  lte: String
-  gt: String
-  gte: String
-  contains: String
-  startsWith: String
-  endsWith: String
-  not: NestedStringNullableFilter
-}
-
-input IntFilter {
-  equals: Int
-  in: [Int!]
-  notIn: [Int!]
-  lt: Int
-  lte: Int
-  gt: Int
-  gte: Int
-  not: NestedIntFilter
-}
-
-input NestedIntFilter {
-  equals: Int
-  in: [Int!]
-  notIn: [Int!]
-  lt: Int
-  lte: Int
-  gt: Int
-  gte: Int
-  not: NestedIntFilter
-}
-
-input MemOrderByWithRelationInput {
-  id: SortOrder
-  imgUrls: SortOrder
-  text: SortOrder
-  tags: SortOrder
-  likes: SortOrder
-  dislikes: SortOrder
-}
-
-enum SortOrder {
-  asc
-  desc
-}
-
-input MemWhereUniqueInput {
+input UserUniqueInput {
   id: String
-}
-
-enum MemScalarFieldEnum {
-  id
-  imgUrls
-  text
-  tags
-  likes
-  dislikes
-  rating
-}
-
-input UserWhereUniqueInput {
   email: String
   nickname: String
 }
 
 type Mutation {
-  updateMem(data: MemUpdateInput!, where: MemWhereUniqueInput!): Mem!
-  createMem(data: MemCreateInput!): Mem!
-  createUser(data: UserCreateInput!): User!
+  updateMem(UpdateMemInput: MemUpdateInput!): Mem!
+  createMem(CreateMemInput: MemCreateInput!): Mem!
+  createUser(UserCreateInput: UserCreateInput!): User!
 }
 
 input MemUpdateInput {
-  id: StringFieldUpdateOperationsInput
-  imgUrls: MemUpdateimgUrlsInput
-  text: NullableStringFieldUpdateOperationsInput
-  tags: MemUpdatetagsInput
-  likes: IntFieldUpdateOperationsInput
-  dislikes: IntFieldUpdateOperationsInput
-}
-
-input StringFieldUpdateOperationsInput {
-  set: String
-}
-
-input MemUpdateimgUrlsInput {
-  set: [String!]
-  push: [String!]
-}
-
-input NullableStringFieldUpdateOperationsInput {
-  set: String
-}
-
-input MemUpdatetagsInput {
-  set: [String!]
-  push: [String!]
-}
-
-input IntFieldUpdateOperationsInput {
-  set: Int
-  increment: Int
-  decrement: Int
-  multiply: Int
-  divide: Int
+  id: String!
+  imgUrls: [String!]
+  text: String
+  tags: [String!]
+  addLikes: Float
+  addDislikes: Float
 }
 
 input MemCreateInput {
-  id: String
-  imgUrls: MemCreateimgUrlsInput
+  imgUrls: [String!]!
   text: String
-  tags: MemCreatetagsInput
-  likes: Int
-  dislikes: Int
-}
-
-input MemCreateimgUrlsInput {
-  set: [String!]!
-}
-
-input MemCreatetagsInput {
-  set: [String!]!
+  tags: [String!]
 }
 
 input UserCreateInput {
