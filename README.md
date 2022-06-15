@@ -1,5 +1,7 @@
 # MemHouse
 
+![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/asmirnov-backend/MemHouse)
+
 MemHouse is a platform to easy surf mems
 
 ## Zen

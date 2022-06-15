@@ -5,6 +5,7 @@
   "root": "",
   "compilerOptions": {
     "tsConfigPath": "apps/api/tsconfig.app.json",
+    "plugins": ["@nestjs/graphql"],
     "webpack": false
   },
   "projects": {

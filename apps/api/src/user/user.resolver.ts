@@ -1,6 +1,6 @@
-import { CreateOneUserArgs } from './@genereted/args/create-one-user.args';
-import { FindUniqueUserArgs } from './@genereted/args/find-unique-user.args';
-import { User } from './@genereted/models/user.model';
+import { UserCreateInput } from './dto/input/user-create.input';
+import { UserUniqueInput } from './dto/input/user-get-unique.input';
+import { User } from './dto/user.model';
 import { UserService } from './user.service';
 
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
@@ -10,12 +10,12 @@ export class UserResolver {
   constructor(private readonly userService: UserService) {}
 
   @Query(() => User)
-  user(@Args() findUniqueUserArgs: FindUniqueUserArgs): Promise<User | null> {
-    return this.userService.getUser(findUniqueUserArgs);
+  user(@Args('UserUniqueInput') params: UserUniqueInput): Promise<User | null> {
+    return this.userService.getUser(params);
   }
 
   @Mutation(() => User)
-  createUser(@Args() createOneUserArgs: CreateOneUserArgs): Promise<User> {
-    return this.userService.createUser(createOneUserArgs);
+  createUser(@Args('UserCreateInput') params: UserCreateInput): Promise<User> {
+    return this.userService.createUser(params);
   }
 }
