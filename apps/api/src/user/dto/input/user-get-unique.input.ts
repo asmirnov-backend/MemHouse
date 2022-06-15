@@ -5,7 +5,9 @@ import { IsEmail } from 'class-validator';
 export class UserUniqueInput {
   @Field(() => ID)
   id?: string;
+
   @IsEmail()
   email?: string;
+
   nickname?: string;
 }
