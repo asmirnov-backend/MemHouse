@@ -6,17 +6,17 @@ type Mem {
   id: ID!
   likes: Int!
   dislikes: Int!
-  rating: Float!
   imgUrls: [String!]!
   text: String
   tags: [String!]
+  rating: Float!
 }
 
 type User {
-  money: Float!
   id: String!
   email: String!
   nickname: String!
+  money: Float!
 }
 
 type Query {
@@ -46,10 +46,8 @@ input MemUpdateInput {
   imgUrls: [String!]
   text: String
   tags: [String!]
-  incrementLikesBy: Boolean
-  decrementLikesBy: Boolean
-  incrementDislikesByOne: Boolean
-  decrementDislikesByOne: Boolean
+  addLikes: Float
+  addDislikes: Float
 }
 
 input MemCreateInput {

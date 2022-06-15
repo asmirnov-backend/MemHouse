@@ -1,4 +1,4 @@
-import { Field, ObjectType, ID, Float } from '@nestjs/graphql';
+import { ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
 export class User {
@@ -8,6 +8,5 @@ export class User {
 
   nickname: string;
 
-  @Field(() => Float)
   money: number;
 }

@@ -33,7 +33,17 @@ export class MemService {
   async updateMem(params: MemUpdateInput): Promise<Mem> {
     return this.prisma.mem.update({
       where: { id: params.id },
-      data: { imgUrls: params.imgUrls, text: params.text, tags: params.tags },
+      data: {
+        imgUrls: params.imgUrls,
+        text: params.text,
+        tags: params.tags,
+        likes: {
+          increment: params.addLikes ?? 0,
+        },
+        dislikes: {
+          increment: params.addDislikes ?? 0,
+        },
+      },
     });
   }
 }

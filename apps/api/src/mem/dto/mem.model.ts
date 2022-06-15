@@ -1,4 +1,4 @@
-import { Field, ObjectType, ID, Int, Float } from '@nestjs/graphql';
+import { Field, ObjectType, ID, Int } from '@nestjs/graphql';
 
 @ObjectType()
 export class Mem {
@@ -11,12 +11,11 @@ export class Mem {
 
   tags?: string[];
 
-  @Field(() => Int, { defaultValue: 0 })
+  @Field(() => Int)
   likes: number;
 
-  @Field(() => Int, { defaultValue: 0 })
+  @Field(() => Int)
   dislikes: number;
 
-  @Field(() => Float)
   rating: number;
 }
