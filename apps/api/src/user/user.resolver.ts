@@ -1,4 +1,4 @@
-import { UserCreateInput } from './@genereted/inputs/user-create.input';
+import { UserCreateInput } from './dto/input/user-create.input';
 import { UserUniqueInput } from './dto/input/user-get-unique.input';
 import { User } from './dto/user.model';
 import { UserService } from './user.service';
