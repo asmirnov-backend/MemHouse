@@ -2,14 +2,20 @@ import { MemCreateInput } from './dto/input/mem-create.input';
 import { MemUpdateInput } from './dto/input/mem-update.input';
 import { MemsGetBestInput } from './dto/input/mems-get-best.input';
 import { Mem } from './dto/mem.model';
+import { MemNotFoundException } from './exceptions/mem-not-found.exception';
+import { MemRatingService } from './mem.rating.service';
 
 import { PrismaService } from '@api/prisma/prisma.service';
 
 import { Injectable } from '@nestjs/common';
+import { isNull } from 'lodash';
 
 @Injectable()
 export class MemService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly ratingService: MemRatingService,
+  ) {}
 
   async getBestMems(params: MemsGetBestInput): Promise<Mem[]> {
     return this.prisma.mem.findMany({
@@ -25,24 +31,31 @@ export class MemService {
         imgUrls: params.imgUrls,
         text: params.text ?? null,
         tags: params.tags,
-        rating: 1.0, // ratingService.getInitialMemRating()
+        rating: this.ratingService.calcRating(),
       },
     });
   }
 
   async updateMem(params: MemUpdateInput): Promise<Mem> {
+    const mem = await this.prisma.mem.findUnique({ where: { id: params.id } });
+
+    if (isNull(mem)) {
+      throw new MemNotFoundException(params.id);
+    }
+
+    const likes = mem.likes + (params.addLikes ? params.addLikes : 0);
+    const dislikes =
+      mem.dislikes + (params.addDislikes ? params.addDislikes : 0);
+
     return this.prisma.mem.update({
       where: { id: params.id },
       data: {
         imgUrls: params.imgUrls,
         text: params.text,
         tags: params.tags,
-        likes: {
-          increment: params.addLikes ?? 0,
-        },
-        dislikes: {
-          increment: params.addDislikes ?? 0,
-        },
+        likes,
+        dislikes,
+        rating: this.ratingService.calcRating({ likes, dislikes }),
       },
     });
   }
