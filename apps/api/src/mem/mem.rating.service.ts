@@ -5,16 +5,18 @@ import { Injectable } from '@nestjs/common';
  */
 @Injectable()
 export class MemRatingService {
-  private readonly initialAbsolutRating = 1000;
+  private readonly INITIAL_ABSOLUT_RATING = 1000;
 
-  calcRating(mem = { likes: 0, dislikes: 0 }) {
+  calculate(mem = { likes: 0, dislikes: 0 }) {
     const ratingAbsolut =
-      this.initialAbsolutRating + mem.likes - mem.dislikes * 3;
+      this.INITIAL_ABSOLUT_RATING + mem.likes - mem.dislikes * 3;
 
-    return this.convertNumberBetweenMinus100and100(ratingAbsolut);
+    return this.convertNumberToInterval(ratingAbsolut);
   }
 
-  private convertNumberBetweenMinus100and100(value: number) {
-    return ((Math.atan(value / 10000) * 2) / Math.PI) * 100;
+  private convertNumberToInterval(value: number) {
+    const TO_INTERVAL_FROM_MINUS_100_TO_100 = (2 / Math.PI) * 100;
+
+    return Math.atan(value / 10000) * TO_INTERVAL_FROM_MINUS_100_TO_100;
   }
 }

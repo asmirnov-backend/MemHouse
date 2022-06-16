@@ -31,7 +31,7 @@ export class MemService {
         imgUrls: params.imgUrls,
         text: params.text ?? null,
         tags: params.tags,
-        rating: this.ratingService.calcRating(),
+        rating: this.ratingService.calculate(),
       },
     });
   }
@@ -55,7 +55,7 @@ export class MemService {
         tags: params.tags,
         likes,
         dislikes,
-        rating: this.ratingService.calcRating({ likes, dislikes }),
+        rating: this.ratingService.calculate({ likes, dislikes }),
       },
     });
   }
