@@ -1,5 +1,5 @@
 import { AppModule } from '@api/app.module';
-import { Advertiser } from '@api/graphql.schema';
+import { Mem } from '@api/mem/dto/mem.model';
 
 import { HttpServer, INestApplication } from '@nestjs/common';
 import { TestingModule, Test } from '@nestjs/testing';
@@ -26,17 +26,17 @@ describe('AdvertiserResolver', () => {
 
   afterAll(async () => await nestApp.close());
 
-  it('AdvertiserResolver', async () => {
+  it('MemResolver', async () => {
     const result = await request(server).post(GRAPHQL_URL).send({
-      query: '{ advertiser(originId: "1") { name id campaigns { name } }}',
+      query: '{ bestMems(GetBestMemsInput: {}) { id likes rating }}',
     });
 
-    const data: {
-      data: Advertiser;
+    const response: {
+      data: Mem;
       error: { errors: GraphQLFormattedError[] };
     } = result.body;
 
-    expect(data).not.toHaveProperty('error');
-    expect(data.data).toMatchSnapshot();
+    expect(response).not.toHaveProperty('error');
+    expect(response.data).toMatchSnapshot();
   });
 });

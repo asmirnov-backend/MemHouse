@@ -1,8 +1,7 @@
-import { Field, ObjectType, ID, Int } from '@nestjs/graphql';
+import { Field, ObjectType, Int } from '@nestjs/graphql';
 
 @ObjectType()
 export class Mem {
-  @Field(() => ID)
   id: string;
 
   imgUrls: string[];

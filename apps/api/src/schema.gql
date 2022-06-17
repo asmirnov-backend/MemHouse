@@ -3,9 +3,9 @@
 # ------------------------------------------------------
 
 type Mem {
-  id: ID!
   likes: Int!
   dislikes: Int!
+  id: String!
   imgUrls: [String!]!
   text: String
   tags: [String!]
