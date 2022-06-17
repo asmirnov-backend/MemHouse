@@ -1,3 +1,4 @@
+import { MemModule } from './mem.module';
 import { MemResolver } from './mem.resolver';
 
 import { Test, TestingModule } from '@nestjs/testing';
@@ -7,7 +8,7 @@ describe('MemResolver', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [MemResolver],
+      imports: [MemModule],
     }).compile();
 
     resolver = module.get<MemResolver>(MemResolver);

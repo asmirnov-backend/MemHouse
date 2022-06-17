@@ -22,6 +22,5 @@ import { join } from 'path';
     UserModule,
   ],
   controllers: [AppController],
-  providers: [],
 })
 export class AppModule {}
