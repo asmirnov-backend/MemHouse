@@ -21,6 +21,8 @@ type User {
   email: String!
   nickname: String!
   money: Float!
+  viewedMemes: [Mem!]!
+  createdMems: [Mem!]!
 }
 
 type Query {

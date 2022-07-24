@@ -8,19 +8,24 @@ datasource db {
 }
 
 model Mem {
-  id       String   @id @default(uuid()) @db.Uuid
-  imgUrls  String[]
-  text     String?  @db.VarChar(1024)
-  tags     String[]
-  likes    Int      @default(0)
-  dislikes Int      @default(0)
-  rating   Float
+  id            String   @id @default(uuid()) @db.Uuid
+  imgUrls       String[]
+  text          String?  @db.VarChar(1024)
+  tags          String[]
+  likes         Int      @default(0)
+  dislikes      Int      @default(0)
+  rating        Float
+  createdUser   User     @relation(name: "create", fields: [createdUserId], references: [id])
+  createdUserId String   @db.Uuid
+  viewedUsers   User[]
 }
 
 model User {
-  id       String @id @default(uuid()) @db.Uuid
-  email    String @unique @db.VarChar(128)
-  password String
-  nickname String @unique @db.VarChar(64)
-  money    Float  @default(0)
+  id          String @id @default(uuid()) @db.Uuid
+  email       String @unique @db.VarChar(128)
+  password    String
+  nickname    String @unique @db.VarChar(64)
+  money       Float  @default(0)
+  createdMems Mem[]  @relation(name: "create")
+  viewedMemes Mem[]
 }

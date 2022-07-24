@@ -20,18 +20,24 @@ export class MemResolver {
     @Args('UpdateMemInput') params: MemUpdateInput,
     @UserId() userId: string,
   ): Promise<Mem> {
-    console.log(userId);
-
-    return this.memService.updateMem(params);
+    return this.memService.updateMem({ ...params, userId });
   }
 
   @Mutation(() => Mem)
-  createMem(@Args('CreateMemInput') params: MemCreateInput): Promise<Mem> {
-    return this.memService.createMem(params);
+  @UseGuards(JwtAuthGuard)
+  createMem(
+    @Args('CreateMemInput') params: MemCreateInput,
+    @UserId() userId: string,
+  ): Promise<Mem> {
+    return this.memService.createMem({ ...params, userId });
   }
 
   @Query(() => [Mem])
-  bestMems(@Args('GetBestMemsInput') params: MemsGetBestInput): Promise<Mem[]> {
-    return this.memService.getBestMems(params);
+  @UseGuards(JwtAuthGuard)
+  bestMems(
+    @Args('GetBestMemsInput') params: MemsGetBestInput,
+    @UserId() userId: string,
+  ): Promise<Mem[]> {
+    return this.memService.getBestMems({ ...params, userId });
   }
 }
