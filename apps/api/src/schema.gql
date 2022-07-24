@@ -26,6 +26,7 @@ type User {
 type Query {
   bestMems(GetBestMemsInput: MemsGetBestInput!): [Mem!]!
   user(UserUniqueInput: UserUniqueInput!): User!
+  me: User!
   login(LoginInput: LoginInput!): JwtToken!
 }
 

@@ -18,7 +18,7 @@ export class MemResolver {
   @UseGuards(JwtAuthGuard)
   updateMem(
     @Args('UpdateMemInput') params: MemUpdateInput,
-    @UserId() userId: number,
+    @UserId() userId: string,
   ): Promise<Mem> {
     console.log(userId);
 
