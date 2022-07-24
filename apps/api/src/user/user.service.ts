@@ -5,6 +5,7 @@ import { User } from './dto/user.model';
 import { PrismaService } from '@api/prisma/prisma.service';
 
 import { Injectable } from '@nestjs/common';
+import { hash } from 'bcrypt';
 
 @Injectable()
 export class UserService {
@@ -21,7 +22,7 @@ export class UserService {
       data: {
         email: params.email,
         nickname: params.nickname,
-        password: params.password,
+        password: await hash(params.password, 10),
       },
     });
   }
