@@ -1,0 +1,12 @@
+import { createParamDecorator, ExecutionContext } from '@nestjs/common';
+import { GqlExecutionContext } from '@nestjs/graphql';
+
+export const UserId = createParamDecorator(
+  (data: unknown, context: ExecutionContext) => {
+    const ctx = GqlExecutionContext.create(context);
+    const request = ctx.getContext().req;
+
+    // userId добавляется к request в JwtAuthGuard-е
+    return request.userId;
+  },
+);
