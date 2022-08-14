@@ -20,6 +20,9 @@
     "db:deploy": "prisma migrate deploy",
     "db:seed": "prisma db seed"
   },
+  "prisma": {
+    "seed": "ts-node ./prisma/seed/seed.ts"
+  },
   "dependencies": {
     "@nestjs/apollo": "^10.0.14",
     "@nestjs/common": "^8.0.0",
