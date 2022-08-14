@@ -36,7 +36,7 @@ export const seedMems: Mem[] = [
     tags: [],
     likes: 10,
     dislikes: 2,
-    rating: 2,
+    rating: 7,
     createdUserId: seedUsers[0].id,
   },
   {
@@ -62,7 +62,7 @@ export const seedMems: Mem[] = [
     tags: [],
     likes: 10,
     dislikes: 2,
-    rating: 1,
+    rating: 7,
     createdUserId: seedUsers[0].id,
   },
 ];
