@@ -26,13 +26,14 @@ type User {
 }
 
 type Query {
-  bestMems(GetBestMemsInput: MemsGetBestInput!): [Mem!]!
+  bestMems(GetMemsInput: GetMemsInput!): [Mem!]!
+  mems(GetMemsInput: GetMemsInput!): [Mem!]!
   user(UserUniqueInput: UserUniqueInput!): User!
   me: User!
   login(LoginInput: LoginInput!): JwtToken!
 }
 
-input MemsGetBestInput {
+input GetMemsInput {
   take: Int = 10
   skip: Int = 0
 }

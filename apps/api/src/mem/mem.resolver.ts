@@ -1,6 +1,6 @@
 import { MemCreateInput } from './dto/input/mem-create.input';
 import { MemUpdateInput } from './dto/input/mem-update.input';
-import { MemsGetBestInput } from './dto/input/mems-get-best.input';
+import { GetMemsInput } from './dto/input/mems-get-best.input';
 import { Mem } from './dto/mem.model';
 import { MemService } from './mem.service';
 
@@ -35,9 +35,14 @@ export class MemResolver {
   @Query(() => [Mem])
   @UseGuards(JwtAuthGuard)
   bestMems(
-    @Args('GetBestMemsInput') params: MemsGetBestInput,
+    @Args('GetMemsInput') params: GetMemsInput,
     @UserId() userId: string,
   ): Promise<Mem[]> {
     return this.memService.getBestMems({ ...params, userId });
+  }
+
+  @Query(() => [Mem])
+  mems(@Args('GetMemsInput') params: GetMemsInput): Promise<Mem[]> {
+    return this.memService.getMems(params);
   }
 }

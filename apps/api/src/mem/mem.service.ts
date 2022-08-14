@@ -1,6 +1,6 @@
 import { MemCreateInput } from './dto/input/mem-create.input';
 import { MemUpdateInput } from './dto/input/mem-update.input';
-import { MemsGetBestInput } from './dto/input/mems-get-best.input';
+import { GetMemsInput } from './dto/input/mems-get-best.input';
 import { Mem } from './dto/mem.model';
 import { MemNotFoundException } from './exceptions/mem-not-found.exception';
 import { MemRatingService } from './mem.rating.service';
@@ -17,9 +17,7 @@ export class MemService {
     private readonly ratingService: MemRatingService,
   ) {}
 
-  async getBestMems(
-    params: MemsGetBestInput & { userId: string },
-  ): Promise<Mem[]> {
+  async getBestMems(params: GetMemsInput & { userId: string }): Promise<Mem[]> {
     const mems = await this.prisma.mem.findMany({
       orderBy: { rating: 'desc' },
       take: params.take,
@@ -35,6 +33,14 @@ export class MemService {
     }
 
     return mems;
+  }
+
+  async getMems(params: GetMemsInput): Promise<Mem[]> {
+    return this.prisma.mem.findMany({
+      orderBy: { rating: 'desc' },
+      take: params.take,
+      skip: params.skip,
+    });
   }
 
   async createMem(params: MemCreateInput & { userId: string }): Promise<Mem> {
