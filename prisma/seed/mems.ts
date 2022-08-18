@@ -8,7 +8,7 @@ export const seedMems: Mem[] = [
     imgUrls: [
       'https://sun9-9.userapi.com/impg/0kyBk6Caf4_12E8n4XX5Ch_yLqcFxkgsrKld_Q/KfEqLhCaUBY.jpg?size=1200x1200&quality=95&sign=b846a2d995ddc09990ec22e2614d45b3&type=album',
     ],
-    text: null,
+    text: 'Волк идёт',
     tags: [],
     likes: 10,
     dislikes: 2,
@@ -30,7 +30,7 @@ export const seedMems: Mem[] = [
   {
     id: '19888a7d-ff42-42a5-95e5-1717675725a1',
     imgUrls: [
-      'https://sun9-56.userapi.com/impg/BuwXnhNAcdoXaOW9NIBm3XipxqJfZ9RidCI2LA/XZiy-3HgUeE.jpg?size=2000x1777&quality=96&sign=d4e21b1b0a37101a53fb9d16f992d099&type=album',
+      'https://sun9-16.userapi.com/impg/byJrL7m5gH7YZ9-UiqhP8d-ta9noMN4kIx3oYQ/ZQFh48q3RUM.jpg?size=612x974&quality=96&sign=32a6f64af558061135ca78d277d9e956&type=album',
     ],
     text: null,
     tags: [],
