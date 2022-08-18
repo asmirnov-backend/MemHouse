@@ -21,11 +21,18 @@ model Mem {
 }
 
 model User {
-  id          String @id @default(uuid()) @db.Uuid
-  email       String @unique @db.VarChar(128)
+  id          String   @id @default(uuid()) @db.Uuid
+  email       String   @unique @db.VarChar(128)
   password    String
-  nickname    String @unique @db.VarChar(64)
-  money       Float  @default(0)
-  createdMems Mem[]  @relation(name: "create")
+  nickname    String   @unique @db.VarChar(64)
+  createdMems Mem[]    @relation(name: "create")
   viewedMemes Mem[]
+  Wallet      Wallet[]
+}
+
+model Wallet {
+  id      String @id @default(uuid()) @db.Uuid
+  balance Float  @default(0)
+  owner   User   @relation(fields: [ownerId], references: [id])
+  ownerId String @db.Uuid
 }

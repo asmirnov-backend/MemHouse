@@ -6,6 +6,5 @@ export const seedUsers: User[] = [
     email: 'email@example.com',
     password: '28f1a678',
     nickname: 'nickname text',
-    money: 0,
   },
 ];
