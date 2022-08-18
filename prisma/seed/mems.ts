@@ -149,4 +149,44 @@ export const seedMems: Mem[] = [
     rating: 6.9,
     createdUserId: seedUsers[0].id,
   },
+  {
+    id: '19888a7d-ff42-42a5-95e5-2725175724a1',
+    imgUrls: [
+      'https://sun9-26.userapi.com/impg/SAy4gg6zj8wrtGPufl6bxooJPEZa0cyIE39lrg/59B_04J3bG4.jpg?size=940x715&quality=95&sign=a9bc8f6cf795465db1d3be5427baecb3&type=album',
+    ],
+    text: `Влaсти Япoнии ищyт чeловека, котoрый нaучит молoдежь бyхать.
+
+    Они объявили кoнкурс — нужнo придyмать cпособы, кoторые cклонят молoдёжь к бoльшему упoтреблению aлкоголя. Всё из-зa cокращения нaлоговых поcтуплений от aлкогольной отрaсли.
+    
+    Мeчта номeр oдин - брoсить все дeла и улeтеть в Япoнию пoднимать эконoмику.`,
+    tags: [],
+    likes: 10,
+    dislikes: 2,
+    rating: 6.9,
+    createdUserId: seedUsers[0].id,
+  },
+  {
+    id: '19888a7d-ff42-42a5-95e5-3725175724a1',
+    imgUrls: [
+      'https://sun9-69.userapi.com/impg/M5khgT5biCY4aekHzJMB8C_ogfyP8zuB778wvw/63m9TiV9_2Y.jpg?size=1664x2160&quality=96&sign=dcfad37cba2cdf13bab8b61cf8b05996&type=album',
+    ],
+    text: null,
+    tags: [],
+    likes: 10,
+    dislikes: 2,
+    rating: 6.9,
+    createdUserId: seedUsers[0].id,
+  },
+  {
+    id: '19888a7d-ff42-42a5-95e5-4725175724a1',
+    imgUrls: [
+      'https://sun9-43.userapi.com/impg/5-Ka1TVM5V9IKPB9fU9x8yeT7O4Q2xa0rT-5OA/Oj1vrcIQzK0.jpg?size=1200x1200&quality=95&sign=6050342e6201f936e87e6f8e52a110f8&type=album',
+    ],
+    text: null,
+    tags: [],
+    likes: 10,
+    dislikes: 2,
+    rating: 6.9,
+    createdUserId: seedUsers[0].id,
+  },
 ];
