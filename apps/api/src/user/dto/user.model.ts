@@ -7,7 +7,6 @@ export class User {
   id: string;
   email: string;
   nickname: string;
-  money: number;
   viewedMemes: Mem[];
   createdMems: Mem[];
 }
