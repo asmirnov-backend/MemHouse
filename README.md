@@ -35,3 +35,9 @@ MemService knows about Prisma, because prisma provides nice abstraction. So "rep
 ```bash
 docker run --name postgres-local -p 5432:5432 -e POSTGRES_DB=mem-storage -e POSTGRES_HOST_AUTH_METHOD=trust -e POSTGRES_USER=root -d postgres
 ```
+
+### Use ngrok for apply connection to the client side in the Internet
+
+```bash
+/Users/user/Downloads/ngrok http 3002
+```
