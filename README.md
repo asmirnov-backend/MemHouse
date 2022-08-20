@@ -41,3 +41,11 @@ docker run --name postgres-local -p 5432:5432 -e POSTGRES_DB=mem-storage -e POST
 ```bash
 /Users/user/Downloads/ngrok http 3002
 ```
+
+## How to start full app:
+
+- Start postgres in docker
+- Start 'nest start'
+- /Users/user/Downloads/ngrok http 3002
+- Copy ngrok url to frontend in App.ts and codegen.yml
+- firebase deploy client (frontend)
