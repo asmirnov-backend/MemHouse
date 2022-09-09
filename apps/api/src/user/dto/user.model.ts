@@ -1,3 +1,5 @@
+import { Profile } from './profile.model';
+
 import { Mem } from '../../mem/dto/mem.model';
 
 import { ObjectType } from '@nestjs/graphql';
@@ -9,4 +11,5 @@ export class User {
   nickname: string;
   viewedMemes: Mem[];
   createdMems: Mem[];
+  Profile: Profile | null;
 }

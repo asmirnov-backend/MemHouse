@@ -12,7 +12,11 @@ export class UserService {
   async getUser(params: UserUniqueInput): Promise<User | null> {
     return this.prisma.user.findUnique({
       where: { id: params.id, email: params.email, nickname: params.nickname },
-      include: { viewedMemes: true, createdMems: true },
+      include: {
+        viewedMemes: true,
+        createdMems: true,
+        Profile: true,
+      },
     });
   }
 }

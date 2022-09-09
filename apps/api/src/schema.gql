@@ -16,12 +16,25 @@ type Mem {
   rating: Float!
 }
 
+type Profile {
+  id: String!
+  name: String!
+  surname: String!
+  birthday: DateTime
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type User {
   id: String!
   email: String!
   nickname: String!
   viewedMemes: [Mem!]!
   createdMems: [Mem!]!
+  Profile: Profile
 }
 
 type Query {
@@ -29,7 +42,6 @@ type Query {
   mems(GetMemsInput: GetMemsInput!): [Mem!]!
   user(UserUniqueInput: UserUniqueInput!): User!
   me: User!
-  login(LoginInput: LoginInput!): JwtToken!
 }
 
 input GetMemsInput {
@@ -43,14 +55,10 @@ input UserUniqueInput {
   nickname: String
 }
 
-input LoginInput {
-  email: String!
-  password: String!
-}
-
 type Mutation {
   updateMem(UpdateMemInput: MemUpdateInput!): Mem!
   createMem(CreateMemInput: MemCreateInput!): Mem!
+  login(LoginInput: LoginInput!): JwtToken!
   registration(RegistrationInput: RegistrationInput!): JwtToken!
 }
 
@@ -69,8 +77,15 @@ input MemCreateInput {
   tags: [String!]
 }
 
+input LoginInput {
+  email: String!
+  password: String!
+}
+
 input RegistrationInput {
   email: String!
   password: String!
   nickname: String!
+  name: String!
+  surname: String!
 }
