@@ -1,11 +1,12 @@
 import { Injectable } from '@nestjs/common';
+import { Mem } from '@prisma/client';
 
 /**
  * Rating must be limited (Not be infinity) so it must be in interval (-100, 100)
  */
 @Injectable()
 export class MemRatingService {
-  calculate(mem = { likes: 0, dislikes: 0 }) {
+  calculate(mem: Pick<Mem, 'likes' | 'dislikes'> = { likes: 0, dislikes: 0 }) {
     const INITIAL_ABSOLUT_RATING = 1000;
     const ratingAbsolut = INITIAL_ABSOLUT_RATING + mem.likes - mem.dislikes * 3;
 

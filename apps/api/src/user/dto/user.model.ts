@@ -11,5 +11,5 @@ export class User {
   nickname: string;
   viewedMemes: Mem[];
   createdMems: Mem[];
-  Profile: Profile | null;
+  profile: Profile | null;
 }
