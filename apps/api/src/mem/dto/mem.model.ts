@@ -1,8 +1,7 @@
-import { Field, ObjectType, ID, Int } from '@nestjs/graphql';
+import { ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
 export class Mem {
-  @Field(() => ID)
   id: string;
 
   imgUrls: string[];
@@ -10,12 +9,4 @@ export class Mem {
   text?: string | null;
 
   tags?: string[];
-
-  @Field(() => Int)
-  likes: number;
-
-  @Field(() => Int)
-  dislikes: number;
-
-  rating: number;
 }

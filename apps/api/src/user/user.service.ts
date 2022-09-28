@@ -1,5 +1,3 @@
-import { UserCreateInput } from './dto/input/user-create.input';
-import { UserUniqueInput } from './dto/input/user-get-unique.input';
 import { User } from './dto/user.model';
 
 import { PrismaService } from '@api/prisma/prisma.service';
@@ -10,18 +8,13 @@ import { Injectable } from '@nestjs/common';
 export class UserService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async getUser(params: UserUniqueInput): Promise<User | null> {
+  async getUser(params: { userId: string }): Promise<User | null> {
     return this.prisma.user.findUnique({
-      where: { id: params.id, email: params.email, nickname: params.nickname },
-    });
-  }
-
-  async createUser(params: UserCreateInput): Promise<User> {
-    return this.prisma.user.create({
-      data: {
-        email: params.email,
-        nickname: params.nickname,
-        password: params.password,
+      where: { id: params.userId },
+      include: {
+        viewedMemes: true,
+        createdMems: true,
+        profile: true,
       },
     });
   }

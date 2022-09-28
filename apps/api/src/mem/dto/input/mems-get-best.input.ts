@@ -1,11 +1,12 @@
-import { Field, Int, InputType } from '@nestjs/graphql';
-import { IsInt, IsOptional } from 'class-validator';
+import { Field, InputType, Int } from '@nestjs/graphql';
+import { IsInt, IsOptional, Max } from 'class-validator';
 
 @InputType()
-export class MemsGetBestInput {
+export class GetMemsInput {
   @Field(() => Int)
   @IsOptional()
   @IsInt()
+  @Max(100)
   take = 10;
 
   @Field(() => Int)

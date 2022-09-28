@@ -1,5 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["filteredRelationCount"]
 }
 
 datasource db {
@@ -8,19 +9,62 @@ datasource db {
 }
 
 model Mem {
-  id       String   @id @default(uuid()) @db.Uuid
-  imgUrls  String[]
-  text     String?  @db.VarChar(1024)
-  tags     String[]
-  likes    Int      @default(0)
-  dislikes Int      @default(0)
-  rating   Float
+  id            String        @id @default(uuid()) @db.Uuid
+  imgUrls       String[]
+  text          String?       @db.VarChar(1024)
+  tags          String[]
+  createdUser   User          @relation(name: "create", fields: [createdUserId], references: [id])
+  createdUserId String        @db.Uuid
+  viewedUsers   User[]
+  reactions     MemReaction[]
+  rating        Rating?
+}
+
+model MemReaction {
+  id     String          @id @default(uuid()) @db.Uuid
+  mem    Mem             @relation(fields: [memId], references: [id])
+  memId  String          @db.Uuid
+  type   MemReactionType
+  user   User            @relation(fields: [userId], references: [id])
+  userId String          @db.Uuid
+}
+
+enum MemReactionType {
+  LIKE
+  DISLIKE
+}
+
+model Rating {
+  id     String @id @default(uuid()) @db.Uuid
+  amount Float
+  mem    Mem    @relation(fields: [memId], references: [id])
+  memId  String @unique @db.Uuid
 }
 
 model User {
-  id       String @id @default(uuid()) @db.Uuid
-  email    String @unique @db.VarChar(128)
-  password String
-  nickname String @unique @db.VarChar(64)
-  money    Float  @default(0)
+  id          String        @id @default(uuid()) @db.Uuid
+  email       String        @unique @db.VarChar(128)
+  password    String
+  nickname    String        @unique @db.VarChar(64)
+  createdMems Mem[]         @relation(name: "create")
+  viewedMemes Mem[]
+  wallet      Wallet[]
+  profile     Profile?
+  reactions   MemReaction[]
+}
+
+model Profile {
+  id       String    @id @default(uuid()) @db.Uuid
+  name     String    @db.VarChar(128)
+  surname  String    @db.VarChar(128)
+  birthday DateTime? @db.Date
+  user     User      @relation(fields: [userId], references: [id])
+  userId   String    @unique @db.Uuid
+}
+
+model Wallet {
+  id      String @id @default(uuid()) @db.Uuid
+  balance Float  @default(0)
+  owner   User   @relation(fields: [ownerId], references: [id])
+  ownerId String @db.Uuid
 }

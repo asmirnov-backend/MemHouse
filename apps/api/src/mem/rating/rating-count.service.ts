@@ -4,10 +4,13 @@ import { Injectable } from '@nestjs/common';
  * Rating must be limited (Not be infinity) so it must be in interval (-100, 100)
  */
 @Injectable()
-export class MemRatingService {
-  calculate(mem = { likes: 0, dislikes: 0 }) {
+export class RatingCountService {
+  calculate(
+    params: { likes: number; dislikes: number } = { likes: 0, dislikes: 0 },
+  ) {
     const INITIAL_ABSOLUT_RATING = 1000;
-    const ratingAbsolut = INITIAL_ABSOLUT_RATING + mem.likes - mem.dislikes * 3;
+    const ratingAbsolut =
+      INITIAL_ABSOLUT_RATING + params.likes - params.dislikes * 3;
 
     return this.convertUnlimitedNumberToInterval(ratingAbsolut);
   }

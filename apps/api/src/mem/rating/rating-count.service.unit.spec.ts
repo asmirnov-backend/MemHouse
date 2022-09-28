@@ -1,7 +1,7 @@
-import { MemRatingService } from './mem.rating.service';
+import { RatingCountService } from './rating-count.service';
 
-describe('MemRatingService', () => {
-  const service = new MemRatingService();
+describe('RatingCountService', () => {
+  const service = new RatingCountService();
 
   it('Service should be defined', () => {
     expect(service).toBeDefined();

@@ -1,21 +1,25 @@
-import { UserCreateInput } from './dto/input/user-create.input';
-import { UserUniqueInput } from './dto/input/user-get-unique.input';
+import { UserByIdInput } from './dto/input/user-by-id.input';
 import { User } from './dto/user.model';
 import { UserService } from './user.service';
 
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { JwtAuthGuard } from '../auth/jwt/jwt-auth.guard';
+import { UserId } from '../auth/jwt/user-id.decorator';
+
+import { UseGuards } from '@nestjs/common';
+import { Args, Query, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 export class UserResolver {
   constructor(private readonly userService: UserService) {}
 
   @Query(() => User)
-  user(@Args('UserUniqueInput') params: UserUniqueInput): Promise<User | null> {
-    return this.userService.getUser(params);
+  userById(@Args('UserByIdInput') params: UserByIdInput): Promise<User | null> {
+    return this.userService.getUser({ userId: params.id });
   }
 
-  @Mutation(() => User)
-  createUser(@Args('UserCreateInput') params: UserCreateInput): Promise<User> {
-    return this.userService.createUser(params);
+  @Query(() => User)
+  @UseGuards(JwtAuthGuard)
+  me(@UserId() userId: string): Promise<User | null> {
+    return this.userService.getUser({ userId });
   }
 }

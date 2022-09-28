@@ -2,43 +2,69 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type JwtToken {
+  jwtToken: String!
+}
+
 type Mem {
-  id: ID!
-  likes: Int!
-  dislikes: Int!
+  id: String!
   imgUrls: [String!]!
   text: String
   tags: [String!]
+}
+
+type MemFull {
+  id: String!
+  imgUrls: [String!]!
+  text: String
+  tags: [String!]
+  likes: Int!
+  dislikes: Int!
   rating: Float!
 }
+
+type Profile {
+  id: String!
+  name: String!
+  surname: String!
+  birthday: DateTime
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
 
 type User {
   id: String!
   email: String!
   nickname: String!
-  money: Float!
+  viewedMemes: [Mem!]!
+  createdMems: [Mem!]!
+  profile: Profile
 }
 
 type Query {
-  bestMems(GetBestMemsInput: MemsGetBestInput!): [Mem!]!
-  user(UserUniqueInput: UserUniqueInput!): User!
+  bestMems(GetMemsInput: GetMemsInput!): [MemFull!]!
+  mems(GetMemsInput: GetMemsInput!): [MemFull!]!
+  userById(UserByIdInput: UserByIdInput!): User!
+  me: User!
 }
 
-input MemsGetBestInput {
+input GetMemsInput {
   take: Int = 10
   skip: Int = 0
 }
 
-input UserUniqueInput {
-  id: String
-  email: String
-  nickname: String
+input UserByIdInput {
+  id: String!
 }
 
 type Mutation {
-  updateMem(UpdateMemInput: MemUpdateInput!): Mem!
-  createMem(CreateMemInput: MemCreateInput!): Mem!
-  createUser(UserCreateInput: UserCreateInput!): User!
+  updateMem(UpdateMemInput: MemUpdateInput!): MemFull!
+  createMem(CreateMemInput: MemCreateInput!): MemFull!
+  login(LoginInput: LoginInput!): JwtToken!
+  registration(RegistrationInput: RegistrationInput!): JwtToken!
 }
 
 input MemUpdateInput {
@@ -46,8 +72,6 @@ input MemUpdateInput {
   imgUrls: [String!]
   text: String
   tags: [String!]
-  addLikes: Float
-  addDislikes: Float
 }
 
 input MemCreateInput {
@@ -56,8 +80,15 @@ input MemCreateInput {
   tags: [String!]
 }
 
-input UserCreateInput {
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+input RegistrationInput {
   email: String!
   password: String!
   nickname: String!
+  name: String!
+  surname: String!
 }

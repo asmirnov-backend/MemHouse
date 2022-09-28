@@ -1,4 +1,5 @@
 import { AppController } from './app.controller';
+import { AuthModule } from './auth/auth.module';
 import { MemModule } from './mem/mem.module';
 import { UserModule } from './user/user.module';
 
@@ -20,6 +21,7 @@ import { join } from 'path';
     ConfigModule.forRoot({ isGlobal: true }),
     MemModule,
     UserModule,
+    AuthModule,
   ],
   controllers: [AppController],
 })
