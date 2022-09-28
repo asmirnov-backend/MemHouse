@@ -12,6 +12,7 @@ import { UserId } from '../auth/jwt/user-id.decorator';
 import { UseGuards } from '@nestjs/common';
 import {
   Args,
+  Float,
   Mutation,
   Parent,
   Query,
@@ -68,7 +69,7 @@ export class MemResolver {
     return this.metadataService.getDislikesAmount(mem.id);
   }
 
-  @ResolveField('rating')
+  @ResolveField('rating', () => Float)
   async rating(@Parent() mem: MemFull) {
     return this.metadataService.getRatingAmount(mem.id);
   }
