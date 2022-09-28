@@ -10,9 +10,6 @@ export const seedMems: Mem[] = [
     ],
     text: 'Волк идёт',
     tags: [],
-    likes: 10,
-    dislikes: 2,
-    rating: 22,
     createdUserId: seedUsers[0].id,
   },
   {
@@ -22,9 +19,6 @@ export const seedMems: Mem[] = [
     ],
     text: null,
     tags: [],
-    likes: 10,
-    dislikes: 2,
-    rating: 23,
     createdUserId: seedUsers[0].id,
   },
   {
@@ -34,9 +28,6 @@ export const seedMems: Mem[] = [
     ],
     text: null,
     tags: [],
-    likes: 10,
-    dislikes: 2,
-    rating: 7,
     createdUserId: seedUsers[0].id,
   },
   {
@@ -46,9 +37,6 @@ export const seedMems: Mem[] = [
     ],
     text: null,
     tags: [],
-    likes: 10,
-    dislikes: 2,
-    rating: 20,
     createdUserId: seedUsers[0].id,
   },
   {
@@ -60,9 +48,6 @@ export const seedMems: Mem[] = [
     ],
     text: null,
     tags: [],
-    likes: 10,
-    dislikes: 2,
-    rating: 7,
     createdUserId: seedUsers[0].id,
   },
   {
@@ -72,9 +57,6 @@ export const seedMems: Mem[] = [
     ],
     text: null,
     tags: [],
-    likes: 10,
-    dislikes: 2,
-    rating: 6.9,
     createdUserId: seedUsers[0].id,
   },
   {
@@ -84,9 +66,6 @@ export const seedMems: Mem[] = [
     ],
     text: null,
     tags: [],
-    likes: 10,
-    dislikes: 2,
-    rating: 6.9,
     createdUserId: seedUsers[0].id,
   },
   {
@@ -96,9 +75,6 @@ export const seedMems: Mem[] = [
     ],
     text: null,
     tags: [],
-    likes: 10,
-    dislikes: 2,
-    rating: 6.9,
     createdUserId: seedUsers[0].id,
   },
   {
@@ -108,9 +84,6 @@ export const seedMems: Mem[] = [
     ],
     text: null,
     tags: [],
-    likes: 10,
-    dislikes: 2,
-    rating: 6.9,
     createdUserId: seedUsers[0].id,
   },
   {
@@ -120,9 +93,6 @@ export const seedMems: Mem[] = [
     ],
     text: null,
     tags: [],
-    likes: 10,
-    dislikes: 2,
-    rating: 6.9,
     createdUserId: seedUsers[0].id,
   },
   {
@@ -132,9 +102,6 @@ export const seedMems: Mem[] = [
     ],
     text: null,
     tags: [],
-    likes: 10,
-    dislikes: 2,
-    rating: 6.9,
     createdUserId: seedUsers[0].id,
   },
   {
@@ -144,9 +111,6 @@ export const seedMems: Mem[] = [
     ],
     text: null,
     tags: [],
-    likes: 10,
-    dislikes: 2,
-    rating: 6.9,
     createdUserId: seedUsers[0].id,
   },
   {
@@ -160,9 +124,6 @@ export const seedMems: Mem[] = [
     
     Мeчта номeр oдин - брoсить все дeла и улeтеть в Япoнию пoднимать эконoмику.`,
     tags: [],
-    likes: 10,
-    dislikes: 2,
-    rating: 6.9,
     createdUserId: seedUsers[0].id,
   },
   {
@@ -172,9 +133,6 @@ export const seedMems: Mem[] = [
     ],
     text: null,
     tags: [],
-    likes: 10,
-    dislikes: 2,
-    rating: 6.9,
     createdUserId: seedUsers[0].id,
   },
   {
@@ -184,9 +142,6 @@ export const seedMems: Mem[] = [
     ],
     text: null,
     tags: [],
-    likes: 10,
-    dislikes: 2,
-    rating: 6.9,
     createdUserId: seedUsers[0].id,
   },
 ];

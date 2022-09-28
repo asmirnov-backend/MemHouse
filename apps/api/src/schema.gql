@@ -7,12 +7,19 @@ type JwtToken {
 }
 
 type Mem {
-  likes: Int!
-  dislikes: Int!
   id: String!
   imgUrls: [String!]!
   text: String
   tags: [String!]
+}
+
+type MemFull {
+  id: String!
+  imgUrls: [String!]!
+  text: String
+  tags: [String!]
+  likes: Int!
+  dislikes: Int!
   rating: Float!
 }
 
@@ -34,13 +41,13 @@ type User {
   nickname: String!
   viewedMemes: [Mem!]!
   createdMems: [Mem!]!
-  Profile: Profile
+  profile: Profile
 }
 
 type Query {
-  bestMems(GetMemsInput: GetMemsInput!): [Mem!]!
-  mems(GetMemsInput: GetMemsInput!): [Mem!]!
-  user(UserUniqueInput: UserUniqueInput!): User!
+  bestMems(GetMemsInput: GetMemsInput!): [MemFull!]!
+  mems(GetMemsInput: GetMemsInput!): [MemFull!]!
+  userById(UserByIdInput: UserByIdInput!): User!
   me: User!
 }
 
@@ -49,15 +56,13 @@ input GetMemsInput {
   skip: Int = 0
 }
 
-input UserUniqueInput {
-  id: String
-  email: String
-  nickname: String
+input UserByIdInput {
+  id: String!
 }
 
 type Mutation {
-  updateMem(UpdateMemInput: MemUpdateInput!): Mem!
-  createMem(CreateMemInput: MemCreateInput!): Mem!
+  updateMem(UpdateMemInput: MemUpdateInput!): MemFull!
+  createMem(CreateMemInput: MemCreateInput!): MemFull!
   login(LoginInput: LoginInput!): JwtToken!
   registration(RegistrationInput: RegistrationInput!): JwtToken!
 }
@@ -67,8 +72,6 @@ input MemUpdateInput {
   imgUrls: [String!]
   text: String
   tags: [String!]
-  addLikes: Float
-  addDislikes: Float
 }
 
 input MemCreateInput {

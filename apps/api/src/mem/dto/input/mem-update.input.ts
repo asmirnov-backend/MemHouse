@@ -1,5 +1,5 @@
 import { InputType } from '@nestjs/graphql';
-import { IsArray, IsInt, IsOptional, IsString, IsUUID } from 'class-validator';
+import { IsArray, IsOptional, IsString, IsUUID } from 'class-validator';
 
 @InputType()
 export class MemUpdateInput {
@@ -17,12 +17,4 @@ export class MemUpdateInput {
   @IsOptional()
   @IsArray()
   tags?: string[];
-
-  @IsOptional()
-  @IsInt()
-  addLikes?: number;
-
-  @IsOptional()
-  @IsInt()
-  addDislikes?: number;
 }

@@ -3,43 +3,48 @@ import { MemUpdateInput } from './dto/input/mem-update.input';
 import { GetMemsInput } from './dto/input/mems-get-best.input';
 import { Mem } from './dto/mem.model';
 import { MemNotFoundException } from './exceptions/mem-not-found.exception';
-import { MemRatingService } from './mem.rating.service';
+import { NotMemCreatorException } from './exceptions/not-mem-creator.exception copy';
+import { MemMetadataService } from './mem.metadata.service';
+import { RatingCountService } from './rating/rating-count.service';
 
 import { PrismaService } from '@api/prisma/prisma.service';
 
-import { ForbiddenException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { isNull } from 'lodash';
 
 @Injectable()
 export class MemService {
   constructor(
     private readonly prisma: PrismaService,
-    private readonly ratingService: MemRatingService,
+    private readonly metadataService: MemMetadataService,
+    private readonly ratingCountService: RatingCountService,
   ) {}
 
   async getBestMems(params: GetMemsInput & { userId: string }): Promise<Mem[]> {
     const mems = await this.prisma.mem.findMany({
-      orderBy: { rating: 'desc' },
       take: params.take,
       skip: params.skip,
       where: { NOT: [{ viewedUsers: { some: { id: params.userId } } }] },
+      orderBy: { rating: { amount: 'desc' } },
     });
 
-    for (const mem of mems) {
-      await this.prisma.mem.update({
-        where: { id: mem.id },
-        data: { viewedUsers: { connect: { id: params.userId } } },
-      });
-    }
+    await Promise.all(
+      mems.map((mem) =>
+        this.prisma.mem.update({
+          where: { id: mem.id },
+          data: { viewedUsers: { connect: { id: params.userId } } },
+        }),
+      ),
+    );
 
     return mems;
   }
 
   async getMems(params: GetMemsInput): Promise<Mem[]> {
     return this.prisma.mem.findMany({
-      orderBy: { rating: 'desc' },
       take: params.take,
       skip: params.skip,
+      orderBy: { rating: { amount: 'desc' } },
     });
   }
 
@@ -49,8 +54,8 @@ export class MemService {
         imgUrls: params.imgUrls,
         text: params.text ?? null,
         tags: params.tags,
-        rating: this.ratingService.calculate(),
-        createdUserId: params.userId,
+        createdUser: { connect: { id: params.userId } },
+        rating: { create: { amount: this.ratingCountService.calculate() } },
       },
     });
   }
@@ -65,12 +70,8 @@ export class MemService {
     }
 
     if (mem.createdUserId !== params.userId) {
-      throw new ForbiddenException('You are not the creater of this mem');
+      throw new NotMemCreatorException();
     }
-
-    const likes = mem.likes + (params.addLikes ? params.addLikes : 0);
-    const dislikes =
-      mem.dislikes + (params.addDislikes ? params.addDislikes : 0);
 
     return this.prisma.mem.update({
       where: { id: params.id },
@@ -78,9 +79,6 @@ export class MemService {
         imgUrls: params.imgUrls,
         text: params.text,
         tags: params.tags,
-        likes,
-        dislikes,
-        rating: this.ratingService.calculate({ likes, dislikes }),
       },
     });
   }

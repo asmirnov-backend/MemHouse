@@ -1,8 +1,8 @@
 import { AppModule } from '@api/app.module';
-import { Mem } from '@api/mem/dto/mem.model';
+import { MemFull } from '@api/mem/dto/mem-full.model';
 
 import { HttpServer, INestApplication } from '@nestjs/common';
-import { TestingModule, Test } from '@nestjs/testing';
+import { Test, TestingModule } from '@nestjs/testing';
 import { GraphQLFormattedError } from 'graphql';
 import * as request from 'supertest';
 
@@ -32,7 +32,7 @@ describe('AdvertiserResolver', () => {
     });
 
     const response: {
-      data: Mem;
+      data: MemFull;
       error: { errors: GraphQLFormattedError[] };
     } = result.body;
 

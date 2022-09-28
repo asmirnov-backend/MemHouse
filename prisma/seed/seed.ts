@@ -1,4 +1,5 @@
 import { seedMems } from './mems';
+import { seedRatings } from './rating';
 import { seedUsers } from './users';
 
 import { PrismaClient } from '@prisma/client';
@@ -7,6 +8,9 @@ const prisma = new PrismaClient();
 
 const main = async () => {
   // First of all delete previous seed
+  await prisma.rating.deleteMany({
+    where: { id: { in: seedRatings.map((rating) => rating.id) } },
+  });
   await prisma.mem.deleteMany({
     where: { id: { in: seedMems.map((mem) => mem.id) } },
   });
@@ -20,6 +24,9 @@ const main = async () => {
   });
   await prisma.mem.createMany({
     data: seedMems,
+  });
+  await prisma.rating.createMany({
+    data: seedRatings,
   });
 };
 

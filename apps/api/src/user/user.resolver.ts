@@ -1,4 +1,4 @@
-import { UserUniqueInput } from './dto/input/user-get-unique.input';
+import { UserByIdInput } from './dto/input/user-by-id.input';
 import { User } from './dto/user.model';
 import { UserService } from './user.service';
 
@@ -13,13 +13,13 @@ export class UserResolver {
   constructor(private readonly userService: UserService) {}
 
   @Query(() => User)
-  user(@Args('UserUniqueInput') params: UserUniqueInput): Promise<User | null> {
-    return this.userService.getUser(params);
+  userById(@Args('UserByIdInput') params: UserByIdInput): Promise<User | null> {
+    return this.userService.getUser({ userId: params.id });
   }
 
   @Query(() => User)
   @UseGuards(JwtAuthGuard)
   me(@UserId() userId: string): Promise<User | null> {
-    return this.userService.getUser({ id: userId });
+    return this.userService.getUser({ userId });
   }
 }
