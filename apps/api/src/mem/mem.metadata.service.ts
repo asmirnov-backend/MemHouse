@@ -25,6 +25,6 @@ export class MemMetadataService {
       select: { amount: true },
     });
 
-    return rating?.amount;
+    return rating?.amount ?? null;
   }
 }

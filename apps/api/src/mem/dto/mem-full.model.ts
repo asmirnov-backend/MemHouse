@@ -10,5 +10,5 @@ export class MemFull extends Mem {
   @Field(() => Int)
   dislikes: number;
 
-  rating: number;
+  rating: number | null;
 }
