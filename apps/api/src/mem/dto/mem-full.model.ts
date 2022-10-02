@@ -1,9 +1,9 @@
-import { Mem } from './mem.model';
+import { MemDto } from './mem.model';
 
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
-export class MemFull extends Mem {
+export class MemFullDto extends MemDto {
   @Field(() => Int)
   likes: number;
 

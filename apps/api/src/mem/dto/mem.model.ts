@@ -1,7 +1,7 @@
 import { ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
-export class Mem {
+export class MemDto {
   id: string;
 
   imgUrls: string[];

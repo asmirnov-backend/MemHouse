@@ -1,15 +1,15 @@
-import { Profile } from './profile.model';
+import { ProfileDto } from './profile.model';
 
-import { Mem } from '../../mem/dto/mem.model';
+import { MemDto } from '../../mem/dto/mem.model';
 
 import { ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
-export class User {
+export class UserDto {
   id: string;
   email: string;
   nickname: string;
-  viewedMemes: Mem[];
-  createdMems: Mem[];
-  profile: Profile | null;
+  viewedMemes: MemDto[];
+  createdMems: MemDto[];
+  profile: ProfileDto | null;
 }

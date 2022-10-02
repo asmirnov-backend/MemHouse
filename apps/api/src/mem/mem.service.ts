@@ -1,7 +1,7 @@
 import { MemCreateInput } from './dto/input/mem-create.input';
 import { MemUpdateInput } from './dto/input/mem-update.input';
 import { GetMemsInput } from './dto/input/mems-get-best.input';
-import { Mem } from './dto/mem.model';
+import { MemDto } from './dto/mem.model';
 import { MemNotFoundException } from './exceptions/mem-not-found.exception';
 import { NotMemCreatorException } from './exceptions/not-mem-creator.exception copy';
 import { MemMetadataService } from './mem.metadata.service';
@@ -20,7 +20,9 @@ export class MemService {
     private readonly ratingCountService: RatingCountService,
   ) {}
 
-  async getBestMems(params: GetMemsInput & { userId: string }): Promise<Mem[]> {
+  async getBestMems(
+    params: GetMemsInput & { userId: string },
+  ): Promise<MemDto[]> {
     const mems = await this.prisma.mem.findMany({
       take: params.take,
       skip: params.skip,
@@ -40,7 +42,7 @@ export class MemService {
     return mems;
   }
 
-  async getMems(params: GetMemsInput): Promise<Mem[]> {
+  async getMems(params: GetMemsInput): Promise<MemDto[]> {
     return this.prisma.mem.findMany({
       take: params.take,
       skip: params.skip,
@@ -48,7 +50,9 @@ export class MemService {
     });
   }
 
-  async createMem(params: MemCreateInput & { userId: string }): Promise<Mem> {
+  async createMem(
+    params: MemCreateInput & { userId: string },
+  ): Promise<MemDto> {
     return this.prisma.mem.create({
       data: {
         imgUrls: params.imgUrls,
@@ -60,7 +64,9 @@ export class MemService {
     });
   }
 
-  async updateMem(params: MemUpdateInput & { userId: string }): Promise<Mem> {
+  async updateMem(
+    params: MemUpdateInput & { userId: string },
+  ): Promise<MemDto> {
     const mem = await this.prisma.mem.findUnique({
       where: { id: params.id },
     });

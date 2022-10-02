@@ -1,8 +1,8 @@
 import { MemCreateInput } from './dto/input/mem-create.input';
 import { MemUpdateInput } from './dto/input/mem-update.input';
 import { GetMemsInput } from './dto/input/mems-get-best.input';
-import { MemFull } from './dto/mem-full.model';
-import { Mem } from './dto/mem.model';
+import { MemFullDto } from './dto/mem-full.model';
+import { MemDto } from './dto/mem.model';
 import { MemMetadataService } from './mem.metadata.service';
 import { MemService } from './mem.service';
 
@@ -20,57 +20,57 @@ import {
   Resolver,
 } from '@nestjs/graphql';
 
-@Resolver(() => MemFull)
+@Resolver(() => MemFullDto)
 export class MemResolver {
   constructor(
     private readonly memService: MemService,
     private readonly metadataService: MemMetadataService,
   ) {}
 
-  @Mutation(() => MemFull)
+  @Mutation(() => MemFullDto)
   @UseGuards(JwtAuthGuard)
   updateMem(
     @Args('UpdateMemInput') params: MemUpdateInput,
     @UserId() userId: string,
-  ): Promise<Mem> {
+  ): Promise<MemDto> {
     return this.memService.updateMem({ ...params, userId });
   }
 
-  @Mutation(() => MemFull)
+  @Mutation(() => MemFullDto)
   @UseGuards(JwtAuthGuard)
   createMem(
     @Args('CreateMemInput') params: MemCreateInput,
     @UserId() userId: string,
-  ): Promise<Mem> {
+  ): Promise<MemDto> {
     return this.memService.createMem({ ...params, userId });
   }
 
-  @Query(() => [MemFull])
+  @Query(() => [MemFullDto])
   @UseGuards(JwtAuthGuard)
   bestMems(
     @Args('GetMemsInput') params: GetMemsInput,
     @UserId() userId: string,
-  ): Promise<Mem[]> {
+  ): Promise<MemDto[]> {
     return this.memService.getBestMems({ ...params, userId });
   }
 
-  @Query(() => [MemFull])
-  mems(@Args('GetMemsInput') params: GetMemsInput): Promise<Mem[]> {
+  @Query(() => [MemFullDto])
+  mems(@Args('GetMemsInput') params: GetMemsInput): Promise<MemDto[]> {
     return this.memService.getMems(params);
   }
 
   @ResolveField('likes')
-  async likes(@Parent() mem: MemFull) {
+  async likes(@Parent() mem: MemFullDto) {
     return this.metadataService.getLikesAmount(mem.id);
   }
 
   @ResolveField('dislikes')
-  async dislikes(@Parent() mem: MemFull) {
+  async dislikes(@Parent() mem: MemFullDto) {
     return this.metadataService.getDislikesAmount(mem.id);
   }
 
   @ResolveField('rating', () => Float)
-  async rating(@Parent() mem: MemFull) {
+  async rating(@Parent() mem: MemFullDto) {
     return this.metadataService.getRatingAmount(mem.id);
   }
 }
