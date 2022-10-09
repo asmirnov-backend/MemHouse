@@ -16,11 +16,15 @@ MemHouse is a platform to easy surf mems
 
 ## Architecture
 
-![DB schema](https://dbdesigner.page.link/a7ofB8xHB3BLmHEZ6)
-
 ![MemHouse architecture](https://user-images.githubusercontent.com/93443107/173183041-9be59e04-40d6-42b4-b394-a82431f6b0a4.png)
 
 <https://drive.google.com/file/d/1uncUdHqMnCW973bLj6hlUAizCPfXi3_p/view?usp=sharing>
+
+## Database
+
+DB schema: https://dbdesigner.page.link/a7ofB8xHB3BLmHEZ6
+
+![DB schema](https://user-images.githubusercontent.com/93443107/194750939-a12db922-4723-4e9c-ad32-97038fb4d586.png)
 
 ## Construction
 
