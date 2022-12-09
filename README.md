@@ -22,9 +22,7 @@ MemHouse is a platform to easy surf mems
 
 ## Database
 
-DB schema: https://dbdesigner.page.link/a7ofB8xHB3BLmHEZ6
-
-![DB schema](https://user-images.githubusercontent.com/93443107/194750939-a12db922-4723-4e9c-ad32-97038fb4d586.png)
+![DB schema](./prisma/ERD.svg)
 
 ## Construction
 
