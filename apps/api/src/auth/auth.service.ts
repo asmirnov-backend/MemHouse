@@ -55,7 +55,8 @@ export class AuthService {
         email: params.email,
         nickname: params.nickname,
         password: await hash(params.password, 10),
-        profile: { create: { name: params.name, surname: params.surname } },
+        name: params.name,
+        surname: params.surname,
       },
     });
 
