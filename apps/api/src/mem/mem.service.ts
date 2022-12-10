@@ -55,9 +55,18 @@ export class MemService {
   ): Promise<MemDto> {
     return this.prisma.mem.create({
       data: {
-        imgUrls: params.imgUrls,
+        images: {
+          createMany: {
+            data: params.imgUrls.map((imgUrl) => ({ displayUrl: imgUrl })),
+          },
+        },
         text: params.text ?? null,
-        tags: params.tags,
+        tags: {
+          connectOrCreate: params.tags?.map((tag) => ({
+            create: { value: tag },
+            where: { value: tag },
+          })),
+        },
         createdUser: { connect: { id: params.userId } },
         rating: { create: { amount: this.ratingCountService.calculate() } },
       },
@@ -82,9 +91,19 @@ export class MemService {
     return this.prisma.mem.update({
       where: { id: params.id },
       data: {
-        imgUrls: params.imgUrls,
+        images: {
+          connectOrCreate: params.imgUrls?.map((imgUrl) => ({
+            where: { displayUrl: imgUrl },
+            create: { displayUrl: imgUrl },
+          })),
+        },
         text: params.text,
-        tags: params.tags,
+        tags: {
+          connectOrCreate: params.tags?.map((tag) => ({
+            create: { value: tag },
+            where: { value: tag },
+          })),
+        },
       },
     });
   }

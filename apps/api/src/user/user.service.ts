@@ -14,7 +14,6 @@ export class UserService {
       include: {
         viewedMemes: true,
         createdMems: true,
-        profile: true,
       },
     });
   }
