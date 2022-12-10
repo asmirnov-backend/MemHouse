@@ -1,11 +1,11 @@
 import { AppModule } from './app.module';
 
 import { ValidationPipe } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 
 async function bootstrap() {
-  const appContext = await NestFactory.createApplicationContext(AppModule);
+  const appContext = await NestFactory.create(ConfigModule.forRoot());
   const config = appContext.get(ConfigService);
   const httpPort = Number(config.get<string>('APP_PORT')) || 3000;
 

@@ -1,8 +1,8 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
-import { Image } from '@prisma/client';
+import { ImageMeta } from '@prisma/client';
 
 @ObjectType()
-export class ImageDto implements Omit<Image, 'meta'> {
+export class ImageDto implements Omit<ImageMeta, 'originMeta'> {
   id: string;
 
   title: string;
