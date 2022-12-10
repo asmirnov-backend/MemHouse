@@ -60,17 +60,30 @@ export class MemResolver {
   }
 
   @ResolveField('likes')
-  async likes(@Parent() mem: MemFullDto) {
+  async likes(
+    @Parent() mem: MemFullDto,
+  ): Promise<Pick<MemFullDto, 'likes'>['likes']> {
     return this.metadataService.getLikesAmount(mem.id);
   }
 
   @ResolveField('dislikes')
-  async dislikes(@Parent() mem: MemFullDto) {
+  async dislikes(
+    @Parent() mem: MemFullDto,
+  ): Promise<Pick<MemFullDto, 'dislikes'>['dislikes']> {
     return this.metadataService.getDislikesAmount(mem.id);
   }
 
   @ResolveField('rating', () => Float)
-  async rating(@Parent() mem: MemFullDto) {
+  async rating(
+    @Parent() mem: MemFullDto,
+  ): Promise<Pick<MemFullDto, 'rating'>['rating']> {
     return this.metadataService.getRatingAmount(mem.id);
+  }
+
+  @ResolveField('images')
+  async images(
+    @Parent() mem: MemFullDto,
+  ): Promise<Pick<MemFullDto, 'images'>['images']> {
+    return this.metadataService.getImages(mem.id);
   }
 }

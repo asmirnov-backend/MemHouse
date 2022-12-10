@@ -27,4 +27,10 @@ export class MemMetadataService {
 
     return rating?.amount ?? null;
   }
+
+  getImages(memId: string) {
+    return this.prisma.imageMeta.findMany({
+      where: { memId },
+    });
+  }
 }
