@@ -27,7 +27,9 @@ describe('StoreImgBBService', () => {
       buffer: await readFile('./apps/api/src/store/mock/cat.jpeg'),
     } as Express.Multer.File;
 
-    const result = await service.storeImage(file.buffer);
+    const result = await service.storeImage(
+      Buffer.from(file.buffer.toString('base64')),
+    );
 
     expect(result.imageMeta).toBeDefined();
     expect(result.imageMeta.displayUrl).toBeTruthy();

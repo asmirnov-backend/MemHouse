@@ -12,7 +12,7 @@ import { StoreImgBBService } from '../store/store.imgbb.service';
 import { PrismaService } from '@api/prisma/prisma.service';
 
 import { Injectable } from '@nestjs/common';
-import { isNull } from 'lodash';
+import { isNull, omit } from 'lodash';
 
 @Injectable()
 export class MemService {
@@ -64,7 +64,7 @@ export class MemService {
       data: {
         images: {
           createMany: {
-            data: images.map((i) => i.imageMeta),
+            data: images.map((i) => omit(i.imageMeta, 'id')),
           },
         },
         text: params.text ?? null,

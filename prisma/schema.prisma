@@ -27,7 +27,7 @@ model Mem {
 model ImageMeta {
   id         String  @id @default(uuid())
   title      String  @db.VarChar(128)
-  displayUrl String  @unique @db.VarChar(256)
+  displayUrl String  @db.VarChar(256)
   width      Int
   height     Int
   size       Int

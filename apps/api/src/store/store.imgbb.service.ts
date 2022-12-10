@@ -64,7 +64,7 @@ export class StoreImgBBService extends StoreAbstractService<ImageMetaFromImagBB>
     });
 
     const formData = new FormData();
-    formData.append('image', buffer.toString('base64'));
+    formData.append('image', buffer);
 
     return firstValueFrom(
       this.http.post<{
