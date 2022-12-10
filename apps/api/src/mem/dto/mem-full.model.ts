@@ -1,3 +1,4 @@
+import { ImageDto } from './image.model';
 import { MemDto } from './mem.model';
 
 import { Field, Int, ObjectType } from '@nestjs/graphql';
@@ -11,4 +12,8 @@ export class MemFullDto extends MemDto {
   dislikes: number;
 
   rating: number | null;
+
+  tags: string[];
+
+  images: ImageDto[];
 }

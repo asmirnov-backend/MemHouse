@@ -26,19 +26,19 @@ model Mem {
 
 model Image {
   id         String  @id @default(uuid())
-  title      String  @db.VarChar(128)
-  displayUrl String  @db.VarChar(256)
-  width      Int
-  height     Int
-  size       Int
-  meta       Json    @db.JsonB()
+  title      String? @db.VarChar(128)
+  displayUrl String  @unique @db.VarChar(256)
+  width      Int?
+  height     Int?
+  size       Int?
+  meta       Json?   @db.JsonB()
   mem        Mem?    @relation(fields: [memId], references: [id])
   memId      String? @db.Uuid
 }
 
 model Tag {
   id    String @id @default(uuid()) @db.Uuid
-  value String @db.VarChar(64)
+  value String @unique @db.VarChar(64)
   mems  Mem[]
 }
 
