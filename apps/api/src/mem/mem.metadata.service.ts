@@ -33,4 +33,12 @@ export class MemMetadataService {
       where: { memId },
     });
   }
+
+  async getTags(memId: string) {
+    const tags = await this.prisma.tag.findMany({
+      where: { mems: { some: { id: memId } } },
+    });
+
+    return tags.map((tag) => tag.value);
+  }
 }

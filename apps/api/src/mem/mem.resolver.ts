@@ -86,4 +86,11 @@ export class MemResolver {
   ): Promise<Pick<MemFullDto, 'images'>['images']> {
     return this.metadataService.getImages(mem.id);
   }
+
+  @ResolveField('tags')
+  async tags(
+    @Parent() mem: MemFullDto,
+  ): Promise<Pick<MemFullDto, 'tags'>['tags']> {
+    return this.metadataService.getTags(mem.id);
+  }
 }
