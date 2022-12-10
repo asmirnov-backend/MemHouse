@@ -7,6 +7,8 @@ import { NotMemCreatorException } from './exceptions/not-mem-creator.exception c
 import { MemMetadataService } from './mem.metadata.service';
 import { RatingCountService } from './rating/rating-count.service';
 
+import { StoreImgBBService } from '../store/store.imgbb.service';
+
 import { PrismaService } from '@api/prisma/prisma.service';
 
 import { Injectable } from '@nestjs/common';
@@ -18,6 +20,7 @@ export class MemService {
     private readonly prisma: PrismaService,
     private readonly metadataService: MemMetadataService,
     private readonly ratingCountService: RatingCountService,
+    private readonly storeService: StoreImgBBService,
   ) {}
 
   async getBestMems(
@@ -53,11 +56,15 @@ export class MemService {
   async createMem(
     params: MemCreateInput & { userId: string },
   ): Promise<MemDto> {
+    const images = await this.storeService.storeManyImages(
+      params.imgsBuffers.map((imgBuffer) => Buffer.from(imgBuffer)),
+    );
+
     return this.prisma.mem.create({
       data: {
         images: {
           createMany: {
-            data: params.imgUrls.map((imgUrl) => ({ displayUrl: imgUrl })),
+            data: images.map((i) => i.imageMeta),
           },
         },
         text: params.text ?? null,
@@ -91,12 +98,6 @@ export class MemService {
     return this.prisma.mem.update({
       where: { id: params.id },
       data: {
-        images: {
-          connectOrCreate: params.imgUrls?.map((imgUrl) => ({
-            where: { displayUrl: imgUrl },
-            create: { displayUrl: imgUrl },
-          })),
-        },
         text: params.text,
         tags: {
           connectOrCreate: params.tags?.map((tag) => ({

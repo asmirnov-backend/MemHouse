@@ -1,10 +1,11 @@
-import { InputType } from '@nestjs/graphql';
+import { Field, InputType } from '@nestjs/graphql';
 import { IsArray, IsOptional, IsString } from 'class-validator';
 
 @InputType()
 export class MemCreateInput {
   @IsArray()
-  imgUrls: string[];
+  @Field({ description: 'base64 string buffers' })
+  imgsBuffers: string[];
 
   @IsOptional()
   @IsString()
