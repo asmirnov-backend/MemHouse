@@ -1,4 +1,4 @@
-export interface ImageMetaFromImagBB {
+export type ImageMetaFromImagBB = {
   id: string;
   title: string;
   url_viewer: string;
@@ -13,12 +13,12 @@ export interface ImageMetaFromImagBB {
   thumb: ImageAttributesFromImagBB;
   medium: ImageAttributesFromImagBB;
   delete_url: string;
-}
+};
 
-export interface ImageAttributesFromImagBB {
+export type ImageAttributesFromImagBB = {
   filename: string;
   name: string;
   mime: string;
   extension: string;
   url: string;
-}
+};

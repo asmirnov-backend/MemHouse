@@ -41,22 +41,19 @@ export class StoreImgBBService extends StoreAbstractService<ImageMetaFromImagBB>
     return variable;
   }
 
-  async storeImage(params: { file: Express.Multer.File }) {
-    const response = await this.sendImageToRemoteService(params.file.buffer);
-
-    const sourceMeta = response.data.data;
+  async storeImage(buffer: Buffer) {
+    const response = await this.sendImageToRemoteService(buffer);
+    const originMeta = response.data.data;
 
     return {
-      sourceMeta,
-      meta: {
-        id: sourceMeta.id,
-        title: sourceMeta.title,
-        display_url: sourceMeta.display_url,
-        width: toNumber(sourceMeta.width),
-        height: toNumber(sourceMeta.height),
-        size: sourceMeta.size,
-        // sourceMeta.time in seconds, but new Date() take timestamp in milliseconds, so sourceMeta.time must be multiplied by 1000
-        time: new Date(toNumber(sourceMeta.time) * 1000),
+      imageMeta: {
+        id: originMeta.id,
+        title: originMeta.title,
+        displayUrl: originMeta.display_url,
+        width: toNumber(originMeta.width),
+        height: toNumber(originMeta.height),
+        size: originMeta.size,
+        originMeta: originMeta,
       },
     };
   }
@@ -80,7 +77,7 @@ export class StoreImgBBService extends StoreAbstractService<ImageMetaFromImagBB>
     );
   }
 
-  async deleteImage(sourceMeta: ImageMetaFromImagBB): Promise<void> {
+  async deleteImage(imageOriginMeta: ImageMetaFromImagBB): Promise<void> {
     throw new Error('Method not implemented.');
   }
 }

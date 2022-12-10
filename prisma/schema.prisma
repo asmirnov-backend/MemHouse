@@ -21,17 +21,17 @@ model Mem {
   reactions     MemReaction[]
   rating        Rating?
   tags          Tag[]
-  images        Image[]
+  images        ImageMeta[]
 }
 
-model Image {
+model ImageMeta {
   id         String  @id @default(uuid())
-  title      String? @db.VarChar(128)
+  title      String  @db.VarChar(128)
   displayUrl String  @unique @db.VarChar(256)
-  width      Int?
-  height     Int?
-  size       Int?
-  meta       Json?   @db.JsonB()
+  width      Int
+  height     Int
+  size       Int
+  originMeta Json    @db.JsonB()
   mem        Mem?    @relation(fields: [memId], references: [id])
   memId      String? @db.Uuid
 }

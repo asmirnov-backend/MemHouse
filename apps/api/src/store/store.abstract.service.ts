@@ -1,9 +1,13 @@
-import { ImageMeta } from './interfaces/image-meta.interface';
+import { IStoreImageOutput } from './interfaces/store.image.output.interface';
 
-export abstract class StoreAbstractService<ISourceMeta> {
-  abstract storeImage(params: {
-    file: Express.Multer.File;
-  }): Promise<{ meta: ImageMeta; sourceMeta: ISourceMeta }>;
+export abstract class StoreAbstractService<IOriginMeta> {
+  abstract storeImage(buffer: Buffer): Promise<IStoreImageOutput<IOriginMeta>>;
 
-  abstract deleteImage(sourceMeta: ISourceMeta): Promise<void>;
+  async storeManyImages(
+    buffers: Buffer[],
+  ): Promise<IStoreImageOutput<IOriginMeta>[]> {
+    return Promise.all(buffers.map((buffer) => this.storeImage(buffer)));
+  }
+
+  abstract deleteImage(imageOriginMeta: IOriginMeta): Promise<void>;
 }
