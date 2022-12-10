@@ -6,28 +6,42 @@ type JwtToken {
   jwtToken: String!
 }
 
-type Mem {
+type ImageDto {
+  width: Int!
+  height: Int!
+  size: Int!
   id: String!
-  imgUrls: [String!]!
-  text: String
-  tags: [String!]
+  title: String!
+  displayUrl: String!
+  memId: String
 }
 
-type MemFull {
+type MemDto {
   id: String!
-  imgUrls: [String!]!
   text: String
-  tags: [String!]
+  createdUserId: String!
+}
+
+type MemFullDto {
+  id: String!
+  text: String
+  createdUserId: String!
   likes: Int!
   dislikes: Int!
-  rating: Float!
+  rating: Float
+  tags: [String!]!
+  images: [ImageDto!]!
 }
 
-type Profile {
+type UserDto {
   id: String!
+  email: String!
+  nickname: String!
   name: String!
   surname: String!
   birthday: DateTime
+  viewedMemes: [MemDto!]!
+  createdMems: [MemDto!]!
 }
 
 """
@@ -35,20 +49,11 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
-type User {
-  id: String!
-  email: String!
-  nickname: String!
-  viewedMemes: [Mem!]!
-  createdMems: [Mem!]!
-  profile: Profile
-}
-
 type Query {
-  bestMems(GetMemsInput: GetMemsInput!): [MemFull!]!
-  mems(GetMemsInput: GetMemsInput!): [MemFull!]!
-  userById(UserByIdInput: UserByIdInput!): User!
-  me: User!
+  bestMems(GetMemsInput: GetMemsInput!): [MemFullDto!]!
+  mems(GetMemsInput: GetMemsInput!): [MemFullDto!]!
+  userById(UserByIdInput: UserByIdInput!): UserDto!
+  me: UserDto!
 }
 
 input GetMemsInput {
@@ -61,21 +66,20 @@ input UserByIdInput {
 }
 
 type Mutation {
-  updateMem(UpdateMemInput: MemUpdateInput!): MemFull!
-  createMem(CreateMemInput: MemCreateInput!): MemFull!
+  updateMem(UpdateMemInput: MemUpdateInput!): MemFullDto!
+  createMem(CreateMemInput: MemCreateInput!): MemFullDto!
   login(LoginInput: LoginInput!): JwtToken!
   registration(RegistrationInput: RegistrationInput!): JwtToken!
 }
 
 input MemUpdateInput {
   id: String!
-  imgUrls: [String!]
   text: String
   tags: [String!]
 }
 
 input MemCreateInput {
-  imgUrls: [String!]!
+  imgsBuffers: [String!]!
   text: String
   tags: [String!]
 }
