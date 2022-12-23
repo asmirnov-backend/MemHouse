@@ -15,7 +15,7 @@ datasource db {
 model Mem {
   id            String        @id @default(uuid()) @db.Uuid
   text          String?       @db.VarChar(1024)
-  createdUser   User          @relation(name: "create", fields: [createdUserId], references: [id])
+  createdUser   User?         @relation(name: "created", fields: [createdUserId], references: [id])
   createdUserId String        @db.Uuid
   viewedUsers   User[]
   reactions     MemReaction[]
@@ -32,7 +32,7 @@ model ImageMeta {
   height     Int
   size       Int
   originMeta Json    @db.JsonB()
-  mem        Mem?    @relation(fields: [memId], references: [id])
+  mem        Mem?    @relation(fields: [memId], references: [id], onDelete: Cascade)
   memId      String? @db.Uuid
 }
 
@@ -44,10 +44,10 @@ model Tag {
 
 model MemReaction {
   id     String          @id @default(uuid()) @db.Uuid
-  mem    Mem             @relation(fields: [memId], references: [id])
+  mem    Mem             @relation(fields: [memId], references: [id], onDelete: Cascade)
   memId  String          @db.Uuid
   type   MemReactionType
-  user   User            @relation(fields: [userId], references: [id])
+  user   User            @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String          @db.Uuid
 }
 
@@ -59,7 +59,7 @@ enum MemReactionType {
 model Rating {
   id     String @id @default(uuid()) @db.Uuid
   amount Float
-  mem    Mem    @relation(fields: [memId], references: [id])
+  mem    Mem    @relation(fields: [memId], references: [id], onDelete: Cascade)
   memId  String @unique @db.Uuid
 }
 
@@ -71,7 +71,7 @@ model User {
   name        String        @db.VarChar(128)
   surname     String        @db.VarChar(128)
   birthday    DateTime?     @db.Date
-  createdMems Mem[]         @relation(name: "create")
+  createdMems Mem[]         @relation(name: "created")
   viewedMemes Mem[]
   wallet      Wallet[]
   reactions   MemReaction[]
@@ -80,6 +80,6 @@ model User {
 model Wallet {
   id      String @id @default(uuid()) @db.Uuid
   balance Float  @default(0)
-  owner   User   @relation(fields: [ownerId], references: [id])
+  owner   User   @relation(fields: [ownerId], references: [id], onDelete: Cascade)
   ownerId String @db.Uuid
 }
