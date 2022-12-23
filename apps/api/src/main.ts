@@ -7,7 +7,7 @@ import { NestFactory } from '@nestjs/core';
 async function bootstrap() {
   const appContext = await NestFactory.create(ConfigModule.forRoot());
   const config = appContext.get(ConfigService);
-  const httpPort = Number(config.get<string>('APP_PORT')) || 3000;
+  const httpPort = Number(config.getOrThrow<string>('APP_PORT')) || 3000;
 
   // { cors: true } is needed to process requests from the internet
   const app = await NestFactory.create(AppModule, {

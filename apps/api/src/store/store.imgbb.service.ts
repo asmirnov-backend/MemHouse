@@ -32,7 +32,7 @@ export class StoreImgBBService extends StoreAbstractService<ImageMetaFromImagBB>
   }
 
   private getEnvVariableAndCheckForUndefined<T>(name: string) {
-    const variable = this.config.get<T>(name);
+    const variable = this.config.getOrThrow<T>(name);
 
     if (isUndefined(variable)) {
       throw new Error(`${name} is not defined in env`);
