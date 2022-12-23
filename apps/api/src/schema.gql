@@ -95,4 +95,5 @@ input RegistrationInput {
   nickname: String!
   name: String!
   surname: String!
+  birthday: String
 }

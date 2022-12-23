@@ -57,6 +57,7 @@ export class AuthService {
         password: await hash(params.password, 10),
         name: params.name,
         surname: params.surname,
+        birthday: params.birthday,
       },
     });
 
