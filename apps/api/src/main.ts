@@ -1,4 +1,5 @@
 import { AppModule } from './app.module';
+import { LoggingInterceptor } from './logging.interceptor';
 
 import { ValidationPipe } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -21,6 +22,7 @@ async function bootstrap() {
     },
   });
   app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalInterceptors(new LoggingInterceptor());
 
   await app.listen(httpPort);
 }
