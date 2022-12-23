@@ -4,7 +4,7 @@ import { IsArray, IsOptional, IsString } from 'class-validator';
 @InputType()
 export class MemCreateInput {
   @IsArray()
-  imgUrls: string[];
+  imgsBuffers: string[]; // base64 string buffers
 
   @IsOptional()
   @IsString()

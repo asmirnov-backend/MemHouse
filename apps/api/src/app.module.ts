@@ -3,7 +3,7 @@ import { AuthModule } from './auth/auth.module';
 import { MemModule } from './mem/mem.module';
 import { UserModule } from './user/user.module';
 
-import { ApolloDriverConfig, ApolloDriver } from '@nestjs/apollo';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';

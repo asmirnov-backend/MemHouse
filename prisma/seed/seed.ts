@@ -1,3 +1,4 @@
+import { seedImagesMeta } from './imagesMeta';
 import { seedMems } from './mems';
 import { seedRatings } from './rating';
 import { seedUsers } from './users';
@@ -8,14 +9,17 @@ const prisma = new PrismaClient();
 
 const main = async () => {
   // First of all delete previous seed
+  await prisma.imageMeta.deleteMany({
+    where: { id: { in: seedImagesMeta.map((e) => e.id) } },
+  });
   await prisma.rating.deleteMany({
-    where: { id: { in: seedRatings.map((rating) => rating.id) } },
+    where: { id: { in: seedRatings.map((e) => e.id) } },
   });
   await prisma.mem.deleteMany({
-    where: { id: { in: seedMems.map((mem) => mem.id) } },
+    where: { id: { in: seedMems.map((e) => e.id) } },
   });
   await prisma.user.deleteMany({
-    where: { id: { in: seedUsers.map((user) => user.id) } },
+    where: { id: { in: seedUsers.map((e) => e.id) } },
   });
 
   // Create seed
@@ -27,6 +31,10 @@ const main = async () => {
   });
   await prisma.rating.createMany({
     data: seedRatings,
+  });
+  await prisma.imageMeta.createMany({
+    // @ts-ignore Prisma issue: https://github.com/prisma/prisma/issues/9247
+    data: seedImagesMeta,
   });
 };
 

@@ -20,6 +20,10 @@ MemHouse is a platform to easy surf mems
 
 <https://drive.google.com/file/d/1uncUdHqMnCW973bLj6hlUAizCPfXi3_p/view?usp=sharing>
 
+## Database
+
+![DB schema](./prisma/ERD.svg)
+
 ## Construction
 
 ![MemHouse constructor diagram](https://user-images.githubusercontent.com/93443107/173183086-825c3bc3-995a-42ef-8760-93d04e4f5856.png)

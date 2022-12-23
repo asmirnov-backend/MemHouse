@@ -7,10 +7,6 @@ export class MemUpdateInput {
   id: string;
 
   @IsOptional()
-  @IsArray()
-  imgUrls?: string[];
-
-  @IsOptional()
   @IsString()
   text?: string;
 

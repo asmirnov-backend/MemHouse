@@ -1,12 +1,11 @@
 import { ObjectType } from '@nestjs/graphql';
+import { Mem } from '@prisma/client';
 
 @ObjectType()
-export class Mem {
+export class MemDto implements Mem {
   id: string;
 
-  imgUrls: string[];
+  text: string | null;
 
-  text?: string | null;
-
-  tags?: string[];
+  createdUserId: string;
 }

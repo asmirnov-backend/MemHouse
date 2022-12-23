@@ -1,5 +1,11 @@
 import { InputType } from '@nestjs/graphql';
-import { IsEmail, IsString, MinLength } from 'class-validator';
+import {
+  IsDateString,
+  IsEmail,
+  IsOptional,
+  IsString,
+  MinLength,
+} from 'class-validator';
 
 @InputType()
 export class RegistrationInput {
@@ -22,4 +28,8 @@ export class RegistrationInput {
   @IsString()
   @MinLength(1)
   surname: string;
+
+  @IsDateString()
+  @IsOptional()
+  birthday?: string;
 }

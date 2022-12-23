@@ -25,6 +25,20 @@ export class MemMetadataService {
       select: { amount: true },
     });
 
-    return rating?.amount;
+    return rating?.amount ?? null;
+  }
+
+  getImages(memId: string) {
+    return this.prisma.imageMeta.findMany({
+      where: { memId },
+    });
+  }
+
+  async getTags(memId: string) {
+    const tags = await this.prisma.tag.findMany({
+      where: { mems: { some: { id: memId } } },
+    });
+
+    return tags.map((tag) => tag.value);
   }
 }

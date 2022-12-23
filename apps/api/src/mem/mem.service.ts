@@ -1,16 +1,18 @@
 import { MemCreateInput } from './dto/input/mem-create.input';
 import { MemUpdateInput } from './dto/input/mem-update.input';
 import { GetMemsInput } from './dto/input/mems-get-best.input';
-import { Mem } from './dto/mem.model';
+import { MemDto } from './dto/mem.model';
 import { MemNotFoundException } from './exceptions/mem-not-found.exception';
 import { NotMemCreatorException } from './exceptions/not-mem-creator.exception copy';
 import { MemMetadataService } from './mem.metadata.service';
 import { RatingCountService } from './rating/rating-count.service';
 
+import { StoreImgBBService } from '../store/store.imgbb.service';
+
 import { PrismaService } from '@api/prisma/prisma.service';
 
 import { Injectable } from '@nestjs/common';
-import { isNull } from 'lodash';
+import { isNull, omit } from 'lodash';
 
 @Injectable()
 export class MemService {
@@ -18,9 +20,12 @@ export class MemService {
     private readonly prisma: PrismaService,
     private readonly metadataService: MemMetadataService,
     private readonly ratingCountService: RatingCountService,
+    private readonly storeService: StoreImgBBService,
   ) {}
 
-  async getBestMems(params: GetMemsInput & { userId: string }): Promise<Mem[]> {
+  async getBestMems(
+    params: GetMemsInput & { userId: string },
+  ): Promise<MemDto[]> {
     const mems = await this.prisma.mem.findMany({
       take: params.take,
       skip: params.skip,
@@ -40,7 +45,7 @@ export class MemService {
     return mems;
   }
 
-  async getMems(params: GetMemsInput): Promise<Mem[]> {
+  async getMems(params: GetMemsInput): Promise<MemDto[]> {
     return this.prisma.mem.findMany({
       take: params.take,
       skip: params.skip,
@@ -48,19 +53,36 @@ export class MemService {
     });
   }
 
-  async createMem(params: MemCreateInput & { userId: string }): Promise<Mem> {
+  async createMem(
+    params: MemCreateInput & { userId: string },
+  ): Promise<MemDto> {
+    const images = await this.storeService.storeManyImages(
+      params.imgsBuffers.map((imgBuffer) => Buffer.from(imgBuffer)),
+    );
+
     return this.prisma.mem.create({
       data: {
-        imgUrls: params.imgUrls,
+        images: {
+          createMany: {
+            data: images.map((i) => omit(i.imageMeta, 'id')),
+          },
+        },
         text: params.text ?? null,
-        tags: params.tags,
+        tags: {
+          connectOrCreate: params.tags?.map((tag) => ({
+            create: { value: tag },
+            where: { value: tag },
+          })),
+        },
         createdUser: { connect: { id: params.userId } },
         rating: { create: { amount: this.ratingCountService.calculate() } },
       },
     });
   }
 
-  async updateMem(params: MemUpdateInput & { userId: string }): Promise<Mem> {
+  async updateMem(
+    params: MemUpdateInput & { userId: string },
+  ): Promise<MemDto> {
     const mem = await this.prisma.mem.findUnique({
       where: { id: params.id },
     });
@@ -76,9 +98,13 @@ export class MemService {
     return this.prisma.mem.update({
       where: { id: params.id },
       data: {
-        imgUrls: params.imgUrls,
         text: params.text,
-        tags: params.tags,
+        tags: {
+          connectOrCreate: params.tags?.map((tag) => ({
+            create: { value: tag },
+            where: { value: tag },
+          })),
+        },
       },
     });
   }
