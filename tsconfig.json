@@ -20,7 +20,7 @@
     "resolveJsonModule": true,
     "paths": {
       "@api/*": ["apps/api/src/*"],
-      "@common/*": ["common/src/*"]
+      "@libs/common/*": ["libs/common/src/*"]
     }
   }
 }
