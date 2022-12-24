@@ -4,6 +4,7 @@ import { LoggingInterceptor } from './logging.interceptor';
 import { ValidationPipe } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
+import { json, urlencoded } from 'express';
 
 async function bootstrap() {
   const appContext = await NestFactory.create(ConfigModule.forRoot());
@@ -23,6 +24,8 @@ async function bootstrap() {
   });
   app.useGlobalPipes(new ValidationPipe());
   app.useGlobalInterceptors(new LoggingInterceptor());
+  app.use(json({ limit: '50mb' }));
+  app.use(urlencoded({ extended: true, limit: '50mb' }));
 
   await app.listen(httpPort);
 }
