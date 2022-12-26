@@ -17,6 +17,7 @@ async function bootstrap() {
       origin: [
         'https://memhouse-client.web.app',
         'http://localhost:3000',
+        'http://localhost:3001',
         'https://localhost',
       ],
       credentials: true,

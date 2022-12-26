@@ -73,6 +73,8 @@ export class StoreImgBBService extends StoreAbstractService<ImageMetaFromImagBB>
         status: HttpStatus;
       }>(this.IMAGE_STORE_URL + `?${queryParams.toString()}`, formData, {
         headers: formData.getHeaders(),
+        maxContentLength: Infinity,
+        maxBodyLength: Infinity,
       }),
     );
   }
