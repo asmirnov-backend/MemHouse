@@ -1,9 +1,9 @@
 {
-  "name": "code-sample",
+  "name": "memhouse-server",
   "version": "0.0.1",
   "description": "",
-  "author": "",
-  "private": false,
+  "author": "Smirnov Andrew",
+  "private": true,
   "license": "UNLICENSED",
   "scripts": {
     "prebuild": "rimraf dist",
