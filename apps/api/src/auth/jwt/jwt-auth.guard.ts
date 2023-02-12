@@ -1,11 +1,8 @@
 import { JwtTokenBody } from './jwt-token.interface';
 
-import {
-  CanActivate,
-  ExecutionContext,
-  Injectable,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { UserNotAuthorizedException } from '../exceptions/user-not-authorized.exception';
+
+import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { GqlExecutionContext } from '@nestjs/graphql';
 import { JwtService } from '@nestjs/jwt';
 import { Observable } from 'rxjs';
@@ -25,9 +22,7 @@ export class JwtAuthGuard implements CanActivate {
       const [bearer, token] = authHeader.split(' ');
 
       if (bearer !== 'Bearer' || !token) {
-        throw new UnauthorizedException({
-          message: 'Пользователь не авторизован',
-        });
+        throw new UserNotAuthorizedException();
       }
 
       const jwtTokenBody = this.jwtService.verify<JwtTokenBody>(token, {
@@ -38,9 +33,7 @@ export class JwtAuthGuard implements CanActivate {
 
       return true;
     } catch (e) {
-      throw new UnauthorizedException({
-        message: 'Пользователь не авторизован',
-      });
+      throw new UserNotAuthorizedException();
     }
   }
 }
