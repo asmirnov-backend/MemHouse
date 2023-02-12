@@ -10,7 +10,7 @@ export class RatingSteps {
 
   @given(/Мем/)
   givenMem(dataTable: { rawTable: [['лайки', string], ['дизлайки', string]] }) {
-    console.log(dataTable);
+    console.log((dataTable as any).rowsHash());
     this.mem.likes = Number(dataTable.rawTable[0][1]);
     this.mem.dislikes = Number(dataTable.rawTable[1][1]);
   }
