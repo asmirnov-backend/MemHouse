@@ -2,11 +2,13 @@ import { RatingService } from './rating.service';
 
 import { PrismaService } from '../../prisma/prisma.service';
 
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
 
 @Injectable()
 export class RatingCronService {
+  private readonly logger = new Logger(RatingCronService.name);
+
   constructor(
     private readonly ratingService: RatingService,
     private readonly prisma: PrismaService,
@@ -14,6 +16,7 @@ export class RatingCronService {
 
   @Cron(CronExpression.EVERY_10_MINUTES)
   async recountAllRatings() {
+    this.logger.verbose('Start recount all ratings');
     // TODO: increase performance and decrease memory usage, when needed (So big mems amount)
     const ratings = await this.prisma.rating.findMany({
       select: { memId: true },
@@ -24,5 +27,6 @@ export class RatingCronService {
         this.ratingService.recountRatingForMem({ memId }),
       ),
     );
+    this.logger.verbose('Recount all ratings success');
   }
 }
