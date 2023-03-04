@@ -14,7 +14,7 @@ const main = async () => {
     where: { id: { in: seedImagesMeta.map((e) => e.id) } },
   });
   await prisma.rating.deleteMany({
-    where: { id: { in: seedRatings.map((e) => e.id) } },
+    where: { OR: seedRatings },
   });
   await prisma.mem.deleteMany({
     where: { id: { in: seedMems.map((e) => e.id) } },
@@ -23,7 +23,7 @@ const main = async () => {
     where: { id: { in: seedUsers.map((e) => e.id) } },
   });
   await prisma.memReaction.deleteMany({
-    where: { id: { in: seedMemReactions.map((e) => e.id) } },
+    where: { OR: seedMemReactions },
   });
 
   // Create seed

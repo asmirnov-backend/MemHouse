@@ -66,20 +66,20 @@ input UserByIdInput {
 }
 
 type Mutation {
-  updateMem(UpdateMemInput: MemUpdateInput!): MemFullDto!
   createMem(CreateMemInput: MemCreateInput!): MemFullDto!
+  updateMem(UpdateMemInput: MemUpdateInput!): MemFullDto!
   login(LoginInput: LoginInput!): JwtToken!
   registration(RegistrationInput: RegistrationInput!): JwtToken!
 }
 
-input MemUpdateInput {
-  id: String!
+input MemCreateInput {
+  imgsBuffers: [String!]!
   text: String
   tags: [String!]
 }
 
-input MemCreateInput {
-  imgsBuffers: [String!]!
+input MemUpdateInput {
+  id: String!
   text: String
   tags: [String!]
 }

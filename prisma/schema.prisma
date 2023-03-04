@@ -43,12 +43,13 @@ model Tag {
 }
 
 model MemReaction {
-  id     String          @id @default(uuid()) @db.Uuid
   mem    Mem             @relation(fields: [memId], references: [id], onDelete: Cascade)
   memId  String          @db.Uuid
   type   MemReactionType
   user   User            @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String          @db.Uuid
+
+  @@id([memId, userId, type])
 }
 
 enum MemReactionType {
@@ -57,10 +58,9 @@ enum MemReactionType {
 }
 
 model Rating {
-  id     String @id @default(uuid()) @db.Uuid
   amount Float
   mem    Mem    @relation(fields: [memId], references: [id], onDelete: Cascade)
-  memId  String @unique @db.Uuid
+  memId  String @id @unique @db.Uuid
 }
 
 model User {
