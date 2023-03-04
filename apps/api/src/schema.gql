@@ -19,13 +19,13 @@ type ImageDto {
 type MemDto {
   id: String!
   text: String
-  createdUserId: String!
+  createdUserId: String
 }
 
 type MemFullDto {
   id: String!
   text: String
-  createdUserId: String!
+  createdUserId: String
   likes: Int!
   dislikes: Int!
   rating: Float

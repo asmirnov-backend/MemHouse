@@ -7,5 +7,5 @@ export class MemDto implements Mem {
 
   text: string | null;
 
-  createdUserId: string;
+  createdUserId: string | null;
 }

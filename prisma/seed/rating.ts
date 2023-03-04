@@ -10,7 +10,7 @@ export const seedRatings: Rating[] = [
   },
   {
     id: '699f72c6-aad1-45dc-a255-017c73384d75',
-    amount: 10.2,
+    amount: 19.2,
     memId: seedMems[1].id,
   },
   {
