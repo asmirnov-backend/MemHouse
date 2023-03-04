@@ -1,4 +1,5 @@
 import { seedImagesMeta } from './imagesMeta';
+import { seedMemReactions } from './memReaction';
 import { seedMems } from './mems';
 import { seedRatings } from './rating';
 import { seedUsers } from './users';
@@ -21,6 +22,9 @@ const main = async () => {
   await prisma.user.deleteMany({
     where: { id: { in: seedUsers.map((e) => e.id) } },
   });
+  await prisma.memReaction.deleteMany({
+    where: { id: { in: seedMemReactions.map((e) => e.id) } },
+  });
 
   // Create seed
   await prisma.user.createMany({
@@ -28,6 +32,9 @@ const main = async () => {
   });
   await prisma.mem.createMany({
     data: seedMems,
+  });
+  await prisma.memReaction.createMany({
+    data: seedMemReactions,
   });
   await prisma.rating.createMany({
     data: seedRatings,
