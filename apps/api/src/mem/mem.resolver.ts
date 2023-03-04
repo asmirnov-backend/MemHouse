@@ -27,24 +27,6 @@ export class MemResolver {
     private readonly metadataService: MemMetadataService,
   ) {}
 
-  @Mutation(() => MemFullDto)
-  @UseGuards(JwtAuthGuard)
-  updateMem(
-    @Args('UpdateMemInput') params: MemUpdateInput,
-    @UserId() userId: string,
-  ): Promise<MemDto> {
-    return this.memService.updateMem({ ...params, userId });
-  }
-
-  @Mutation(() => MemFullDto)
-  @UseGuards(JwtAuthGuard)
-  createMem(
-    @Args('CreateMemInput') params: MemCreateInput,
-    @UserId() userId: string,
-  ): Promise<MemDto> {
-    return this.memService.createMem({ ...params, userId });
-  }
-
   @Query(() => [MemFullDto])
   @UseGuards(JwtAuthGuard)
   bestMems(
@@ -90,5 +72,23 @@ export class MemResolver {
   @ResolveField('tags')
   async tags(@Parent() mem: MemDto): Promise<Pick<MemFullDto, 'tags'>['tags']> {
     return this.metadataService.getTags(mem.id);
+  }
+
+  @Mutation(() => MemFullDto)
+  @UseGuards(JwtAuthGuard)
+  createMem(
+    @Args('CreateMemInput') params: MemCreateInput,
+    @UserId() userId: string,
+  ): Promise<MemDto> {
+    return this.memService.createMem({ ...params, userId });
+  }
+
+  @Mutation(() => MemFullDto)
+  @UseGuards(JwtAuthGuard)
+  updateMem(
+    @Args('UpdateMemInput') params: MemUpdateInput,
+    @UserId() userId: string,
+  ): Promise<MemDto> {
+    return this.memService.updateMem({ ...params, userId });
   }
 }
