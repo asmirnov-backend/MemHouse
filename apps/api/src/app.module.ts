@@ -17,7 +17,7 @@ import { join } from 'path';
       driver: ApolloDriver,
       autoTransformHttpErrors: true,
       autoSchemaFile: join(process.cwd(), '/apps/api/src/schema.gql'),
-      sortSchema: false,
+      sortSchema: true,
     }),
     ConfigModule.forRoot({ isGlobal: true }),
     MemModule,

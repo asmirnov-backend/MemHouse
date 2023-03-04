@@ -2,93 +2,28 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type JwtToken {
-  jwtToken: String!
-}
-
-type MemDto {
-  id: String!
-  text: String
-  createdUserId: String
-}
-
-type ImageDto {
-  width: Int!
-  height: Int!
-  size: Int!
-  id: String!
-  title: String!
-  displayUrl: String!
-  memId: String
-}
-
-type MemFullDto {
-  id: String!
-  text: String
-  createdUserId: String
-  likes: Int!
-  dislikes: Int!
-  rating: Float
-  tags: [String!]!
-  images: [ImageDto!]!
-}
-
-type MemReactionDto {
-  type: String!
-  memId: String!
-  userId: String!
-}
-
-type UserDto {
-  id: String!
-  email: String!
-  nickname: String!
-  name: String!
-  surname: String!
-  birthday: DateTime
-  viewedMemes: [MemDto!]!
-  createdMems: [MemDto!]!
-}
-
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
 scalar DateTime
 
-type Query {
-  bestMems(GetMemsInput: GetMemsInput!): [MemFullDto!]!
-  mems(GetMemsInput: GetMemsInput!): [MemFullDto!]!
-  userById(UserByIdInput: UserByIdInput!): UserDto!
-  me: UserDto!
-}
-
 input GetMemsInput {
-  take: Int = 10
   skip: Int = 0
+  take: Int = 10
 }
 
-input UserByIdInput {
+type ImageDto {
+  displayUrl: String!
+  height: Int!
   id: String!
+  memId: String
+  size: Int!
+  title: String!
+  width: Int!
 }
 
-type Mutation {
-  createMem(CreateMemInput: MemCreateInput!): MemFullDto!
-  updateMem(UpdateMemInput: MemUpdateInput!): MemFullDto!
-  login(LoginInput: LoginInput!): JwtToken!
-  registration(RegistrationInput: RegistrationInput!): JwtToken!
-  toggleLike(ToggleLikeInputDto: ToggleLikeInputDto!): MemReactionDto!
-}
-
-input MemCreateInput {
-  imgsBuffers: [String!]!
-  text: String
-  tags: [String!]
-}
-
-input MemUpdateInput {
-  id: String!
-  text: String
-  tags: [String!]
+type JwtToken {
+  jwtToken: String!
 }
 
 input LoginInput {
@@ -96,15 +31,80 @@ input LoginInput {
   password: String!
 }
 
+input MemCreateInput {
+  imgsBuffers: [String!]!
+  tags: [String!]
+  text: String
+}
+
+type MemDto {
+  createdUserId: String
+  id: String!
+  text: String
+}
+
+type MemFullDto {
+  createdUserId: String
+  dislikes: Int!
+  id: String!
+  images: [ImageDto!]!
+  likes: Int!
+  rating: Float
+  tags: [String!]!
+  text: String
+}
+
+type MemReactionDto {
+  memId: String!
+  type: String!
+  userId: String!
+}
+
+input MemUpdateInput {
+  id: String!
+  tags: [String!]
+  text: String
+}
+
+type Mutation {
+  createMem(CreateMemInput: MemCreateInput!): MemFullDto!
+  login(LoginInput: LoginInput!): JwtToken!
+  registration(RegistrationInput: RegistrationInput!): JwtToken!
+  toggleLike(ToggleLikeInputDto: ToggleLikeInputDto!): MemReactionDto!
+  updateMem(UpdateMemInput: MemUpdateInput!): MemFullDto!
+}
+
+type Query {
+  bestMems(GetMemsInput: GetMemsInput!): [MemFullDto!]!
+  me: UserDto!
+  mems(GetMemsInput: GetMemsInput!): [MemFullDto!]!
+  userById(UserByIdInput: UserByIdInput!): UserDto!
+}
+
 input RegistrationInput {
-  email: String!
-  password: String!
-  nickname: String!
-  name: String!
-  surname: String!
   birthday: String
+  email: String!
+  name: String!
+  nickname: String!
+  password: String!
+  surname: String!
 }
 
 input ToggleLikeInputDto {
   memId: String!
+}
+
+input UserByIdInput {
+  id: String!
+}
+
+type UserDto {
+  birthday: DateTime
+  createdMems: [MemDto!]!
+  email: String!
+  id: String!
+  name: String!
+  nickname: String!
+  surname: String!
+  viewedMemes: [MemDto!]!
 }
