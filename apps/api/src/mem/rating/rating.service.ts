@@ -1,4 +1,4 @@
-import { RatingCountService } from './rating-count.service';
+import { RatingCountService } from './ratingCount.service';
 
 import { PrismaService } from '../../prisma/prisma.service';
 import { MemMetadataService } from '../mem.metadata.service';

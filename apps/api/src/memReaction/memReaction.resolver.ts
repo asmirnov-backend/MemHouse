@@ -2,8 +2,8 @@ import { ToggleLikeInputDto } from './dto/input/toggleLike.input.dto';
 import { MemReactionDto } from './dto/memReaction.model';
 import { MemReactionService } from './memReaction.service';
 
-import { JwtAuthGuard } from '../auth/jwt/jwt-auth.guard';
-import { UserId } from '../auth/jwt/user-id.decorator';
+import { JwtAuthGuard } from '../auth/jwt/jwtAuth.guard';
+import { UserId } from '../auth/jwt/userId.decorator';
 
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';

@@ -1,7 +1,7 @@
 import { MemReactionResolver } from './memReaction.resolver';
 import { MemReactionService } from './memReaction.service';
 
-import { JwtRegisteredModule } from '../auth/jwt/jwt-registered.module';
+import { JwtRegisteredModule } from '../auth/jwt/jwtRegistered.module';
 import { PrismaModule } from '../prisma/prisma.module';
 
 import { Module } from '@nestjs/common';

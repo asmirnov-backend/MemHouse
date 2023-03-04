@@ -6,6 +6,12 @@ type JwtToken {
   jwtToken: String!
 }
 
+type MemDto {
+  id: String!
+  text: String
+  createdUserId: String
+}
+
 type ImageDto {
   width: Int!
   height: Int!
@@ -14,12 +20,6 @@ type ImageDto {
   title: String!
   displayUrl: String!
   memId: String
-}
-
-type MemDto {
-  id: String!
-  text: String
-  createdUserId: String
 }
 
 type MemFullDto {

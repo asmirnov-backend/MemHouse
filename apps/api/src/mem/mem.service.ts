@@ -1,11 +1,11 @@
-import { MemCreateInput } from './dto/input/mem-create.input';
-import { MemUpdateInput } from './dto/input/mem-update.input';
-import { GetMemsInput } from './dto/input/mems-get-best.input';
+import { MemCreateInput } from './dto/input/memCreate.input';
+import { GetMemsInput } from './dto/input/memsGetBest.input';
+import { MemUpdateInput } from './dto/input/memUpdate.input';
 import { MemDto } from './dto/mem.model';
-import { MemNotFoundException } from './exceptions/mem-not-found.exception';
-import { NotMemCreatorException } from './exceptions/not-mem-creator.exception copy';
+import { MemNotFoundException } from './exceptions/memNotFound.exception';
+import { NotMemCreatorException } from './exceptions/notMemCreator.exception copy';
 import { MemMetadataService } from './mem.metadata.service';
-import { RatingCountService } from './rating/rating-count.service';
+import { RatingCountService } from './rating/ratingCount.service';
 
 import { StoreImgBBService } from '../store/store.imgbb.service';
 

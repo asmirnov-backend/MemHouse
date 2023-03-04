@@ -1,6 +1,6 @@
-import { JwtTokenBody } from './jwt-token.interface';
+import { JwtTokenBody } from './jwtToken.interface';
 
-import { UserNotAuthorizedException } from '../exceptions/user-not-authorized.exception';
+import { UserNotAuthorizedException } from '../exceptions/userNotAuthorized.exception';
 
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { GqlExecutionContext } from '@nestjs/graphql';

@@ -1,4 +1,4 @@
-import { RatingCountService } from './rating-count.service';
+import { RatingCountService } from './ratingCount.service';
 
 describe('RatingCountService', () => {
   const service = new RatingCountService();

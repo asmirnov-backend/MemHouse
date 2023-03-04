@@ -1,6 +1,6 @@
 import { AuthResolver } from './auth.resolver';
 import { AuthService } from './auth.service';
-import { JwtRegisteredModule } from './jwt/jwt-registered.module';
+import { JwtRegisteredModule } from './jwt/jwtRegistered.module';
 
 import { PrismaModule } from '@api/prisma/prisma.module';
 

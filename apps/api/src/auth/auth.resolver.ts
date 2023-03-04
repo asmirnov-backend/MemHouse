@@ -1,7 +1,7 @@
 import { AuthService } from './auth.service';
 import { LoginInput } from './dto/input/login.input';
 import { RegistrationInput } from './dto/input/registration.input';
-import { JwtToken } from './dto/jwt-token.model';
+import { JwtToken } from './dto/jwtToken.model';
 
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 

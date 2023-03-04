@@ -1,4 +1,4 @@
-import { ImageMetaFromImagBB } from './interfaces/image-meta.imgbb.interface';
+import { ImageMetaFromImagBB } from './interfaces/imageMeta.imgbb.interface';
 import { StoreAbstractService } from './store.abstract.service';
 
 import { HttpService } from '@nestjs/axios';

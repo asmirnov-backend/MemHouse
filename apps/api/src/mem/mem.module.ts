@@ -3,7 +3,7 @@ import { MemResolver } from './mem.resolver';
 import { MemService } from './mem.service';
 import { RatingModule } from './rating/rating.module';
 
-import { JwtRegisteredModule } from '../auth/jwt/jwt-registered.module';
+import { JwtRegisteredModule } from '../auth/jwt/jwtRegistered.module';
 import { StoreModule } from '../store/store.module';
 
 import { PrismaModule } from '@api/prisma/prisma.module';

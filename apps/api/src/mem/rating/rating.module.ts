@@ -1,6 +1,6 @@
-import { RatingCountService } from './rating-count.service';
 import { RatingCronService } from './rating.cron.service';
 import { RatingService } from './rating.service';
+import { RatingCountService } from './ratingCount.service';
 
 import { MemMetadataService } from '../mem.metadata.service';
 

@@ -1,13 +1,13 @@
-import { MemCreateInput } from './dto/input/mem-create.input';
-import { MemUpdateInput } from './dto/input/mem-update.input';
-import { GetMemsInput } from './dto/input/mems-get-best.input';
-import { MemFullDto } from './dto/mem-full.model';
+import { MemCreateInput } from './dto/input/memCreate.input';
+import { GetMemsInput } from './dto/input/memsGetBest.input';
+import { MemUpdateInput } from './dto/input/memUpdate.input';
 import { MemDto } from './dto/mem.model';
+import { MemFullDto } from './dto/memFull.model';
 import { MemMetadataService } from './mem.metadata.service';
 import { MemService } from './mem.service';
 
-import { JwtAuthGuard } from '../auth/jwt/jwt-auth.guard';
-import { UserId } from '../auth/jwt/user-id.decorator';
+import { JwtAuthGuard } from '../auth/jwt/jwtAuth.guard';
+import { UserId } from '../auth/jwt/userId.decorator';
 
 import { UseGuards } from '@nestjs/common';
 import {

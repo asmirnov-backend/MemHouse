@@ -1,9 +1,9 @@
-import { UserByIdInput } from './dto/input/user-by-id.input';
+import { UserByIdInput } from './dto/input/userById.input';
 import { UserDto } from './dto/user.model';
 import { UserService } from './user.service';
 
-import { JwtAuthGuard } from '../auth/jwt/jwt-auth.guard';
-import { UserId } from '../auth/jwt/user-id.decorator';
+import { JwtAuthGuard } from '../auth/jwt/jwtAuth.guard';
+import { UserId } from '../auth/jwt/userId.decorator';
 
 import { UseGuards } from '@nestjs/common';
 import { Args, Query, Resolver } from '@nestjs/graphql';
