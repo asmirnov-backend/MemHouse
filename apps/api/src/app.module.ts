@@ -1,6 +1,7 @@
 import { AppController } from './app.controller';
 import { AuthModule } from './auth/auth.module';
 import { MemModule } from './mem/mem.module';
+import { MemReactionModule } from './memReaction/memReaction.module';
 import { UserModule } from './user/user.module';
 
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
@@ -22,6 +23,7 @@ import { join } from 'path';
     MemModule,
     UserModule,
     AuthModule,
+    MemReactionModule,
   ],
   controllers: [AppController],
 })

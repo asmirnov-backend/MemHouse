@@ -33,6 +33,12 @@ type MemFullDto {
   images: [ImageDto!]!
 }
 
+type MemReactionDto {
+  type: String!
+  memId: String!
+  userId: String!
+}
+
 type UserDto {
   id: String!
   email: String!
@@ -70,6 +76,7 @@ type Mutation {
   updateMem(UpdateMemInput: MemUpdateInput!): MemFullDto!
   login(LoginInput: LoginInput!): JwtToken!
   registration(RegistrationInput: RegistrationInput!): JwtToken!
+  toggleLike(ToggleLikeInputDto: ToggleLikeInputDto!): MemReactionDto!
 }
 
 input MemCreateInput {
@@ -96,4 +103,8 @@ input RegistrationInput {
   name: String!
   surname: String!
   birthday: String
+}
+
+input ToggleLikeInputDto {
+  memId: String!
 }
