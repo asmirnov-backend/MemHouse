@@ -8,4 +8,7 @@ export class MemDto implements Mem {
   text: string | null;
 
   createdUserId: string | null;
+
+  createdAt: Date;
+  updatedAt: Date;
 }

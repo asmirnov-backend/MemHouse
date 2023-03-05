@@ -9,4 +9,7 @@ export class MemReactionDto implements MemReaction {
   type: MemReactionType;
 
   userId: string;
+
+  createdAt: Date;
+  updatedAt: Date;
 }

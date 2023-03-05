@@ -13,12 +13,14 @@ input GetMemsInput {
 }
 
 type ImageDto {
+  createdAt: DateTime!
   displayUrl: String!
   height: Int!
   id: String!
   memId: String
   size: Int!
   title: String!
+  updatedAt: DateTime!
   width: Int!
 }
 
@@ -38,12 +40,15 @@ input MemCreateInput {
 }
 
 type MemDto {
+  createdAt: DateTime!
   createdUserId: String
   id: String!
   text: String
+  updatedAt: DateTime!
 }
 
 type MemFullDto {
+  createdAt: DateTime!
   createdUserId: String
   dislikes: Int!
   id: String!
@@ -52,11 +57,14 @@ type MemFullDto {
   rating: Float
   tags: [String!]!
   text: String
+  updatedAt: DateTime!
 }
 
 type MemReactionDto {
+  createdAt: DateTime!
   memId: String!
   type: String!
+  updatedAt: DateTime!
   userId: String!
 }
 
@@ -100,11 +108,13 @@ input UserByIdInput {
 
 type UserDto {
   birthday: DateTime
+  createdAt: DateTime!
   createdMems: [MemDto!]!
   email: String!
   id: String!
   name: String!
   nickname: String!
   surname: String!
+  updatedAt: DateTime!
   viewedMemes: [MemDto!]!
 }

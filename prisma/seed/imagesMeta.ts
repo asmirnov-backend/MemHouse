@@ -46,6 +46,8 @@ export const seedImagesMeta: ImageMeta[] = [
       delete_url: 'https://ibb.co/JF3r8W9/8b71b4c936bee7a22437c8c594ee6722',
     },
     memId: seedMems[0].id,
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     id: 'QF3r8W9',
@@ -89,6 +91,8 @@ export const seedImagesMeta: ImageMeta[] = [
       delete_url: 'https://ibb.co/JF3r8W9/8b71b4c936bee7a22437c8c594ee6722',
     },
     memId: seedMems[1].id,
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     id: 'fMtdxns',
@@ -132,6 +136,8 @@ export const seedImagesMeta: ImageMeta[] = [
       delete_url: 'https://ibb.co/fMtdxns/3d78048b1b930e1ced867f5272d12b87',
     },
     memId: seedMems[1].id,
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     id: '7KLB2HH',
@@ -175,6 +181,8 @@ export const seedImagesMeta: ImageMeta[] = [
       delete_url: 'https://ibb.co/7KLB2HH/aa985af02ae014e7d5133ce1cbb4f78b',
     },
     memId: seedMems[2].id,
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     id: 'dBDfVfW',
@@ -218,6 +226,8 @@ export const seedImagesMeta: ImageMeta[] = [
       delete_url: 'https://ibb.co/dBDfVfW/6867081235bd7afcf2cc4afe4ca65fc8',
     },
     memId: seedMems[3].id,
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     id: 'Bs1BDcL4',
@@ -254,5 +264,7 @@ export const seedImagesMeta: ImageMeta[] = [
       delete_url: 'https://ibb.co/Bs1BDcL/f6ae72eb3d870af2602d5be97a0543d2',
     },
     memId: seedMems[4].id,
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
 ];

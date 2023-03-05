@@ -11,6 +11,8 @@ export class UserDto implements Omit<User, 'password'> {
   name: string;
   surname: string;
   birthday: Date | null;
+  createdAt: Date;
+  updatedAt: Date;
 
   viewedMemes: MemDto[];
   createdMems: MemDto[];

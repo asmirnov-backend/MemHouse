@@ -9,6 +9,8 @@ export const seedUsers: User[] = [
     name: 'Name',
     surname: 'Surname',
     birthday: null,
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     id: '2594476d-c89d-4d33-93ff-dc92407ce18f',
@@ -18,5 +20,7 @@ export const seedUsers: User[] = [
     name: 'Антон',
     surname: 'Крючков',
     birthday: null,
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
 ];

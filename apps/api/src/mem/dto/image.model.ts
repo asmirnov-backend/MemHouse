@@ -18,5 +18,8 @@ export class ImageDto implements Omit<ImageMeta, 'originMeta'> {
   @Field(() => Int)
   size: number;
 
+  createdAt: Date;
+  updatedAt: Date;
+
   memId: string | null;
 }
