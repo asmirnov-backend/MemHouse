@@ -12,6 +12,6 @@ import { Module } from '@nestjs/common';
 @Module({
   imports: [PrismaModule, JwtRegisteredModule, StoreModule],
   providers: [MemService, MemResolver, MemMetadataService],
-  exports: [MemMetadataService],
+  exports: [MemMetadataService, MemService],
 })
 export class MemModule {}

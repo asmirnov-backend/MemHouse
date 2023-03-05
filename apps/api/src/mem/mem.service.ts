@@ -11,7 +11,7 @@ import { StoreImgBBService } from '../store/store.imgbb.service';
 import { PrismaService } from '@api/prisma/prisma.service';
 
 import { Injectable } from '@nestjs/common';
-import { isNull, omit } from 'lodash';
+import { isNull, map, omit } from 'lodash';
 
 @Injectable()
 export class MemService {
@@ -49,6 +49,16 @@ export class MemService {
       skip: params.skip,
       orderBy: { rating: { amount: 'desc' } },
     });
+  }
+
+  async getAllMemsIds() {
+    return this.prisma.mem.findMany({
+      select: { id: true },
+    });
+  }
+
+  async countAllMemsAmount(): Promise<number> {
+    return this.prisma.mem.count();
   }
 
   async createMem(

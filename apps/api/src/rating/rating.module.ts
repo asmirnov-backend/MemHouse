@@ -1,4 +1,4 @@
-import { RatingCronService } from './rating.cron.service';
+import { RatingCronController } from './rating.cron.controller';
 import { RatingService } from './rating.service';
 import { RatingCountService } from './ratingCount.service';
 
@@ -11,6 +11,7 @@ import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [PrismaModule, MemModule, ScheduleModule.forRoot()],
-  providers: [RatingCountService, RatingCronService, RatingService],
+  providers: [RatingCountService, RatingService],
+  controllers: [RatingCronController],
 })
 export class RatingModule {}
