@@ -11,19 +11,15 @@ export class MemReactionService {
   async toggleLike(params: { userId: string; memId: string }) {
     const memLikeReactionData = { ...params, type: MemReactionType.LIKE };
 
-    const memLikeReaction = await this.prisma.memReaction.findUnique({
-      where: { memId_userId_type: memLikeReactionData },
-    });
-
-    if (isNull(memLikeReaction)) {
-      await this.prisma.memReaction.create({
-        data: memLikeReactionData,
-      });
-    } else {
+    if (await this.isUserHasSetLike(params)) {
       await this.prisma.memReaction.delete({
         where: {
           memId_userId_type: memLikeReactionData,
         },
+      });
+    } else {
+      await this.prisma.memReaction.create({
+        data: memLikeReactionData,
       });
     }
 
@@ -32,5 +28,16 @@ export class MemReactionService {
     });
 
     return { likes };
+  }
+
+  async isUserHasSetLike(params: {
+    memId: string;
+    userId: string;
+  }): Promise<boolean> {
+    const memReaction = await this.prisma.memReaction.findUnique({
+      where: { memId_userId_type: { ...params, type: MemReactionType.LIKE } },
+    });
+
+    return Boolean(memReaction);
   }
 }

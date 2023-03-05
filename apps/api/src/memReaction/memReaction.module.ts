@@ -9,5 +9,6 @@ import { Module } from '@nestjs/common';
 @Module({
   imports: [PrismaModule, JwtRegisteredModule],
   providers: [MemReactionResolver, MemReactionService],
+  exports: [MemReactionService],
 })
 export class MemReactionModule {}

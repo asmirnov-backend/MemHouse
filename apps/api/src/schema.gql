@@ -53,6 +53,7 @@ type MemFullDto {
   dislikes: Int!
   id: String!
   images: [ImageDto!]!
+  isCurrentUserHasSetLike: Boolean!
   likes: Int!
   rating: Float
   tags: [String!]!

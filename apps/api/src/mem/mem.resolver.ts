@@ -8,6 +8,7 @@ import { MemService } from './mem.service';
 
 import { JwtAuthGuard } from '../auth/jwt/jwtAuth.guard';
 import { UserId } from '../auth/jwt/userId.decorator';
+import { MemReactionService } from '../memReaction/memReaction.service';
 
 import { UseGuards } from '@nestjs/common';
 import {
@@ -19,12 +20,14 @@ import {
   ResolveField,
   Resolver,
 } from '@nestjs/graphql';
+import { isUndefined } from 'lodash';
 
 @Resolver(() => MemFullDto)
 export class MemResolver {
   constructor(
     private readonly memService: MemService,
     private readonly metadataService: MemMetadataService,
+    private readonly memReactionService: MemReactionService,
   ) {}
 
   @Query(() => [MemFullDto])
@@ -72,6 +75,19 @@ export class MemResolver {
   @ResolveField('tags')
   async tags(@Parent() mem: MemDto): Promise<Pick<MemFullDto, 'tags'>['tags']> {
     return this.metadataService.getTags(mem.id);
+  }
+
+  @ResolveField('isCurrentUserHasSetLike')
+  async isCurrentUserHasSetLike(
+    @UserId() userId: string,
+    @Parent() mem: MemDto,
+  ): Promise<MemFullDto['isCurrentUserHasSetLike']> {
+    if (isUndefined(userId)) return false;
+
+    return this.memReactionService.isUserHasSetLike({
+      memId: mem.id,
+      userId,
+    });
   }
 
   @Mutation(() => MemFullDto)

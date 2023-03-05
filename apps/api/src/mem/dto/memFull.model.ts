@@ -16,4 +16,6 @@ export class MemFullDto extends MemDto {
   tags: string[];
 
   images: ImageDto[];
+
+  isCurrentUserHasSetLike: boolean;
 }
