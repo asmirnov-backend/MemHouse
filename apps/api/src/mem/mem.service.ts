@@ -5,7 +5,6 @@ import { MemDto } from './dto/mem.model';
 import { MemNotFoundException } from './exceptions/memNotFound.exception';
 import { NotMemCreatorException } from './exceptions/notMemCreator.exception copy';
 import { MemMetadataService } from './mem.metadata.service';
-import { RatingCountService } from './rating/ratingCount.service';
 
 import { StoreImgBBService } from '../store/store.imgbb.service';
 
@@ -19,7 +18,6 @@ export class MemService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly metadataService: MemMetadataService,
-    private readonly ratingCountService: RatingCountService,
     private readonly storeService: StoreImgBBService,
   ) {}
 
@@ -75,7 +73,7 @@ export class MemService {
           })),
         },
         createdUser: { connect: { id: params.userId } },
-        rating: { create: { amount: this.ratingCountService.calculate() } },
+        rating: { create: { amount: 0 } },
       },
     });
   }

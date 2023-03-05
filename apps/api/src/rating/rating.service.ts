@@ -1,7 +1,7 @@
 import { RatingCountService } from './ratingCount.service';
 
-import { PrismaService } from '../../prisma/prisma.service';
-import { MemMetadataService } from '../mem.metadata.service';
+import { MemMetadataService } from '../mem/mem.metadata.service';
+import { PrismaService } from '../prisma/prisma.service';
 
 import { Injectable } from '@nestjs/common';
 
