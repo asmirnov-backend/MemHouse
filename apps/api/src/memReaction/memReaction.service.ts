@@ -16,15 +16,21 @@ export class MemReactionService {
     });
 
     if (isNull(memLikeReaction)) {
-      return this.prisma.memReaction.create({
+      await this.prisma.memReaction.create({
         data: memLikeReactionData,
+      });
+    } else {
+      await this.prisma.memReaction.delete({
+        where: {
+          memId_userId_type: memLikeReactionData,
+        },
       });
     }
 
-    return this.prisma.memReaction.delete({
-      where: {
-        memId_userId_type: memLikeReactionData,
-      },
+    const likes = await this.prisma.memReaction.count({
+      where: { memId: params.memId, type: MemReactionType.LIKE },
     });
+
+    return { likes };
   }
 }

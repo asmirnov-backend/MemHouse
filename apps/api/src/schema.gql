@@ -60,14 +60,6 @@ type MemFullDto {
   updatedAt: DateTime!
 }
 
-type MemReactionDto {
-  createdAt: DateTime!
-  memId: String!
-  type: String!
-  updatedAt: DateTime!
-  userId: String!
-}
-
 input MemUpdateInput {
   id: String!
   tags: [String!]
@@ -78,7 +70,7 @@ type Mutation {
   createMem(CreateMemInput: MemCreateInput!): MemFullDto!
   login(LoginInput: LoginInput!): JwtToken!
   registration(RegistrationInput: RegistrationInput!): JwtToken!
-  toggleLike(ToggleLikeInputDto: ToggleLikeInputDto!): MemReactionDto!
+  toggleLike(ToggleLikeInputDto: ToggleLikeInputDto!): ToggleLikeOutputDto!
   updateMem(UpdateMemInput: MemUpdateInput!): MemFullDto!
 }
 
@@ -100,6 +92,10 @@ input RegistrationInput {
 
 input ToggleLikeInputDto {
   memId: String!
+}
+
+type ToggleLikeOutputDto {
+  likes: Int!
 }
 
 input UserByIdInput {
