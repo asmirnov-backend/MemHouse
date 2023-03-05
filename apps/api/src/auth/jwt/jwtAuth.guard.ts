@@ -29,7 +29,7 @@ export class JwtAuthGuard implements CanActivate {
         secret: process.env.JWT_SECRET,
       });
 
-      request.userId = jwtTokenBody.id;
+      request.jwt = jwtTokenBody;
 
       return true;
     } catch (e) {

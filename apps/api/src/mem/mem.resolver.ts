@@ -8,9 +8,10 @@ import { MemService } from './mem.service';
 
 import { JwtAuthGuard } from '../auth/jwt/jwtAuth.guard';
 import { UserId } from '../auth/jwt/userId.decorator';
+import { AddJwtToReqInterceptor } from '../interceptors/addJwtToReq.interceptor';
 import { MemReactionService } from '../memReaction/memReaction.service';
 
-import { UseGuards } from '@nestjs/common';
+import { UseGuards, UseInterceptors } from '@nestjs/common';
 import {
   Args,
   Float,
@@ -40,6 +41,7 @@ export class MemResolver {
   }
 
   @Query(() => [MemFullDto])
+  @UseInterceptors(AddJwtToReqInterceptor)
   mems(@Args('GetMemsInput') params: GetMemsInput): Promise<MemDto[]> {
     return this.memService.getMems(params);
   }

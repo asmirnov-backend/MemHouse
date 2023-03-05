@@ -1,3 +1,5 @@
+import { JwtTokenBody } from './jwtToken.interface';
+
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 import { GqlExecutionContext } from '@nestjs/graphql';
 
@@ -6,7 +8,7 @@ export const UserId = createParamDecorator(
     const ctx = GqlExecutionContext.create(context);
     const request = ctx.getContext().req;
 
-    // userId добавляется к request в JwtAuthGuard-е
-    return request.userId;
+    // jwt добавляется к request в Guard-е или AddJwtToReqInterceptor
+    return (request.jwt as JwtTokenBody).id;
   },
 );

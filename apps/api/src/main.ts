@@ -1,5 +1,5 @@
 import { AppModule } from './app.module';
-import { LoggingInterceptor } from './logging.interceptor';
+import { LoggingInterceptor } from './interceptors/logging.interceptor';
 
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
