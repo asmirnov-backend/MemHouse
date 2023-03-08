@@ -9,6 +9,6 @@ export const UserId = createParamDecorator(
     const request = ctx.getContext().req;
 
     // jwt добавляется к request в Guard-е или AddJwtToReqInterceptor
-    return (request.jwt as JwtTokenBody).id;
+    return (request.jwt as JwtTokenBody)?.id;
   },
 );
