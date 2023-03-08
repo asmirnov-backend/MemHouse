@@ -1,7 +1,8 @@
-import { ToggleLikeInputDto } from './dto/input/toggleLike.input.dto';
+import { DislikeReactionService } from './dislikeReaction.service';
+import { ToggleReactionInputDto } from './dto/input/toggleReaction.input.dto';
 import { MemReactionDto } from './dto/memReaction.model';
-import { ToggleLikeOutputDto } from './dto/output/toggleLike.output.dto';
-import { MemReactionService } from './memReaction.service';
+import { ToggleReactionOutputDto } from './dto/output/toggleReaction.output.dto';
+import { LikeReactionService } from './likeReaction.service';
 
 import { JwtAuthGuard } from '../auth/jwt/jwtAuth.guard';
 import { UserId } from '../auth/jwt/userId.decorator';
@@ -11,14 +12,26 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver(() => MemReactionDto)
 export class MemReactionResolver {
-  constructor(private readonly memReactionService: MemReactionService) {}
+  constructor(
+    private readonly likeReactionService: LikeReactionService,
+    private readonly dislikeReactionService: DislikeReactionService,
+  ) {}
 
-  @Mutation(() => ToggleLikeOutputDto)
+  @Mutation(() => ToggleReactionOutputDto)
   @UseGuards(JwtAuthGuard)
   toggleLike(
     @UserId() userId: string,
-    @Args('ToggleLikeInputDto') params: ToggleLikeInputDto,
-  ): Promise<ToggleLikeOutputDto> {
-    return this.memReactionService.toggleLike({ userId, ...params });
+    @Args('ToggleReactionInputDto') params: ToggleReactionInputDto,
+  ): Promise<ToggleReactionOutputDto> {
+    return this.likeReactionService.toggle({ userId, ...params });
+  }
+
+  @Mutation(() => ToggleReactionOutputDto)
+  @UseGuards(JwtAuthGuard)
+  toggleDislike(
+    @UserId() userId: string,
+    @Args('ToggleReactionInputDto') params: ToggleReactionInputDto,
+  ): Promise<ToggleReactionOutputDto> {
+    return this.dislikeReactionService.toggle({ userId, ...params });
   }
 }

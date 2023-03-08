@@ -9,7 +9,8 @@ import { MemService } from './mem.service';
 import { JwtAuthGuard } from '../auth/jwt/jwtAuth.guard';
 import { UserId } from '../auth/jwt/userId.decorator';
 import { AddJwtToReqInterceptor } from '../interceptors/addJwtToReq.interceptor';
-import { MemReactionService } from '../memReaction/memReaction.service';
+import { DislikeReactionService } from '../memReaction/dislikeReaction.service';
+import { LikeReactionService } from '../memReaction/likeReaction.service';
 
 import { UseGuards, UseInterceptors } from '@nestjs/common';
 import {
@@ -28,7 +29,8 @@ export class MemResolver {
   constructor(
     private readonly memService: MemService,
     private readonly metadataService: MemMetadataService,
-    private readonly memReactionService: MemReactionService,
+    private readonly likeReactionService: LikeReactionService,
+    private readonly dislikeReactionService: DislikeReactionService,
   ) {}
 
   @Query(() => [MemFullDto])
@@ -86,7 +88,20 @@ export class MemResolver {
   ): Promise<MemFullDto['isCurrentUserHasSetLike']> {
     if (isUndefined(userId)) return false;
 
-    return this.memReactionService.isUserHasSetLike({
+    return this.likeReactionService.isUserHasSetReaction({
+      memId: mem.id,
+      userId,
+    });
+  }
+
+  @ResolveField('isCurrentUserHasSetDislike')
+  async isCurrentUserHasSetDislike(
+    @UserId() userId: string,
+    @Parent() mem: MemDto,
+  ): Promise<MemFullDto['isCurrentUserHasSetDislike']> {
+    if (isUndefined(userId)) return false;
+
+    return this.dislikeReactionService.isUserHasSetReaction({
       memId: mem.id,
       userId,
     });

@@ -18,4 +18,5 @@ export class MemFullDto extends MemDto {
   images: ImageDto[];
 
   isCurrentUserHasSetLike: boolean;
+  isCurrentUserHasSetDislike: boolean;
 }

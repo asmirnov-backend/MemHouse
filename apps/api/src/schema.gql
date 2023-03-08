@@ -53,6 +53,7 @@ type MemFullDto {
   dislikes: Int!
   id: String!
   images: [ImageDto!]!
+  isCurrentUserHasSetDislike: Boolean!
   isCurrentUserHasSetLike: Boolean!
   likes: Int!
   rating: Float
@@ -71,7 +72,8 @@ type Mutation {
   createMem(CreateMemInput: MemCreateInput!): MemFullDto!
   login(LoginInput: LoginInput!): JwtToken!
   registration(RegistrationInput: RegistrationInput!): JwtToken!
-  toggleLike(ToggleLikeInputDto: ToggleLikeInputDto!): ToggleLikeOutputDto!
+  toggleDislike(ToggleReactionInputDto: ToggleReactionInputDto!): ToggleReactionOutputDto!
+  toggleLike(ToggleReactionInputDto: ToggleReactionInputDto!): ToggleReactionOutputDto!
   updateMem(UpdateMemInput: MemUpdateInput!): MemFullDto!
 }
 
@@ -91,12 +93,12 @@ input RegistrationInput {
   surname: String!
 }
 
-input ToggleLikeInputDto {
+input ToggleReactionInputDto {
   memId: String!
 }
 
-type ToggleLikeOutputDto {
-  likes: Int!
+type ToggleReactionOutputDto {
+  reactionAmount: Int!
 }
 
 input UserByIdInput {

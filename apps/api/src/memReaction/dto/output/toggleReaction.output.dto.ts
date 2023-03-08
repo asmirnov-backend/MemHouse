@@ -1,7 +1,7 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
-export class ToggleLikeOutputDto {
+export class ToggleReactionOutputDto {
   @Field(() => Int)
-  likes: number;
+  reactionAmount: number;
 }
