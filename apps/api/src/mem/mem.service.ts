@@ -21,28 +21,6 @@ export class MemService {
     private readonly storeService: StoreImgBBService,
   ) {}
 
-  async getBestMems(
-    params: GetMemsInput & { userId: string },
-  ): Promise<MemDto[]> {
-    const mems = await this.prisma.mem.findMany({
-      take: params.take,
-      skip: params.skip,
-      where: { NOT: [{ viewedUsers: { some: { id: params.userId } } }] },
-      orderBy: { rating: { amount: 'desc' } },
-    });
-
-    await Promise.all(
-      mems.map((mem) =>
-        this.prisma.mem.update({
-          where: { id: mem.id },
-          data: { viewedUsers: { connect: { id: params.userId } } },
-        }),
-      ),
-    );
-
-    return mems;
-  }
-
   async getMems(params: GetMemsInput): Promise<MemDto[]> {
     return this.prisma.mem.findMany({
       take: params.take,

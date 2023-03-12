@@ -34,15 +34,6 @@ export class MemResolver {
   ) {}
 
   @Query(() => [MemFullDto])
-  @UseGuards(JwtAuthGuard)
-  bestMems(
-    @Args('GetMemsInput') params: GetMemsInput,
-    @UserId() userId: string,
-  ): Promise<MemDto[]> {
-    return this.memService.getBestMems({ ...params, userId });
-  }
-
-  @Query(() => [MemFullDto])
   @UseInterceptors(AddJwtToReqInterceptor)
   mems(@Args('GetMemsInput') params: GetMemsInput): Promise<MemDto[]> {
     return this.memService.getMems(params);
