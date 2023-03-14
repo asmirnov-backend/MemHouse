@@ -6,15 +6,15 @@ import { JwtTokenBody } from './jwt/jwtToken.interface';
 import { PrismaService } from '../prisma/prisma.service';
 
 import {
-  Controller,
   ForbiddenException,
+  Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { compare, hash } from 'bcrypt';
 import { isNull } from 'lodash';
 
-@Controller()
+@Injectable()
 export class AuthService {
   constructor(
     private readonly prisma: PrismaService,
