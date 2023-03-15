@@ -2,6 +2,7 @@ import { seedImagesMeta } from './imagesMeta';
 import { seedMemReactions } from './memReaction';
 import { seedMems } from './mems';
 import { seedRatings } from './rating';
+import { seedTags } from './tags';
 import { seedUsers } from './users';
 
 import { PrismaClient } from '@prisma/client';
@@ -25,6 +26,7 @@ const main = async () => {
   await prisma.memReaction.deleteMany({
     where: { OR: seedMemReactions },
   });
+  await prisma.tag.deleteMany({ where: { OR: seedTags } });
 
   // Create seed
   await prisma.user.createMany({
@@ -42,6 +44,17 @@ const main = async () => {
   await prisma.imageMeta.createMany({
     // @ts-ignore Prisma issue: https://github.com/prisma/prisma/issues/9247
     data: seedImagesMeta,
+  });
+  await prisma.tag.createMany({
+    data: seedTags,
+  });
+  await prisma.tag.update({
+    where: { id: seedTags[0].id },
+    data: { mems: { connect: { id: seedMems[0].id } } },
+  });
+  await prisma.tag.update({
+    where: { id: seedTags[1].id },
+    data: { mems: { connect: { id: seedMems[0].id } } },
   });
 };
 
