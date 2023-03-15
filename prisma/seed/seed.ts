@@ -12,16 +12,16 @@ const prisma = new PrismaClient();
 const main = async () => {
   // First of all delete previous seed
   await prisma.imageMeta.deleteMany({
-    where: { id: { in: seedImagesMeta.map((e) => e.id) } },
+    where: { id: { in: seedImagesMeta.map(e => e.id) } },
   });
   await prisma.rating.deleteMany({
     where: { OR: seedRatings },
   });
   await prisma.mem.deleteMany({
-    where: { id: { in: seedMems.map((e) => e.id) } },
+    where: { id: { in: seedMems.map(e => e.id) } },
   });
   await prisma.user.deleteMany({
-    where: { id: { in: seedUsers.map((e) => e.id) } },
+    where: { id: { in: seedUsers.map(e => e.id) } },
   });
   await prisma.memReaction.deleteMany({
     where: { OR: seedMemReactions },
@@ -48,18 +48,23 @@ const main = async () => {
   await prisma.tag.createMany({
     data: seedTags,
   });
-  await prisma.tag.update({
-    where: { id: seedTags[0].id },
-    data: { mems: { connect: { id: seedMems[0].id } } },
-  });
-  await prisma.tag.update({
-    where: { id: seedTags[1].id },
-    data: { mems: { connect: { id: seedMems[0].id } } },
+  await prisma.mem.update({
+    where: { id: seedMems[0].id },
+    data: {
+      tags: {
+        set: [
+          { id: seedTags[0].id },
+          { id: seedTags[1].id },
+          { id: seedTags[2].id },
+          { id: seedTags[3].id },
+        ],
+      },
+    },
   });
 };
 
 main()
-  .catch((e) => {
+  .catch(e => {
     console.error(e);
     process.exit(1);
   })
