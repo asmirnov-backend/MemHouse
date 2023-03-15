@@ -67,7 +67,7 @@ enum MemReactionType {
 
 model Rating {
   amount    Float
-  mem       Mem      @relation(fields: [memId], references: [id])
+  mem       Mem      @relation(fields: [memId], references: [id], onDelete: Cascade)
   memId     String   @id @unique @db.Uuid
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
