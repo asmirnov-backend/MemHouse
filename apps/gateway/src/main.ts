@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
+import { json, urlencoded } from 'express';
 
 async function bootstrap() {
   const logger = new Logger('bootstrap');
@@ -23,6 +24,8 @@ async function bootstrap() {
 
   const config = app.get(ConfigService);
   const port = Number(config.getOrThrow<string>('GATEWAY_PORT')) || 3000;
+  app.use(json({ limit: '50mb' }));
+  app.use(urlencoded({ extended: true, limit: '50mb' }));
 
   await app.listen(port);
   logger.log(`Nest is started on port ${port}`);
