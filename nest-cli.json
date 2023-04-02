@@ -9,13 +9,22 @@
     "webpack": false
   },
   "projects": {
-    "api-gateway": {
+    "users": {
       "type": "application",
       "root": "",
       "entryFile": "main",
-      "sourceRoot": "apps/api/src",
+      "sourceRoot": "apps/users/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/api/tsconfig.app.json"
+        "tsConfigPath": "apps/users/tsconfig.app.json"
+      }
+    },
+    "mems": {
+      "type": "application",
+      "root": "",
+      "entryFile": "main",
+      "sourceRoot": "apps/mems/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/mems/tsconfig.app.json"
       }
     },
     "common": {
@@ -25,6 +34,15 @@
       "sourceRoot": "common/src",
       "compilerOptions": {
         "tsConfigPath": "common/tsconfig.lib.json"
+      }
+    },
+    "interfaces": {
+      "type": "library",
+      "root": "interfaces",
+      "entryFile": "index",
+      "sourceRoot": "interfaces/src",
+      "compilerOptions": {
+        "tsConfigPath": "interfaces/tsconfig.lib.json"
       }
     }
   }

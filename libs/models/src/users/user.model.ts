@@ -1,0 +1,19 @@
+import { MemDto } from '../mems/mem.model';
+
+import { ObjectType } from '@nestjs/graphql';
+import { User } from '@prisma/client';
+
+@ObjectType()
+export class UserDto implements Omit<User, 'password'> {
+  id: string;
+  email: string;
+  nickname: string;
+  name: string;
+  surname: string;
+  birthday: Date | null;
+  createdAt: Date;
+  updatedAt: Date;
+
+  viewedMemes: MemDto[];
+  createdMems: MemDto[];
+}
