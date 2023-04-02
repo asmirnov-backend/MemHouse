@@ -3,12 +3,12 @@ import { GetMemsInput } from './dto/input/memsGetBest.input';
 import { MemUpdateInput } from './dto/input/memUpdate.input';
 import { MemMetadataService } from './mem.metadata.service';
 import { MemService } from './mem.service';
+import { MemModel } from './models/mem.model';
+import { MemFullModel } from './models/memFull.model';
 
 import { UserId } from '../../../../libs/common/src/decorators/userId.decorator';
 import { JwtAuthGuard } from '../../../../libs/common/src/guards/jwtAuth.guard';
 import { AddJwtToReqInterceptor } from '../../../../libs/common/src/interceptors/addJwtToReq.interceptor';
-import { MemDto } from '../../../../libs/models/src/mems/mem.model';
-import { MemFullDto } from '../../../../libs/models/src/mems/memFull.model';
 import { DislikeReactionService } from '../memReaction/dislikeReaction.service';
 import { LikeReactionService } from '../memReaction/likeReaction.service';
 
@@ -24,7 +24,7 @@ import {
 } from '@nestjs/graphql';
 import { isUndefined } from 'lodash';
 
-@Resolver(() => MemFullDto)
+@Resolver(() => MemFullModel)
 export class MemResolver {
   constructor(
     private readonly memService: MemService,
@@ -33,50 +33,52 @@ export class MemResolver {
     private readonly dislikeReactionService: DislikeReactionService,
   ) {}
 
-  @Query(() => [MemFullDto])
+  @Query(() => [MemFullModel])
   @UseInterceptors(AddJwtToReqInterceptor)
-  mems(@Args('GetMemsInput') params: GetMemsInput): Promise<MemDto[]> {
+  mems(@Args('GetMemsInput') params: GetMemsInput): Promise<MemModel[]> {
     return this.memService.getMems(params);
   }
 
   @ResolveField('likes')
   async likes(
-    @Parent() mem: MemDto,
-  ): Promise<Pick<MemFullDto, 'likes'>['likes']> {
+    @Parent() mem: MemModel,
+  ): Promise<Pick<MemFullModel, 'likes'>['likes']> {
     return this.metadataService.getLikesAmount(mem.id);
   }
 
   @ResolveField('dislikes')
   async dislikes(
-    @Parent() mem: MemDto,
-  ): Promise<Pick<MemFullDto, 'dislikes'>['dislikes']> {
+    @Parent() mem: MemModel,
+  ): Promise<Pick<MemFullModel, 'dislikes'>['dislikes']> {
     return this.metadataService.getDislikesAmount(mem.id);
   }
 
   @ResolveField('rating', () => Float)
   async rating(
-    @Parent() mem: MemDto,
-  ): Promise<Pick<MemFullDto, 'rating'>['rating']> {
+    @Parent() mem: MemModel,
+  ): Promise<Pick<MemFullModel, 'rating'>['rating']> {
     return this.metadataService.getRatingAmount(mem.id);
   }
 
   @ResolveField('images')
   async images(
-    @Parent() mem: MemDto,
-  ): Promise<Pick<MemFullDto, 'images'>['images']> {
+    @Parent() mem: MemModel,
+  ): Promise<Pick<MemFullModel, 'images'>['images']> {
     return this.metadataService.getImages(mem.id);
   }
 
   @ResolveField('tags')
-  async tags(@Parent() mem: MemDto): Promise<Pick<MemFullDto, 'tags'>['tags']> {
+  async tags(
+    @Parent() mem: MemModel,
+  ): Promise<Pick<MemFullModel, 'tags'>['tags']> {
     return this.metadataService.getTags(mem.id);
   }
 
   @ResolveField('isCurrentUserHasSetLike')
   async isCurrentUserHasSetLike(
     @UserId() userId: string,
-    @Parent() mem: MemDto,
-  ): Promise<MemFullDto['isCurrentUserHasSetLike']> {
+    @Parent() mem: MemModel,
+  ): Promise<MemFullModel['isCurrentUserHasSetLike']> {
     if (isUndefined(userId)) return false;
 
     return this.likeReactionService.isUserHasSetReaction({
@@ -88,8 +90,8 @@ export class MemResolver {
   @ResolveField('isCurrentUserHasSetDislike')
   async isCurrentUserHasSetDislike(
     @UserId() userId: string,
-    @Parent() mem: MemDto,
-  ): Promise<MemFullDto['isCurrentUserHasSetDislike']> {
+    @Parent() mem: MemModel,
+  ): Promise<MemFullModel['isCurrentUserHasSetDislike']> {
     if (isUndefined(userId)) return false;
 
     return this.dislikeReactionService.isUserHasSetReaction({
@@ -98,21 +100,21 @@ export class MemResolver {
     });
   }
 
-  @Mutation(() => MemFullDto)
+  @Mutation(() => MemFullModel)
   @UseGuards(JwtAuthGuard)
   createMem(
     @Args('CreateMemInput') params: MemCreateInput,
     @UserId() userId: string,
-  ): Promise<MemDto> {
+  ): Promise<MemModel> {
     return this.memService.createMem({ ...params, userId });
   }
 
-  @Mutation(() => MemFullDto)
+  @Mutation(() => MemFullModel)
   @UseGuards(JwtAuthGuard)
   updateMem(
     @Args('UpdateMemInput') params: MemUpdateInput,
     @UserId() userId: string,
-  ): Promise<MemDto> {
+  ): Promise<MemModel> {
     return this.memService.updateMem({ ...params, userId });
   }
 }

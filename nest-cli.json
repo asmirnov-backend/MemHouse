@@ -9,6 +9,15 @@
     "webpack": false
   },
   "projects": {
+    "gateway": {
+      "type": "application",
+      "root": "",
+      "entryFile": "main",
+      "sourceRoot": "apps/gateway/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/gateway/tsconfig.app.json"
+      }
+    },
     "users": {
       "type": "application",
       "root": "",

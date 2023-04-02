@@ -2,6 +2,26 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+directive @extends on INTERFACE | OBJECT
+
+directive @external on FIELD_DEFINITION | OBJECT
+
+directive @inaccessible on ARGUMENT_DEFINITION | ENUM | ENUM_VALUE | FIELD_DEFINITION | INPUT_FIELD_DEFINITION | INPUT_OBJECT | INTERFACE | OBJECT | SCALAR | UNION
+
+directive @key(fields: String!, resolvable: Boolean = true) repeatable on INTERFACE | OBJECT
+
+directive @link(import: [link__Import], url: String!) on SCHEMA
+
+directive @override(from: String!) on FIELD_DEFINITION
+
+directive @provides(fields: String!) on FIELD_DEFINITION
+
+directive @requires(fields: String!) on FIELD_DEFINITION
+
+directive @shareable on FIELD_DEFINITION | OBJECT
+
+directive @tag(name: String!) repeatable on ARGUMENT_DEFINITION | ENUM | ENUM_VALUE | FIELD_DEFINITION | INPUT_FIELD_DEFINITION | INPUT_OBJECT | INTERFACE | OBJECT | SCALAR | UNION
+
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
@@ -12,7 +32,7 @@ input GetMemsInput {
   take: Int! = 10
 }
 
-type ImageDto {
+type ImageModel {
   createdAt: DateTime!
   displayUrl: String!
   height: Int!
@@ -30,12 +50,12 @@ input MemCreateInput {
   text: String
 }
 
-type MemFullDto {
+type MemFullModel {
   createdAt: DateTime!
   createdUserId: String
   dislikes: Int!
   id: String!
-  images: [ImageDto!]!
+  images: [ImageModel!]!
   isCurrentUserHasSetDislike: Boolean!
   isCurrentUserHasSetLike: Boolean!
   likes: Int!
@@ -52,14 +72,14 @@ input MemUpdateInput {
 }
 
 type Mutation {
-  createMem(CreateMemInput: MemCreateInput!): MemFullDto!
+  createMem(CreateMemInput: MemCreateInput!): MemFullModel!
   toggleDislike(ToggleReactionInputDto: ToggleReactionInputDto!): ToggleReactionOutputDto!
   toggleLike(ToggleReactionInputDto: ToggleReactionInputDto!): ToggleReactionOutputDto!
-  updateMem(UpdateMemInput: MemUpdateInput!): MemFullDto!
+  updateMem(UpdateMemInput: MemUpdateInput!): MemFullModel!
 }
 
 type Query {
-  mems(GetMemsInput: GetMemsInput!): [MemFullDto!]!
+  mems(GetMemsInput: GetMemsInput!): [MemFullModel!]!
 }
 
 input ToggleReactionInputDto {
@@ -69,3 +89,5 @@ input ToggleReactionInputDto {
 type ToggleReactionOutputDto {
   reactionAmount: Int!
 }
+
+scalar link__Import

@@ -1,6 +1,6 @@
 import { ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
-export class JwtToken {
+export class JwtTokenModel {
   jwtToken: string;
 }

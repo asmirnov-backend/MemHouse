@@ -1,10 +1,11 @@
-import { ImageDto } from './image.model';
-import { MemDto } from './mem.model';
+import { MemModel } from './mem.model';
+
+import { ImageModel } from '../../store/models/image.model';
 
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
-export class MemFullDto extends MemDto {
+export class MemFullModel extends MemModel {
   @Field(() => Int)
   likes: number;
 
@@ -15,7 +16,7 @@ export class MemFullDto extends MemDto {
 
   tags: string[];
 
-  images: ImageDto[];
+  images: ImageModel[];
 
   isCurrentUserHasSetLike: boolean;
   isCurrentUserHasSetDislike: boolean;

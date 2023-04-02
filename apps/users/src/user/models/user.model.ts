@@ -1,10 +1,10 @@
-import { MemDto } from '../mems/mem.model';
-
-import { ObjectType } from '@nestjs/graphql';
+import { Directive, Field, ID, ObjectType } from '@nestjs/graphql';
 import { User } from '@prisma/client';
 
 @ObjectType()
-export class UserDto implements Omit<User, 'password'> {
+@Directive('@key(fields: "id")')
+export class UserModel implements Omit<User, 'password'> {
+  @Field(() => ID)
   id: string;
   email: string;
   nickname: string;
@@ -13,7 +13,4 @@ export class UserDto implements Omit<User, 'password'> {
   birthday: Date | null;
   createdAt: Date;
   updatedAt: Date;
-
-  viewedMemes: MemDto[];
-  createdMems: MemDto[];
 }

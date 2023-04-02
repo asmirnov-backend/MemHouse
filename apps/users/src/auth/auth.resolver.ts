@@ -1,7 +1,7 @@
 import { AuthService } from './auth.service';
 import { LoginInput } from './dto/input/login.input';
 import { RegistrationInput } from './dto/input/registration.input';
-import { JwtToken } from '../../../../libs/models/src/users/jwtToken.model';
+import { JwtTokenModel } from './models/jwtToken.model';
 
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
@@ -9,15 +9,15 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 export class AuthResolver {
   constructor(private readonly authService: AuthService) {}
 
-  @Mutation(() => JwtToken)
-  login(@Args('LoginInput') params: LoginInput): Promise<JwtToken> {
+  @Mutation(() => JwtTokenModel)
+  login(@Args('LoginInput') params: LoginInput): Promise<JwtTokenModel> {
     return this.authService.login(params);
   }
 
-  @Mutation(() => JwtToken)
+  @Mutation(() => JwtTokenModel)
   registration(
     @Args('RegistrationInput') params: RegistrationInput,
-  ): Promise<JwtToken> {
+  ): Promise<JwtTokenModel> {
     return this.authService.registration(params);
   }
 }

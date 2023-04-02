@@ -4,8 +4,8 @@ import { MemUpdateInput } from './dto/input/memUpdate.input';
 import { MemNotFoundException } from './exceptions/memNotFound.exception';
 import { NotMemCreatorException } from './exceptions/notMemCreator.exception copy';
 import { MemMetadataService } from './mem.metadata.service';
+import { MemModel } from './models/mem.model';
 
-import { MemDto } from '../../../../libs/models/src/mems/mem.model';
 import { PrismaService } from '../prisma/prisma.service';
 import { StoreImgBBService } from '../store/store.imgbb.service';
 
@@ -20,7 +20,7 @@ export class MemService {
     private readonly storeService: StoreImgBBService,
   ) {}
 
-  async getMems(params: GetMemsInput): Promise<MemDto[]> {
+  async getMems(params: GetMemsInput): Promise<MemModel[]> {
     return this.prisma.mem.findMany({
       take: params.take,
       skip: params.skip,
@@ -40,7 +40,7 @@ export class MemService {
 
   async createMem(
     params: MemCreateInput & { userId: string },
-  ): Promise<MemDto> {
+  ): Promise<MemModel> {
     const images = await this.storeService.storeManyImages(
       params.imgsBuffers.map(imgBuffer => Buffer.from(imgBuffer)),
     );
@@ -67,7 +67,7 @@ export class MemService {
 
   async updateMem(
     params: MemUpdateInput & { userId: string },
-  ): Promise<MemDto> {
+  ): Promise<MemModel> {
     const mem = await this.prisma.mem.findUnique({
       where: { id: params.id },
     });

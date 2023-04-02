@@ -18,6 +18,8 @@ export class JwtAuthGuard implements CanActivate {
 
     try {
       const authHeader = request.headers.authorization;
+      console.log({ authHeader });
+
       const [bearer, token] = authHeader.split(' ');
 
       if (bearer !== 'Bearer' || !token) {

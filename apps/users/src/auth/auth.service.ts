@@ -1,6 +1,6 @@
 import { LoginInput } from './dto/input/login.input';
 import { RegistrationInput } from './dto/input/registration.input';
-import { JwtToken } from '../../../../libs/models/src/users/jwtToken.model';
+import { JwtTokenModel } from './models/jwtToken.model';
 
 import { JwtTokenBody } from '../../../../libs/interfaces/src/jwtToken.interface';
 import { PrismaService } from '../prisma/prisma.service';
@@ -21,7 +21,7 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async login(params: LoginInput): Promise<JwtToken> {
+  async login(params: LoginInput): Promise<JwtTokenModel> {
     const user = await this.prisma.user.findUnique({
       where: { email: params.email },
     });
@@ -41,7 +41,7 @@ export class AuthService {
     throw new UnauthorizedException('Incorrect email or password');
   }
 
-  async registration(params: RegistrationInput): Promise<JwtToken> {
+  async registration(params: RegistrationInput): Promise<JwtTokenModel> {
     const isUserExist = await this.isUserExist(params);
 
     if (isUserExist) {
