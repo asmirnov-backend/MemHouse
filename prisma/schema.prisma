@@ -15,40 +15,49 @@ datasource db {
 model Mem {
   id            String        @id @default(uuid()) @db.Uuid
   text          String?       @db.VarChar(1024)
-  createdUser   User?         @relation(name: "created", fields: [createdUserId], references: [id])
-  createdUserId String        @db.Uuid
+  createdUser   User?         @relation(name: "created", fields: [createdUserId], references: [id], onDelete: SetNull)
+  createdUserId String?       @db.Uuid
   viewedUsers   User[]
   reactions     MemReaction[]
   rating        Rating?
   tags          Tag[]
   images        ImageMeta[]
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
 }
 
 model ImageMeta {
-  id         String  @id @default(uuid())
-  title      String  @db.VarChar(128)
-  displayUrl String  @db.VarChar(256)
+  id         String   @id @default(uuid())
+  title      String   @db.VarChar(128)
+  displayUrl String   @db.VarChar(256)
   width      Int
   height     Int
   size       Int
-  originMeta Json    @db.JsonB()
-  mem        Mem?    @relation(fields: [memId], references: [id], onDelete: Cascade)
-  memId      String? @db.Uuid
+  originMeta Json     @db.JsonB()
+  mem        Mem?     @relation(fields: [memId], references: [id], onDelete: Cascade)
+  memId      String?  @db.Uuid
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
 
 model Tag {
-  id    String @id @default(uuid()) @db.Uuid
-  value String @unique @db.VarChar(64)
-  mems  Mem[]
+  id        String   @id @default(uuid()) @db.Uuid
+  value     String   @unique @db.VarChar(64)
+  mems      Mem[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model MemReaction {
-  id     String          @id @default(uuid()) @db.Uuid
-  mem    Mem             @relation(fields: [memId], references: [id], onDelete: Cascade)
-  memId  String          @db.Uuid
-  type   MemReactionType
-  user   User            @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId String          @db.Uuid
+  mem       Mem             @relation(fields: [memId], references: [id], onDelete: Cascade)
+  memId     String          @db.Uuid
+  type      MemReactionType
+  user      User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String          @db.Uuid
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+
+  @@id([memId, userId, type])
 }
 
 enum MemReactionType {
@@ -57,10 +66,11 @@ enum MemReactionType {
 }
 
 model Rating {
-  id     String @id @default(uuid()) @db.Uuid
-  amount Float
-  mem    Mem    @relation(fields: [memId], references: [id], onDelete: Cascade)
-  memId  String @unique @db.Uuid
+  amount    Float
+  mem       Mem      @relation(fields: [memId], references: [id], onDelete: Cascade)
+  memId     String   @id @unique @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model User {
@@ -75,11 +85,15 @@ model User {
   viewedMemes Mem[]
   wallet      Wallet[]
   reactions   MemReaction[]
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
 }
 
 model Wallet {
-  id      String @id @default(uuid()) @db.Uuid
-  balance Float  @default(0)
-  owner   User   @relation(fields: [ownerId], references: [id], onDelete: Cascade)
-  ownerId String @db.Uuid
+  id        String   @id @default(uuid()) @db.Uuid
+  balance   Float    @default(0)
+  owner     User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  ownerId   String   @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

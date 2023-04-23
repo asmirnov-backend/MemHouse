@@ -19,8 +19,8 @@
     "noFallthroughCasesInSwitch": true,
     "resolveJsonModule": true,
     "paths": {
-      "@api/*": ["apps/api/src/*"],
-      "@common/*": ["common/src/*"]
+      "@api/*": ["apps/users/src/*"],
+      "@libs/common/*": ["libs/common/src/*"]
     }
   }
 }

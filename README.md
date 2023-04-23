@@ -53,3 +53,7 @@ docker run --name postgres-local -p 5432:5432 -e POSTGRES_DB=mem-storage -e POST
 - /Users/user/Downloads/ngrok http 3002
 - Copy ngrok url to frontend in App.ts and codegen.yml
 - firebase deploy client (frontend)
+
+## DB for all time connect
+
+https://customer.elephantsql.com/instance

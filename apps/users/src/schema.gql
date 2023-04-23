@@ -1,0 +1,73 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+directive @extends on INTERFACE | OBJECT
+
+directive @external on FIELD_DEFINITION | OBJECT
+
+directive @inaccessible on ARGUMENT_DEFINITION | ENUM | ENUM_VALUE | FIELD_DEFINITION | INPUT_FIELD_DEFINITION | INPUT_OBJECT | INTERFACE | OBJECT | SCALAR | UNION
+
+directive @key(fields: String!, resolvable: Boolean = true) repeatable on INTERFACE | OBJECT
+
+directive @link(import: [link__Import], url: String!) on SCHEMA
+
+directive @override(from: String!) on FIELD_DEFINITION
+
+directive @provides(fields: String!) on FIELD_DEFINITION
+
+directive @requires(fields: String!) on FIELD_DEFINITION
+
+directive @shareable on FIELD_DEFINITION | OBJECT
+
+directive @tag(name: String!) repeatable on ARGUMENT_DEFINITION | ENUM | ENUM_VALUE | FIELD_DEFINITION | INPUT_FIELD_DEFINITION | INPUT_OBJECT | INTERFACE | OBJECT | SCALAR | UNION
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type JwtTokenModel {
+  jwtToken: String!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+type Mutation {
+  login(LoginInput: LoginInput!): JwtTokenModel!
+  registration(RegistrationInput: RegistrationInput!): JwtTokenModel!
+}
+
+type Query {
+  me: UserModel!
+  userById(UserByIdInput: UserByIdInput!): UserModel!
+}
+
+input RegistrationInput {
+  birthday: String
+  email: String!
+  name: String!
+  nickname: String!
+  password: String!
+  surname: String!
+}
+
+input UserByIdInput {
+  id: String!
+}
+
+type UserModel {
+  birthday: DateTime
+  createdAt: DateTime!
+  email: String!
+  id: ID!
+  name: String!
+  nickname: String!
+  surname: String!
+  updatedAt: DateTime!
+}
+
+scalar link__Import
