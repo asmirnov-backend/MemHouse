@@ -1,10 +1,9 @@
-import { AppController } from './app.controller';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 
+import { HealthCheckModule } from '../../../libs/common/src/modules/healthCheck/healthCheck.module';
+
 import {
-  ApolloDriver,
-  ApolloDriverConfig,
   ApolloFederationDriver,
   ApolloFederationDriverConfig,
 } from '@nestjs/apollo';
@@ -25,7 +24,7 @@ import { join } from 'path';
     ConfigModule.forRoot({ isGlobal: true }),
     UserModule,
     AuthModule,
+    HealthCheckModule,
   ],
-  controllers: [AppController],
 })
 export class AppModule {}
