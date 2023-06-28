@@ -4,7 +4,7 @@
   "monorepo": true,
   "root": "",
   "compilerOptions": {
-    "tsConfigPath": "apps/api/tsconfig.app.json",
+    "tsConfigPath": "tsconfig.json",
     "plugins": ["@nestjs/graphql"],
     "webpack": false
   },
