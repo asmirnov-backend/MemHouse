@@ -2,7 +2,7 @@ import { LoginInput } from './dto/input/login.input';
 import { RegistrationInput } from './dto/input/registration.input';
 import { JwtTokenModel } from './models/jwtToken.model';
 
-import { JwtTokenBody } from '../../../../libs/interfaces/src/jwtToken.interface';
+import { JwtTokenBody } from '../../../../libs/interface/src/jwtToken.interface';
 import { PrismaService } from '../prisma/prisma.service';
 
 import {

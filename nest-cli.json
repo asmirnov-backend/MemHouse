@@ -18,22 +18,22 @@
         "tsConfigPath": "apps/gateway/tsconfig.app.json"
       }
     },
-    "users": {
+    "user": {
       "type": "application",
       "root": "",
       "entryFile": "main",
-      "sourceRoot": "apps/users/src",
+      "sourceRoot": "apps/user/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/users/tsconfig.app.json"
+        "tsConfigPath": "apps/user/tsconfig.app.json"
       }
     },
-    "mems": {
+    "mem": {
       "type": "application",
       "root": "",
       "entryFile": "main",
-      "sourceRoot": "apps/mems/src",
+      "sourceRoot": "apps/mem/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/mems/tsconfig.app.json"
+        "tsConfigPath": "apps/mem/tsconfig.app.json"
       }
     },
     "common": {
@@ -45,13 +45,13 @@
         "tsConfigPath": "common/tsconfig.lib.json"
       }
     },
-    "interfaces": {
+    "interface": {
       "type": "library",
-      "root": "interfaces",
+      "root": "interface",
       "entryFile": "index",
-      "sourceRoot": "interfaces/src",
+      "sourceRoot": "interface/src",
       "compilerOptions": {
-        "tsConfigPath": "interfaces/tsconfig.lib.json"
+        "tsConfigPath": "interface/tsconfig.lib.json"
       }
     }
   }
