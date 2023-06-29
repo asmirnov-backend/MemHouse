@@ -31,11 +31,11 @@ import { GqlExecutionContext, GraphQLModule } from '@nestjs/graphql';
             subgraphs: [
               {
                 name: 'users',
-                url: `${config.getOrThrow('MEMHOUSE_USER_HOST')}:3000}/graphql`,
+                url: `${config.getOrThrow('MEMHOUSE_USER_HOST')}:3002}/graphql`,
               },
               {
                 name: 'mems',
-                url: `${config.getOrThrow('MEMHOUSE_MEM_HOST')}:3000}/graphql`,
+                url: `${config.getOrThrow('MEMHOUSE_MEM_HOST')}:3003}/graphql`,
               },
             ],
           }),
