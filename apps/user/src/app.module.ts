@@ -18,7 +18,7 @@ import { join } from 'path';
     GraphQLModule.forRoot<ApolloFederationDriverConfig>({
       driver: ApolloFederationDriver,
       autoTransformHttpErrors: true,
-      autoSchemaFile: join(process.cwd(), '/apps/users/src/schema.gql'),
+      autoSchemaFile: join(process.cwd(), '/apps/user/src/schema.gql'),
       sortSchema: true,
     }),
     ConfigModule.forRoot({ isGlobal: true }),

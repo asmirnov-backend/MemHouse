@@ -30,12 +30,16 @@ import { GqlExecutionContext, GraphQLModule } from '@nestjs/graphql';
           supergraphSdl: new IntrospectAndCompose({
             subgraphs: [
               {
-                name: 'users',
-                url: `${config.getOrThrow('MEMHOUSE_USER_HOST')}:3002}/graphql`,
+                name: 'user',
+                url: `${config.getOrThrow(
+                  'MEMHOUSE_USER_HOST_WITH_PORT',
+                )}/graphql`,
               },
               {
-                name: 'mems',
-                url: `${config.getOrThrow('MEMHOUSE_MEM_HOST')}:3003}/graphql`,
+                name: 'mem',
+                url: `${config.getOrThrow(
+                  'MEMHOUSE_MEM_HOST_WITH_PORT',
+                )}/graphql`,
               },
             ],
           }),

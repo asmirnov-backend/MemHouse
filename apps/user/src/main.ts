@@ -25,7 +25,7 @@ async function bootstrap() {
   });
 
   const config = app.get(ConfigService);
-  const port = Number(config.getOrThrow<string>('USERS_PORT')) || 3000;
+  const port = 3002;
 
   app.useGlobalPipes(new ValidationPipe());
   app.useGlobalInterceptors(new LoggingInterceptor());
