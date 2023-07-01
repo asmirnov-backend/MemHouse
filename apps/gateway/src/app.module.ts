@@ -1,13 +1,13 @@
-import { AppController } from './app.controller';
-
 import { IntrospectAndCompose, RemoteGraphQLDataSource } from '@apollo/gateway';
 import { ApolloGatewayDriver, ApolloGatewayDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { GqlExecutionContext, GraphQLModule } from '@nestjs/graphql';
+import { HealthCheckModule } from '../../../libs/common/src/modules/healthCheck/healthCheck.module';
 
 @Module({
   imports: [
+    HealthCheckModule,
     GraphQLModule.forRootAsync<ApolloGatewayDriverConfig>({
       imports: [ConfigModule],
       driver: ApolloGatewayDriver,
@@ -49,6 +49,5 @@ import { GqlExecutionContext, GraphQLModule } from '@nestjs/graphql';
     }),
     ConfigModule.forRoot({ isGlobal: true }),
   ],
-  controllers: [AppController],
 })
 export class AppModule {}
