@@ -1,13 +1,13 @@
-import { AppController } from './app.controller';
-
 import { IntrospectAndCompose, RemoteGraphQLDataSource } from '@apollo/gateway';
 import { ApolloGatewayDriver, ApolloGatewayDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { GqlExecutionContext, GraphQLModule } from '@nestjs/graphql';
+import { HealthCheckModule } from '../../../libs/common/src/modules/healthCheck/healthCheck.module';
 
 @Module({
   imports: [
+    HealthCheckModule,
     GraphQLModule.forRootAsync<ApolloGatewayDriverConfig>({
       imports: [ConfigModule],
       driver: ApolloGatewayDriver,
@@ -30,15 +30,15 @@ import { GqlExecutionContext, GraphQLModule } from '@nestjs/graphql';
           supergraphSdl: new IntrospectAndCompose({
             subgraphs: [
               {
-                name: 'users',
-                url: `${config.getOrThrow('USERS_HOST')}:${config.getOrThrow(
-                  'USERS_PORT',
+                name: 'user',
+                url: `${config.getOrThrow(
+                  'MEMHOUSE_USER_HOST_WITH_PORT',
                 )}/graphql`,
               },
               {
-                name: 'mems',
-                url: `${config.getOrThrow('MEMS_HOST')}:${config.getOrThrow(
-                  'MEMS_PORT',
+                name: 'mem',
+                url: `${config.getOrThrow(
+                  'MEMHOUSE_MEM_HOST_WITH_PORT',
                 )}/graphql`,
               },
             ],
@@ -49,6 +49,5 @@ import { GqlExecutionContext, GraphQLModule } from '@nestjs/graphql';
     }),
     ConfigModule.forRoot({ isGlobal: true }),
   ],
-  controllers: [AppController],
 })
 export class AppModule {}

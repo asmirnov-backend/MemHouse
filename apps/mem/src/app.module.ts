@@ -1,7 +1,8 @@
-import { AppController } from './app.controller';
 import { MemModule } from './mem/mem.module';
 import { MemReactionModule } from './memReaction/memReaction.module';
 import { RatingModule } from './rating/rating.module';
+
+import { HealthCheckModule } from '../../../libs/common/src/modules/healthCheck/healthCheck.module';
 
 import {
   ApolloFederationDriver,
@@ -18,14 +19,14 @@ import { join } from 'path';
     GraphQLModule.forRoot<ApolloFederationDriverConfig>({
       driver: ApolloFederationDriver,
       autoTransformHttpErrors: true,
-      autoSchemaFile: join(process.cwd(), '/apps/mems/src/schema.gql'),
+      autoSchemaFile: join(process.cwd(), '/apps/mem/src/schema.gql'),
       sortSchema: true,
     }),
     ConfigModule.forRoot({ isGlobal: true }),
     MemModule,
     MemReactionModule,
     RatingModule,
+    HealthCheckModule,
   ],
-  controllers: [AppController],
 })
 export class AppModule {}

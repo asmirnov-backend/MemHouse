@@ -15,7 +15,7 @@ describe('StoreImgBBService', () => {
       providers: [StoreImgBBService],
     }).compile();
 
-    service = module.get<StoreImgBBService>(StoreImgBBService);
+    service = module.get(StoreImgBBService);
   });
 
   it('should be defined', () => {
@@ -24,7 +24,7 @@ describe('StoreImgBBService', () => {
 
   it('should save image', async () => {
     const file = {
-      buffer: await readFile('./apps/api/src/store/mock/cat.jpeg'),
+      buffer: await readFile('./apps/mems/src/store/mock/cat.jpeg'),
     } as Express.Multer.File;
 
     const result = await service.storeImage(

@@ -3,9 +3,10 @@ generator client {
   previewFeatures = ["filteredRelationCount"]
 }
 
-generator erd {
-  provider = "prisma-erd-generator"
-}
+// Uncomment only for some temporary purposes
+// generator erd {
+//   provider = "prisma-erd-generator"
+// }
 
 datasource db {
   provider = "postgres"

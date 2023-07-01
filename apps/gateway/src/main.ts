@@ -23,7 +23,7 @@ async function bootstrap() {
   });
 
   const config = app.get(ConfigService);
-  const port = Number(config.getOrThrow<string>('GATEWAY_PORT')) || 3000;
+  const port = 3001;
   app.use(json({ limit: '50mb' }));
   app.use(urlencoded({ extended: true, limit: '50mb' }));
 

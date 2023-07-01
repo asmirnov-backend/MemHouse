@@ -2,7 +2,7 @@ import { LoginInput } from './dto/input/login.input';
 import { RegistrationInput } from './dto/input/registration.input';
 import { JwtTokenModel } from './models/jwtToken.model';
 
-import { JwtTokenBody } from '../../../../libs/interfaces/src/jwtToken.interface';
+import { JwtTokenBody } from '../../../../libs/interface/src/jwtToken.interface';
 import { PrismaService } from '../prisma/prisma.service';
 
 import {
@@ -11,7 +11,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { compare, hash } from 'bcrypt';
+import { compare, hash } from 'bcryptjs';
 import { isNull } from 'lodash';
 
 @Injectable()

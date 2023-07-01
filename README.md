@@ -57,3 +57,19 @@ docker run --name postgres-local -p 5432:5432 -e POSTGRES_DB=mem-storage -e POST
 ## DB for all time connect
 
 https://customer.elephantsql.com/instance
+
+## Build docker images
+
+```bash
+docker build -t user --build-arg APP_NAME=user .
+docker build -t mem --build-arg APP_NAME=mem .
+docker build -t gateway --build-arg APP_NAME=gateway .
+```
+
+## Start docker images
+
+```bash
+docker run --env-file ./.env user
+docker run --env-file ./.env mem
+docker run --env-file ./.env gateway
+```
