@@ -11,7 +11,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { compare, hash } from 'bcrypt';
+import { compare, hash } from 'bcryptjs';
 import { isNull } from 'lodash';
 
 @Injectable()
