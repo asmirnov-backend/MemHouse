@@ -61,15 +61,15 @@ https://customer.elephantsql.com/instance
 ## Build docker images
 
 ```bash
-docker build -t users --build-arg APP_NAME=users .
-docker build -t mems --build-arg APP_NAME=mems .
+docker build -t user --build-arg APP_NAME=user .
+docker build -t mem --build-arg APP_NAME=mem .
 docker build -t gateway --build-arg APP_NAME=gateway .
 ```
 
 ## Start docker images
 
 ```bash
-docker run --env-file ./.env users
-docker run --env-file ./.env mems
+docker run --env-file ./.env user
+docker run --env-file ./.env mem
 docker run --env-file ./.env gateway
 ```
