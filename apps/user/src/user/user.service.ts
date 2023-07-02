@@ -1,8 +1,10 @@
+import { UpdateUserInput } from './interfaces/input/updateUser.input.interface';
 import { UserModel } from './models/user.model';
 
 import { PrismaService } from '../prisma/prisma.service';
 
 import { Injectable } from '@nestjs/common';
+import { omit } from 'lodash';
 
 @Injectable()
 export class UserService {
@@ -15,6 +17,13 @@ export class UserService {
         viewedMemes: true,
         createdMems: true,
       },
+    });
+  }
+
+  updateUser(input: UpdateUserInput): Promise<UserModel> {
+    return this.prisma.user.update({
+      where: { id: input.userId },
+      data: omit(input, 'userId'),
     });
   }
 }

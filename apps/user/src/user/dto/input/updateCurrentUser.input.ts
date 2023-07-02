@@ -4,28 +4,23 @@ import { IsNickname } from '../../../validators/isNickname.validator';
 import { IsSurname } from '../../../validators/isSurname.validator';
 
 import { InputType } from '@nestjs/graphql';
-import { IsEmail, IsOptional, IsString, MinLength } from 'class-validator';
+import { IsOptional } from 'class-validator';
 
 @InputType()
-export class RegistrationInput {
-  @IsEmail()
-  email: string;
-
-  @IsString()
-  // @Matches(new RegExp('(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}'))
-  @MinLength(6)
-  password: string;
-
+export class UpdateCurrentUserInput {
+  @IsOptional()
   @IsNickname()
-  nickname: string;
+  nickname?: string;
 
+  @IsOptional()
   @IsName()
-  name: string;
+  name?: string;
 
+  @IsOptional()
   @IsSurname()
-  surname: string;
+  surname?: string;
 
   @IsOptional()
   @IsBirthday()
-  birthday?: string;
+  birthday?: Date;
 }
