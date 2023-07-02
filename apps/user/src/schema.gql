@@ -39,6 +39,7 @@ input LoginInput {
 type Mutation {
   login(LoginInput: LoginInput!): JwtTokenModel!
   registration(RegistrationInput: RegistrationInput!): JwtTokenModel!
+  updateCurrentUser(UpdateCurrentUserInput: UpdateCurrentUserInput!): UserModel!
 }
 
 type Query {
@@ -53,6 +54,13 @@ input RegistrationInput {
   nickname: String!
   password: String!
   surname: String!
+}
+
+input UpdateCurrentUserInput {
+  birthday: DateTime
+  name: String
+  nickname: String
+  surname: String
 }
 
 input UserByIdInput {
