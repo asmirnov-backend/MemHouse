@@ -71,7 +71,7 @@ export class MemResolver {
   async tags(
     @Parent() mem: MemModel,
   ): Promise<Pick<MemFullModel, 'tags'>['tags']> {
-    return this.metadataService.getTags(mem.id);
+    return this.metadataService.getTagsValue(mem.id);
   }
 
   @ResolveField('isCurrentUserHasSetLike')

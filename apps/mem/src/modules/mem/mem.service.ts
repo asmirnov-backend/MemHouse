@@ -3,20 +3,18 @@ import { GetMemsInput } from './dto/input/memsGetBest.input';
 import { MemUpdateInput } from './dto/input/memUpdate.input';
 import { MemNotFoundException } from './exceptions/memNotFound.exception';
 import { NotMemCreatorException } from './exceptions/notMemCreator.exception copy';
-import { MemMetadataService } from './mem.metadata.service';
 import { MemModel } from './models/mem.model';
 
 import { PrismaService } from '../../../../../libs/common/src/modules/prisma/prisma.service';
 import { StoreImgBBService } from '../store/store.imgbb.service';
 
 import { Injectable } from '@nestjs/common';
-import { isNull, map, omit } from 'lodash';
+import { isNull, omit } from 'lodash';
 
 @Injectable()
 export class MemService {
   constructor(
     private readonly prisma: PrismaService,
-    private readonly metadataService: MemMetadataService,
     private readonly storeService: StoreImgBBService,
   ) {}
 
