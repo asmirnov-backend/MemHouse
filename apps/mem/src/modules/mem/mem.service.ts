@@ -6,7 +6,7 @@ import { NotMemCreatorException } from './exceptions/notMemCreator.exception cop
 import { MemMetadataService } from './mem.metadata.service';
 import { MemModel } from './models/mem.model';
 
-import { PrismaService } from '../prisma/prisma.service';
+import { PrismaService } from '../../../../../libs/common/src/modules/prisma/prisma.service';
 import { StoreImgBBService } from '../store/store.imgbb.service';
 
 import { Injectable } from '@nestjs/common';

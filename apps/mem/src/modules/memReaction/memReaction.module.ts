@@ -2,8 +2,8 @@ import { DislikeReactionService } from './dislikeReaction.service';
 import { LikeReactionService } from './likeReaction.service';
 import { MemReactionResolver } from './memReaction.resolver';
 
-import { JwtRegisteredModule } from '../../../../libs/common/src/modules/jwtRegistered/jwtRegistered.module';
-import { PrismaModule } from '../prisma/prisma.module';
+import { JwtRegisteredModule } from '../../../../../libs/common/src/modules/jwtRegistered/jwtRegistered.module';
+import { PrismaModule } from '../../../../../libs/common/src/modules/prisma/prisma.module';
 
 import { Module } from '@nestjs/common';
 

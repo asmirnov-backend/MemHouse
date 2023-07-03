@@ -1,4 +1,4 @@
-import { sendForTest } from '../../../../test/helpers/e2e.helper';
+import { sendForTest } from '../../../../../test/helpers/e2e.helper';
 
 describe('MemResolver', () => {
   it('mems', async () => {

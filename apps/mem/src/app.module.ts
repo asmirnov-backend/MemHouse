@@ -1,6 +1,6 @@
-import { MemModule } from './mem/mem.module';
-import { MemReactionModule } from './memReaction/memReaction.module';
-import { RatingModule } from './rating/rating.module';
+import { MemModule } from './modules/mem/mem.module';
+import { MemReactionModule } from './modules/memReaction/memReaction.module';
+import { RatingModule } from './modules/rating/rating.module';
 
 import { HealthCheckModule } from '../../../libs/common/src/modules/healthCheck/healthCheck.module';
 

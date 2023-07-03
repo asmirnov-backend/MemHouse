@@ -2,8 +2,8 @@ import { LoginInput } from './dto/input/login.input';
 import { RegistrationInput } from './dto/input/registration.input';
 import { JwtTokenModel } from './models/jwtToken.model';
 
-import { JwtTokenBody } from '../../../../libs/interfaces/src/jwtToken.interface';
-import { PrismaService } from '../prisma/prisma.service';
+import { JwtTokenBody } from '../../../../../libs/interfaces/src/jwtToken.interface';
+import { PrismaService } from '../../../../../libs/common/src/modules/prisma/prisma.service';
 
 import {
   ForbiddenException,

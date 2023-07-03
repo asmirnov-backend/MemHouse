@@ -6,9 +6,9 @@ import { MemService } from './mem.service';
 import { MemModel } from './models/mem.model';
 import { MemFullModel } from './models/memFull.model';
 
-import { UserId } from '../../../../libs/common/src/decorators/userId.decorator';
-import { JwtAuthGuard } from '../../../../libs/common/src/guards/jwtAuth.guard';
-import { AddJwtToReqInterceptor } from '../../../../libs/common/src/interceptors/addJwtToReq.interceptor';
+import { UserId } from '../../../../../libs/common/src/decorators/userId.decorator';
+import { JwtAuthGuard } from '../../../../../libs/common/src/guards/jwtAuth.guard';
+import { AddJwtToReqInterceptor } from '../../../../../libs/common/src/interceptors/addJwtToReq.interceptor';
 import { DislikeReactionService } from '../memReaction/dislikeReaction.service';
 import { LikeReactionService } from '../memReaction/likeReaction.service';
 

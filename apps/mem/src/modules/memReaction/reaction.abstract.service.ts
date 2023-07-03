@@ -1,4 +1,4 @@
-import { PrismaService } from '../prisma/prisma.service';
+import { PrismaService } from '../../../../../libs/common/src/modules/prisma/prisma.service';
 
 import { MemReactionType } from '@prisma/client';
 

@@ -1,8 +1,8 @@
 import { RatingCountService } from './ratingCount.service';
 
+import { PrismaService } from '../../../../../libs/common/src/modules/prisma/prisma.service';
 import { MemMetadataService } from '../mem/mem.metadata.service';
 import { MemService } from '../mem/mem.service';
-import { PrismaService } from '../prisma/prisma.service';
 
 import { Injectable, Logger } from '@nestjs/common';
 import { chunk } from 'lodash';

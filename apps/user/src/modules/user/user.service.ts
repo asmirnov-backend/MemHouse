@@ -1,7 +1,7 @@
 import { UpdateUserInput } from './interfaces/input/updateUser.input.interface';
 import { UserModel } from './models/user.model';
 
-import { PrismaService } from '../prisma/prisma.service';
+import { PrismaService } from '../../../../../libs/common/src/modules/prisma/prisma.service';
 
 import { Injectable } from '@nestjs/common';
 import { omit } from 'lodash';

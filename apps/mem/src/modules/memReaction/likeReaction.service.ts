@@ -1,13 +1,13 @@
 import { ReactionAbstractService } from './reaction.abstract.service';
 
-import { PrismaService } from '../prisma/prisma.service';
+import { PrismaService } from '../../../../../libs/common/src/modules/prisma/prisma.service';
 
 import { Injectable } from '@nestjs/common';
 import { MemReactionType } from '@prisma/client';
 
 @Injectable()
-export class DislikeReactionService extends ReactionAbstractService {
-  protected readonly memReactionType = MemReactionType.DISLIKE;
+export class LikeReactionService extends ReactionAbstractService {
+  protected readonly memReactionType = MemReactionType.LIKE;
 
   constructor(protected readonly prisma: PrismaService) {
     super(prisma);

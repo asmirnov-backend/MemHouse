@@ -1,7 +1,7 @@
-import { IsBirthday } from '../../../validators/isBirthday.validator';
-import { IsName } from '../../../validators/isName.validator';
-import { IsNickname } from '../../../validators/isNickname.validator';
-import { IsSurname } from '../../../validators/isSurname.validator';
+import { IsBirthday } from '../../../../validators/isBirthday.validator';
+import { IsName } from '../../../../validators/isName.validator';
+import { IsNickname } from '../../../../validators/isNickname.validator';
+import { IsSurname } from '../../../../validators/isSurname.validator';
 
 import { InputType } from '@nestjs/graphql';
 import { IsOptional } from 'class-validator';

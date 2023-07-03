@@ -3,8 +3,8 @@ import { UserByIdInput } from './dto/input/userById.input';
 import { UserModel } from './models/user.model';
 import { UserService } from './user.service';
 
-import { UserId } from '../../../../libs/common/src/decorators/userId.decorator';
-import { JwtAuthGuard } from '../../../../libs/common/src/guards/jwtAuth.guard';
+import { UserId } from '../../../../../libs/common/src/decorators/userId.decorator';
+import { JwtAuthGuard } from '../../../../../libs/common/src/guards/jwtAuth.guard';
 
 import { UseGuards } from '@nestjs/common';
 import {

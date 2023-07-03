@@ -1,8 +1,8 @@
 import { UserResolver } from './user.resolver';
 import { UserService } from './user.service';
 
-import { JwtRegisteredModule } from '../../../../libs/common/src/modules/jwtRegistered/jwtRegistered.module';
-import { PrismaModule } from '../prisma/prisma.module';
+import { JwtRegisteredModule } from '../../../../../libs/common/src/modules/jwtRegistered/jwtRegistered.module';
+import { PrismaModule } from '../../../../../libs/common/src/modules/prisma/prisma.module';
 
 import { Module } from '@nestjs/common';
 

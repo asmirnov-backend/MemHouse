@@ -4,8 +4,8 @@ import { ToggleReactionOutputDto } from './dto/output/toggleReaction.output.dto'
 import { LikeReactionService } from './likeReaction.service';
 import { MemReactionModel } from './models/memReaction.model';
 
-import { UserId } from '../../../../libs/common/src/decorators/userId.decorator';
-import { JwtAuthGuard } from '../../../../libs/common/src/guards/jwtAuth.guard';
+import { UserId } from '../../../../../libs/common/src/decorators/userId.decorator';
+import { JwtAuthGuard } from '../../../../../libs/common/src/guards/jwtAuth.guard';
 
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
