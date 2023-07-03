@@ -1,9 +1,10 @@
-import { UserNotAuthorizedException } from '../../../../apps/user/src/auth/exceptions/userNotAuthorized.exception';
 import { JwtTokenBody } from '../../../interface/src/jwtToken.interface';
+import { UserNotAuthorizedException } from '../exceptions/userNotAuthorized.exception';
 
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { GqlExecutionContext } from '@nestjs/graphql';
 import { JwtService } from '@nestjs/jwt';
+import { isUndefined } from 'lodash';
 import { Observable } from 'rxjs';
 
 @Injectable()
@@ -17,8 +18,11 @@ export class JwtAuthGuard implements CanActivate {
     const request = ctx.getContext().req;
 
     try {
-      const authHeader = request.headers.authorization;
-      console.log({ authHeader });
+      const authHeader = request.headers.authorization as string | undefined;
+
+      if (isUndefined(authHeader)) {
+        throw new UserNotAuthorizedException();
+      }
 
       const [bearer, token] = authHeader.split(' ');
 
