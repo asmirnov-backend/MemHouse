@@ -1,4 +1,4 @@
-import { JwtTokenBody } from '../../../interface/src/jwtToken.interface';
+import { JwtTokenBody } from '../../../interfaces/src/jwtToken.interface';
 import { UserNotAuthorizedException } from '../exceptions/userNotAuthorized.exception';
 
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';

@@ -47,11 +47,11 @@
     },
     "interface": {
       "type": "library",
-      "root": "interface",
+      "root": "interfaces",
       "entryFile": "index",
-      "sourceRoot": "interface/src",
+      "sourceRoot": "interfaces/src",
       "compilerOptions": {
-        "tsConfigPath": "interface/tsconfig.lib.json"
+        "tsConfigPath": "interfaces/tsconfig.lib.json"
       }
     }
   }

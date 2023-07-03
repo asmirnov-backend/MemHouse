@@ -1,4 +1,4 @@
-import { JwtTokenBody } from '../../../interface/src/jwtToken.interface';
+import { JwtTokenBody } from '../../../interfaces/src/jwtToken.interface';
 
 import {
   CallHandler,
