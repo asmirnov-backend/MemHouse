@@ -7,10 +7,10 @@ export abstract class ReactionAbstractService {
 
   constructor(protected readonly prisma: PrismaService) {}
 
-  async toggle(params: { userId: string; memId: string }) {
-    const memReactionData = { ...params, type: this.memReactionType };
+  async toggle(input: { userId: string; memId: string }) {
+    const memReactionData = { ...input, type: this.memReactionType };
 
-    if (await this.isUserHasSetReaction(params)) {
+    if (await this.isUserHasSetReaction(input)) {
       await this.prisma.memReaction.delete({
         where: {
           memId_userId_type: memReactionData,
@@ -23,18 +23,18 @@ export abstract class ReactionAbstractService {
     }
 
     const reactionAmount = await this.prisma.memReaction.count({
-      where: { memId: params.memId, type: this.memReactionType },
+      where: { memId: input.memId, type: this.memReactionType },
     });
 
     return { reactionAmount };
   }
 
-  async isUserHasSetReaction(params: {
+  async isUserHasSetReaction(input: {
     memId: string;
     userId: string;
   }): Promise<boolean> {
     const memReaction = await this.prisma.memReaction.findUnique({
-      where: { memId_userId_type: { ...params, type: this.memReactionType } },
+      where: { memId_userId_type: { ...input, type: this.memReactionType } },
     });
 
     return Boolean(memReaction);

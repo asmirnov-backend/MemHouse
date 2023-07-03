@@ -10,14 +10,14 @@ export class AuthResolver {
   constructor(private readonly authService: AuthService) {}
 
   @Mutation(() => JwtTokenModel)
-  login(@Args('LoginInput') params: LoginInput): Promise<JwtTokenModel> {
-    return this.authService.login(params);
+  login(@Args('LoginInput') input: LoginInput): Promise<JwtTokenModel> {
+    return this.authService.login(input);
   }
 
   @Mutation(() => JwtTokenModel)
   registration(
-    @Args('RegistrationInput') params: RegistrationInput,
+    @Args('RegistrationInput') input: RegistrationInput,
   ): Promise<JwtTokenModel> {
-    return this.authService.registration(params);
+    return this.authService.registration(input);
   }
 }

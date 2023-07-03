@@ -6,11 +6,11 @@ import { Injectable } from '@nestjs/common';
 @Injectable()
 export class RatingCountService {
   calculate(
-    params: { likes: number; dislikes: number } = { likes: 0, dislikes: 0 },
+    input: { likes: number; dislikes: number } = { likes: 0, dislikes: 0 },
   ) {
     const INITIAL_ABSOLUT_RATING = 1000;
     const ratingAbsolut =
-      INITIAL_ABSOLUT_RATING + params.likes - params.dislikes * 3;
+      INITIAL_ABSOLUT_RATING + input.likes - input.dislikes * 3;
 
     return this.convertUnlimitedNumberToInterval(ratingAbsolut);
   }

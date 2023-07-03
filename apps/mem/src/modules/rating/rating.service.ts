@@ -18,17 +18,17 @@ export class RatingService {
     private readonly prisma: PrismaService,
   ) {}
 
-  async recountRatingForMem(params: { memId: string }) {
+  async recountRatingForMem(input: { memId: string }) {
     const [likes, dislikes] = await Promise.all([
-      this.metadataService.getLikesAmount(params.memId),
-      this.metadataService.getDislikesAmount(params.memId),
+      this.metadataService.getLikesAmount(input.memId),
+      this.metadataService.getDislikesAmount(input.memId),
     ]);
 
     const ratingAmount = this.ratingService.calculate({ likes, dislikes });
 
     await this.prisma.rating.upsert({
-      where: { memId: params.memId },
-      create: { amount: ratingAmount, memId: params.memId },
+      where: { memId: input.memId },
+      create: { amount: ratingAmount, memId: input.memId },
       update: { amount: ratingAmount },
     });
   }

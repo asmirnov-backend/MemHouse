@@ -20,10 +20,10 @@ export class MemService {
     private readonly storeService: StoreImgBBService,
   ) {}
 
-  async getMems(params: GetMemsInput): Promise<MemModel[]> {
+  async getMems(input: GetMemsInput): Promise<MemModel[]> {
     return this.prisma.mem.findMany({
-      take: params.take,
-      skip: params.skip,
+      take: input.take,
+      skip: input.skip,
       orderBy: { rating: { amount: 'desc' } },
     });
   }
@@ -39,10 +39,10 @@ export class MemService {
   }
 
   async createMem(
-    params: MemCreateInput & { userId: string },
+    input: MemCreateInput & { userId: string },
   ): Promise<MemModel> {
     const images = await this.storeService.storeManyImages(
-      params.imgsBuffers.map(imgBuffer => Buffer.from(imgBuffer)),
+      input.imgsBuffers.map(imgBuffer => Buffer.from(imgBuffer)),
     );
 
     return this.prisma.mem.create({
@@ -52,40 +52,40 @@ export class MemService {
             data: images.map(i => omit(i.imageMeta, 'id')),
           },
         },
-        text: params.text ?? null,
+        text: input.text ?? null,
         tags: {
-          connectOrCreate: params.tags?.map(tag => ({
+          connectOrCreate: input.tags?.map(tag => ({
             create: { value: tag },
             where: { value: tag },
           })),
         },
-        createdUser: { connect: { id: params.userId } },
+        createdUser: { connect: { id: input.userId } },
         rating: { create: { amount: 0 } },
       },
     });
   }
 
   async updateMem(
-    params: MemUpdateInput & { userId: string },
+    input: MemUpdateInput & { userId: string },
   ): Promise<MemModel> {
     const mem = await this.prisma.mem.findUnique({
-      where: { id: params.id },
+      where: { id: input.id },
     });
 
     if (isNull(mem)) {
-      throw new MemNotFoundException(params.id);
+      throw new MemNotFoundException(input.id);
     }
 
-    if (mem.createdUserId !== params.userId) {
+    if (mem.createdUserId !== input.userId) {
       throw new NotMemCreatorException();
     }
 
     return this.prisma.mem.update({
-      where: { id: params.id },
+      where: { id: input.id },
       data: {
-        text: params.text,
+        text: input.text,
         tags: {
-          connectOrCreate: params.tags?.map(tag => ({
+          connectOrCreate: input.tags?.map(tag => ({
             create: { value: tag },
             where: { value: tag },
           })),

@@ -2,8 +2,8 @@ import { LoginInput } from './dto/input/login.input';
 import { RegistrationInput } from './dto/input/registration.input';
 import { JwtTokenModel } from './models/jwtToken.model';
 
-import { JwtTokenBody } from '../../../../../libs/interfaces/src/jwtToken.interface';
 import { PrismaService } from '../../../../../libs/common/src/modules/prisma/prisma.service';
+import { JwtTokenBody } from '../../../../../libs/interfaces/src/jwtToken.interface';
 
 import {
   ForbiddenException,
@@ -21,16 +21,16 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async login(params: LoginInput): Promise<JwtTokenModel> {
+  async login(input: LoginInput): Promise<JwtTokenModel> {
     const user = await this.prisma.user.findUnique({
-      where: { email: params.email },
+      where: { email: input.email },
     });
 
     if (isNull(user)) {
       throw new UnauthorizedException('Incorrect email or password');
     }
 
-    const isPasswordMatch = await compare(params.password, user.password);
+    const isPasswordMatch = await compare(input.password, user.password);
 
     if (isPasswordMatch) {
       const jwtToken = await this.signJwtToken({ id: user.id });
@@ -41,8 +41,8 @@ export class AuthService {
     throw new UnauthorizedException('Incorrect email or password');
   }
 
-  async registration(params: RegistrationInput): Promise<JwtTokenModel> {
-    const isUserExist = await this.isUserExist(params);
+  async registration(input: RegistrationInput): Promise<JwtTokenModel> {
+    const isUserExist = await this.isUserExist(input);
 
     if (isUserExist) {
       throw new ForbiddenException(
@@ -52,12 +52,12 @@ export class AuthService {
 
     const user = await this.prisma.user.create({
       data: {
-        email: params.email,
-        nickname: params.nickname,
-        password: await hash(params.password, 10),
-        name: params.name,
-        surname: params.surname,
-        birthday: params.birthday,
+        email: input.email,
+        nickname: input.nickname,
+        password: await hash(input.password, 10),
+        name: input.name,
+        surname: input.surname,
+        birthday: input.birthday,
       },
     });
 
@@ -66,9 +66,9 @@ export class AuthService {
     return { jwtToken };
   }
 
-  private async isUserExist(params: { email?: string; nickname?: string }) {
+  private async isUserExist(input: { email?: string; nickname?: string }) {
     const existingUserAmount = await this.prisma.user.count({
-      where: { OR: [{ email: params.email }, { nickname: params.nickname }] },
+      where: { OR: [{ email: input.email }, { nickname: input.nickname }] },
     });
 
     return existingUserAmount !== 0;

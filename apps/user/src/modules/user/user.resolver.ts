@@ -21,9 +21,9 @@ export class UserResolver {
 
   @Query(() => UserModel)
   userById(
-    @Args('UserByIdInput') params: UserByIdInput,
+    @Args('UserByIdInput') input: UserByIdInput,
   ): Promise<UserModel | null> {
-    return this.userService.getUser({ userId: params.id });
+    return this.userService.getUser({ userId: input.id });
   }
 
   @Query(() => UserModel)

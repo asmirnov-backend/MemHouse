@@ -10,9 +10,9 @@ import { omit } from 'lodash';
 export class UserService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async getUser(params: { userId: string }): Promise<UserModel | null> {
+  async getUser(input: { userId: string }): Promise<UserModel | null> {
     return this.prisma.user.findUnique({
-      where: { id: params.userId },
+      where: { id: input.userId },
       include: {
         viewedMemes: true,
         createdMems: true,

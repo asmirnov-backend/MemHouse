@@ -35,8 +35,8 @@ export class MemResolver {
 
   @Query(() => [MemFullModel])
   @UseInterceptors(AddJwtToReqInterceptor)
-  mems(@Args('GetMemsInput') params: GetMemsInput): Promise<MemModel[]> {
-    return this.memService.getMems(params);
+  mems(@Args('GetMemsInput') input: GetMemsInput): Promise<MemModel[]> {
+    return this.memService.getMems(input);
   }
 
   @ResolveField('likes')
@@ -103,18 +103,18 @@ export class MemResolver {
   @Mutation(() => MemFullModel)
   @UseGuards(JwtAuthGuard)
   createMem(
-    @Args('CreateMemInput') params: MemCreateInput,
+    @Args('CreateMemInput') input: MemCreateInput,
     @UserId() userId: string,
   ): Promise<MemModel> {
-    return this.memService.createMem({ ...params, userId });
+    return this.memService.createMem({ ...input, userId });
   }
 
   @Mutation(() => MemFullModel)
   @UseGuards(JwtAuthGuard)
   updateMem(
-    @Args('UpdateMemInput') params: MemUpdateInput,
+    @Args('UpdateMemInput') input: MemUpdateInput,
     @UserId() userId: string,
   ): Promise<MemModel> {
-    return this.memService.updateMem({ ...params, userId });
+    return this.memService.updateMem({ ...input, userId });
   }
 }

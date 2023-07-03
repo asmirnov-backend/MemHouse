@@ -21,17 +21,17 @@ export class MemReactionResolver {
   @UseGuards(JwtAuthGuard)
   toggleLike(
     @UserId() userId: string,
-    @Args('ToggleReactionInputDto') params: ToggleReactionInputDto,
+    @Args('ToggleReactionInputDto') input: ToggleReactionInputDto,
   ): Promise<ToggleReactionOutputDto> {
-    return this.likeReactionService.toggle({ userId, ...params });
+    return this.likeReactionService.toggle({ userId, ...input });
   }
 
   @Mutation(() => ToggleReactionOutputDto)
   @UseGuards(JwtAuthGuard)
   toggleDislike(
     @UserId() userId: string,
-    @Args('ToggleReactionInputDto') params: ToggleReactionInputDto,
+    @Args('ToggleReactionInputDto') input: ToggleReactionInputDto,
   ): Promise<ToggleReactionOutputDto> {
-    return this.dislikeReactionService.toggle({ userId, ...params });
+    return this.dislikeReactionService.toggle({ userId, ...input });
   }
 }
