@@ -26,6 +26,19 @@ export class MemService {
     });
   }
 
+  getMemsCreatedByCurrentUser(input: {
+    userId: string;
+    take: number;
+    skip: number;
+  }): Promise<MemModel[]> {
+    return this.prisma.mem.findMany({
+      take: input.take,
+      skip: input.skip,
+      orderBy: { createdAt: 'desc' },
+      where: { createdUser: { id: input.userId } },
+    });
+  }
+
   async getAllMemsIds() {
     return this.prisma.mem.findMany({
       select: { id: true },

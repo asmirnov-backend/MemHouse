@@ -39,6 +39,15 @@ export class MemResolver {
     return this.memService.getMems(input);
   }
 
+  @Query(() => [MemFullModel])
+  @UseGuards(JwtAuthGuard)
+  getMemsCreatedByCurrentUser(
+    @Args('GetMemsInput') input: GetMemsInput,
+    @UserId() userId: string,
+  ): Promise<MemModel[]> {
+    return this.memService.getMemsCreatedByCurrentUser({ ...input, userId });
+  }
+
   @ResolveField('likes')
   async likes(
     @Parent() mem: MemModel,
