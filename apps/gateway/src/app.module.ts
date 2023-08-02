@@ -1,9 +1,10 @@
+import { HealthCheckModule } from '../../../libs/common/src/modules/healthCheck/healthCheck.module';
+
 import { IntrospectAndCompose, RemoteGraphQLDataSource } from '@apollo/gateway';
 import { ApolloGatewayDriver, ApolloGatewayDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { GqlExecutionContext, GraphQLModule } from '@nestjs/graphql';
-import { HealthCheckModule } from '../../../libs/common/src/modules/healthCheck/healthCheck.module';
+import { GraphQLModule } from '@nestjs/graphql';
 
 @Module({
   imports: [

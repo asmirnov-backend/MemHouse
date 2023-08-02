@@ -79,6 +79,7 @@ type Mutation {
 }
 
 type Query {
+  getMemsCreatedByCurrentUser(GetMemsInput: GetMemsInput!): [MemFullModel!]!
   mems(GetMemsInput: GetMemsInput!): [MemFullModel!]!
 }
 

@@ -1,5 +1,7 @@
 import { AppModule } from './app.module';
 
+import { CORS } from '../../../libs/common/src/consts/cors.const';
+
 import { Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
@@ -10,17 +12,8 @@ async function bootstrap() {
 
   // { cors: true } is needed to process requests from the internet
   const app = await NestFactory.create(AppModule, {
-    cors: {
-      origin: [
-        'https://memhouse-client.web.app',
-        'http://localhost:3000',
-        'http://localhost:3001',
-        'http://127.0.0.1:3000',
-        'https://localhost',
-      ],
-      credentials: true,
-    },
-  });
+    cors: CORS,
+  }); //
 
   const config = app.get(ConfigService);
   const port = 3001;

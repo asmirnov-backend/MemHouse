@@ -1,5 +1,5 @@
-import { AuthModule } from './auth/auth.module';
-import { UserModule } from './user/user.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { UserModule } from './modules/user/user.module';
 
 import { HealthCheckModule } from '../../../libs/common/src/modules/healthCheck/healthCheck.module';
 

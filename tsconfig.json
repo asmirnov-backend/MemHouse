@@ -17,9 +17,6 @@
     "noImplicitAny": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "resolveJsonModule": true,
-    "paths": {
-      "@libs/common/*": ["libs/common/src/*"]
-    }
+    "resolveJsonModule": true
   }
 }

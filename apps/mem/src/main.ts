@@ -10,19 +10,7 @@ import { json, urlencoded } from 'express';
 async function bootstrap() {
   const logger = new Logger('bootstrap');
 
-  // { cors: true } is needed to process requests from the internet
-  const app = await NestFactory.create(AppModule, {
-    cors: {
-      origin: [
-        'https://memhouse-client.web.app',
-        'http://localhost:3000',
-        'http://localhost:3001',
-        'http://127.0.0.1:3000',
-        'https://localhost',
-      ],
-      credentials: true,
-    },
-  });
+  const app = await NestFactory.create(AppModule);
 
   const config = app.get(ConfigService);
   const port = 3003;
