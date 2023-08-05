@@ -1,7 +1,7 @@
 import { GraphQLResponse } from 'apollo-server-types';
 import * as request from 'supertest';
 
-const BASE_PATH = 'http://localhost:3002';
+const BASE_PATH = 'http://localhost:3001';
 const GRAPHQL_URL = '/graphql';
 
 export async function sendForTest(input: {

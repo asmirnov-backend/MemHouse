@@ -24,7 +24,7 @@ describe('StoreImgBBService', () => {
 
   it('should save image', async () => {
     const file = {
-      buffer: await readFile('./apps/mems/src/store/mock/cat.jpeg'),
+      buffer: await readFile('./apps/mem/src/modules/store/mock/cat.jpeg'),
     } as Express.Multer.File;
 
     const result = await service.storeImage(
