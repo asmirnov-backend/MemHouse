@@ -98,7 +98,6 @@
     "coverageDirectory": "../coverage",
     "testEnvironment": "node",
     "moduleNameMapper": {
-      "^axios$": "axios/dist/axios.js",
       "^@common/(.*)": "<rootDir>/common/src/$1",
       "^@api/(.*)": "<rootDir>/apps/api/src/$1"
     }
