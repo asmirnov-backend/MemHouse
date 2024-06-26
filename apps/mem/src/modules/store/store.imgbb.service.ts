@@ -16,29 +16,14 @@ import FormData = require('form-data'); // Without 'require' it is not work
  */
 @Injectable()
 export class StoreImgBBService extends StoreAbstractService<ImageMetaFromImagBB> {
-  private IMAGE_STORE_URL: string;
-  private IMAGE_STORE_SECRET_KEY: string;
+  private IMAGE_STORE_URL: string = this.config.getOrThrow('IMAGE_STORE_URL');
+  private IMAGE_STORE_SECRET_KEY: string = this.config.getOrThrow('IMAGE_STORE_SECRET_KEY');
 
   constructor(
     private readonly config: ConfigService,
     private readonly http: HttpService,
   ) {
     super();
-
-    this.IMAGE_STORE_URL =
-      this.getEnvVariableAndCheckForUndefined<string>('IMAGE_STORE_URL');
-    this.IMAGE_STORE_SECRET_KEY =
-      this.getEnvVariableAndCheckForUndefined<string>('IMAGE_STORE_SECRET_KEY');
-  }
-
-  private getEnvVariableAndCheckForUndefined<T>(name: string) {
-    const variable = this.config.getOrThrow<T>(name);
-
-    if (isUndefined(variable)) {
-      throw new Error(`${name} is not defined in env`);
-    }
-
-    return variable;
   }
 
   async storeImage(buffer: Buffer) {
