@@ -5,6 +5,7 @@ import { Injectable } from '@nestjs/common';
  */
 @Injectable()
 export class RatingCountService {
+  
   calculate(
     input: { likes: number; dislikes: number } = { likes: 0, dislikes: 0 },
   ) {

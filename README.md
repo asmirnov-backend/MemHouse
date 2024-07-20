@@ -24,39 +24,18 @@ MemHouse is a platform to easy surf mems
 
 ![DB schema](./prisma/ERD.svg)
 
-## Construction
+## Codesee
 
-![MemHouse constructor diagram](https://user-images.githubusercontent.com/93443107/173183086-825c3bc3-995a-42ef-8760-93d04e4f5856.png)
+![Code schema](./codesee.svg)
 
-<https://app.diagrams.net/?libs=general;uml#G12t0Kjo5OfwtcxeGzsxaQjMOXes3jg-RM>
+https://app.codesee.io/guide/a/eb4dae88-b787-427f-a97f-de582d98ccb0
 
-MemService knows about Prisma, because prisma provides nice abstraction. So "repository" concept is not needed.
-
-## Setup
-
-### POSTGRES
-
-```bash
-docker run --name memhouse_db -p 5432:5432 -e POSTGRES_DB=memhouse -e POSTGRES_PASSWORD=adminUserPass -e POSTGRES_USER=adminUser -d postgres
-```
 
 ### Use ngrok for apply connection to the client side in the Internet
 
 ```bash
 /Users/user/Downloads/ngrok http 3002
 ```
-
-## How to start full app:
-
-- Start postgres in docker
-- Start 'nest start'
-- /Users/user/Downloads/ngrok http 3002
-- Copy ngrok url to frontend in App.ts and codegen.yml
-- firebase deploy client (frontend)
-
-## DB for all time connect
-
-https://customer.elephantsql.com/instance
 
 ## Build docker images
 
